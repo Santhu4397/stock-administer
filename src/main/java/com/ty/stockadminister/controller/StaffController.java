@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ty.stockadminister.dto.LoginDto;
 import com.ty.stockadminister.dto.Staff;
 import com.ty.stockadminister.service.StaffService;
 import com.ty.stockadminister.service.impl.StaffServiceImpl;
@@ -24,8 +25,10 @@ public class StaffController {
 	@Autowired
 	private StaffService service;
 
-	@PostMapping("staff/{email}/{password}")
-	public ResponseEntity<ResponseStructure<Staff>> loginStaff(@PathVariable String email, String password) {
+	@PostMapping("staff/login")
+	public ResponseEntity<ResponseStructure<Staff>> loginStaff(@RequestBody LoginDto dto) {
+		String email=dto.getEmail();
+		String password=dto.getPassword();
 		return service.loginStaff(email, password);
 	}
 

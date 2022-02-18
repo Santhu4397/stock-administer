@@ -94,8 +94,7 @@ public class Owner {
 		super();
 		this.id = id;
 		this.name = name;
-		this.email = email;
-		this.password = password;
+		
 		this.phone = phone;
 		this.comapnyName = comapnyName;
 		this.department = department;
