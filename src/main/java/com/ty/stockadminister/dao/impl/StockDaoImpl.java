@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ty.stockadminister.dao.StockDao;
 import com.ty.stockadminister.dto.Stock;
+
 @Repository
 public class StockDaoImpl implements StockDao {
 
@@ -38,6 +39,5 @@ public class StockDaoImpl implements StockDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
 
 }
