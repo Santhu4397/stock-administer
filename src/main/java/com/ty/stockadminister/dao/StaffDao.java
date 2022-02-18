@@ -16,6 +16,6 @@ public interface StaffDao {
 
 	public boolean deleteStaff(int id);
 
-	public Staff loginStaff(Staff staff);
+	public Staff loginStaff(String email, String password);
 
 }

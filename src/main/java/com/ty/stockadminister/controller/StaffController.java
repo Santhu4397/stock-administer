@@ -18,7 +18,6 @@ import com.ty.stockadminister.service.StaffService;
 import com.ty.stockadminister.service.impl.StaffServiceImpl;
 import com.ty.stockadminister.util.ResponseStructure;
 
-
 @RestController
 public class StaffController {
 
@@ -26,8 +25,8 @@ public class StaffController {
 	private StaffService service;
 
 	@PostMapping("staff/{email}/{password}")
-	public ResponseEntity<ResponseStructure<Staff>> loginStaff(@RequestBody Staff staff) {
-		return service.loginStaff(staff);
+	public ResponseEntity<ResponseStructure<Staff>> loginStaff(@PathVariable String email, String password) {
+		return service.loginStaff(email, password);
 	}
 
 	@PostMapping("staff")

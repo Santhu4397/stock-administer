@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import com.ty.stockadminister.dto.Staff;
 import com.ty.stockadminister.util.ResponseStructure;
 
-
 public interface StaffService {
 
 	public ResponseEntity<ResponseStructure<Staff>> saveStaff(Staff staff);
@@ -20,6 +19,6 @@ public interface StaffService {
 
 	public ResponseEntity<ResponseStructure<String>> deleteStaff(int id);
 
-	public ResponseEntity<ResponseStructure<Staff>> loginStaff(Staff staff);
-	
+	public ResponseEntity<ResponseStructure<Staff>> loginStaff(String email, String password);
+
 }

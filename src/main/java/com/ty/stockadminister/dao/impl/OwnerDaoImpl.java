@@ -8,8 +8,8 @@ import com.ty.stockadminister.dto.Owner;
 import com.ty.stockadminister.repositroy.OwnerRepository;
 
 @Repository
-public class OwnerDaoImpl implements OwnerDao{
-	
+public class OwnerDaoImpl implements OwnerDao {
+
 	@Autowired
 	private OwnerRepository repository;
 
@@ -20,7 +20,7 @@ public class OwnerDaoImpl implements OwnerDao{
 	}
 
 	@Override
-	public Owner loginOwner(Owner owner) {
+	public Owner loginOwner(String email, String password) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -11,7 +11,7 @@ import com.ty.stockadminister.repositroy.StaffRepository;
 
 @Repository
 public class StaffDaoImpl implements StaffDao {
-	
+
 	@Autowired
 	private StaffRepository repository;
 
@@ -46,7 +46,7 @@ public class StaffDaoImpl implements StaffDao {
 	}
 
 	@Override
-	public Staff loginStaff(Staff staff) {
+	public Staff loginStaff(String email, String password) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -6,5 +6,5 @@ public interface OwnerDao {
 
 	public Owner saveOwner(Owner owner);
 
-	public Owner loginOwner(Owner owner);
+	public Owner loginOwner(String email, String password);
 }

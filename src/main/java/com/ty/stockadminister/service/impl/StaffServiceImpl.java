@@ -24,7 +24,8 @@ public class StaffServiceImpl implements StaffService {
 		structure.setStatus(HttpStatus.OK.value());
 		structure.setMessage("Sucess");
 		structure.setData(dao.saveStaff(staff));
-		ResponseEntity<ResponseStructure<Staff>> responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure,HttpStatus.OK);
+		ResponseEntity<ResponseStructure<Staff>> responseEntity = new ResponseEntity<ResponseStructure<Staff>>(
+				structure, HttpStatus.OK);
 		return responseEntity;
 	}
 
@@ -34,8 +35,8 @@ public class StaffServiceImpl implements StaffService {
 		ResponseEntity<ResponseStructure<List<Staff>>> responseEntity = null;
 		structure.setStatus(HttpStatus.OK.value());
 		structure.setMessage("Sucess");
-		structure.setData(dao.getAllStaff()); 
-		responseEntity =  new ResponseEntity<ResponseStructure<List<Staff>>>(structure,HttpStatus.OK);
+		structure.setData(dao.getAllStaff());
+		responseEntity = new ResponseEntity<ResponseStructure<List<Staff>>>(structure, HttpStatus.OK);
 		return responseEntity;
 	}
 
@@ -44,15 +45,14 @@ public class StaffServiceImpl implements StaffService {
 		ResponseStructure<Staff> structure = new ResponseStructure<Staff>();
 		ResponseEntity<ResponseStructure<Staff>> responseEntity = null;
 		Staff staff = dao.getStaffById(id);
-		if(staff != null) {
+		if (staff != null) {
 			structure.setStatus(HttpStatus.OK.value());
 			structure.setMessage("Sucess");
-			structure.setData(dao.getStaffById(id)); 
-			responseEntity =  new ResponseEntity<ResponseStructure<Staff>>(structure,HttpStatus.OK);
+			structure.setData(dao.getStaffById(id));
+			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.OK);
 
-		}
-		else {
-			
+		} else {
+
 		}
 		return responseEntity;
 	}
@@ -62,17 +62,16 @@ public class StaffServiceImpl implements StaffService {
 		ResponseStructure<Staff> structure = new ResponseStructure<>();
 		ResponseEntity<ResponseStructure<Staff>> responseEntity = null;
 		Staff staff1 = dao.getStaffById(id);
-		if(staff1 != null ) {
+		if (staff1 != null) {
 			structure.setStatus(HttpStatus.OK.value());
 			structure.setMessage("Sucess");
 			structure.setData(dao.saveStaff(staff1));
-			responseEntity =  new ResponseEntity<ResponseStructure<Staff>>(structure,HttpStatus.OK);
-		}
-		else {
+			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.OK);
+		} else {
 			structure.setStatus(HttpStatus.OK.value());
 			structure.setMessage("Sucess");
 			structure.setData(dao.saveStaff(staff));
-			responseEntity =  new ResponseEntity<ResponseStructure<Staff>>(structure,HttpStatus.OK);
+			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.OK);
 		}
 		return responseEntity;
 	}
@@ -81,24 +80,23 @@ public class StaffServiceImpl implements StaffService {
 	public ResponseEntity<ResponseStructure<String>> deleteStaff(int id) {
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 		ResponseEntity<ResponseStructure<String>> responseEntity = null;
-		if(dao.deleteStaff(id)) {
+		if (dao.deleteStaff(id)) {
 			structure.setStatus(HttpStatus.OK.value());
 			structure.setMessage("Sucess");
-			structure.setData("Staff deleted"); 
-			responseEntity =  new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.OK);
-		}
-		else {
+			structure.setData("Staff deleted");
+			responseEntity = new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.OK);
+		} else {
 			structure.setStatus(HttpStatus.NOT_FOUND.value());
 			structure.setMessage("data not fond");
-			structure.setData("Staff not  deleted"); 
-			responseEntity =  new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.NOT_FOUND);
+			structure.setData("Staff not  deleted");
+			responseEntity = new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
 		}
 		return responseEntity;
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Staff>> loginStaff(Staff staff) {
-		dao.loginStaff(staff);
+	public ResponseEntity<ResponseStructure<Staff>> loginStaff(String email, String password) {
+		dao.loginStaff(email, password);
 		return null;
 	}
 

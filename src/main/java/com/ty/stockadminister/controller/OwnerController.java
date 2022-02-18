@@ -2,6 +2,7 @@ package com.ty.stockadminister.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,14 +14,13 @@ import com.ty.stockadminister.util.ResponseStructure;
 
 @RestController
 public class OwnerController {
-	
+
 	@Autowired
 	private OwnerService service;
-	
-	
+
 	@PostMapping("owner/{email}/{password}")
-	public ResponseEntity<ResponseStructure<Owner>> loginStaff(@RequestBody Owner owner) {
-		return service.loginOwner(owner);
+	public ResponseEntity<ResponseStructure<Owner>> loginStaff(@PathVariable String email, String password) {
+		return service.loginOwner(email, password);
 	}
 
 	@PostMapping("owner")

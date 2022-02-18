@@ -11,20 +11,22 @@ import com.ty.stockadminister.service.OwnerService;
 import com.ty.stockadminister.util.ResponseStructure;
 
 public class OwnerServiceImpl implements OwnerService {
-	
+
 	@Autowired
 	private OwnerDao dao;
-	
-	public ResponseEntity<ResponseStructure<Owner>> saveOwner(Owner owner){
+
+	public ResponseEntity<ResponseStructure<Owner>> saveOwner(Owner owner) {
 		ResponseStructure<Owner> structure = new ResponseStructure<>();
 		structure.setStatus(HttpStatus.OK.value());
 		structure.setMessage("Sucess");
 		structure.setData(dao.saveOwner(owner));
-		ResponseEntity<ResponseStructure<Owner>> responseEntity = new ResponseEntity<ResponseStructure<Owner>>(structure,HttpStatus.OK);
+		ResponseEntity<ResponseStructure<Owner>> responseEntity = new ResponseEntity<ResponseStructure<Owner>>(
+				structure, HttpStatus.OK);
 		return responseEntity;
 	}
-	public ResponseEntity<ResponseStructure<Owner>> loginOwner(Owner owner){
-		dao.loginOwner(owner);
+
+	public ResponseEntity<ResponseStructure<Owner>> loginOwner(String email, String password) {
+		dao.loginOwner(email, password);
 		return null;
 	}
 

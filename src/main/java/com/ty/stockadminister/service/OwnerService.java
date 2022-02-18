@@ -7,7 +7,7 @@ import com.ty.stockadminister.util.ResponseStructure;
 
 public interface OwnerService {
 
-	public ResponseEntity<ResponseStructure<Owner>> loginOwner(Owner owner);
+	public ResponseEntity<ResponseStructure<Owner>> loginOwner(String email, String password);
 
 	public ResponseEntity<ResponseStructure<Owner>> saveOwner(Owner owner);
 
