@@ -1,0 +1,14 @@
+package com.ty.stockadminister.service;
+
+import org.springframework.http.ResponseEntity;
+
+import com.ty.stockadminister.dto.Owner;
+import com.ty.stockadminister.util.ResponseStructure;
+
+public interface OwnerService {
+
+	public ResponseEntity<ResponseStructure<Owner>> loginOwner(Owner owner);
+
+	public ResponseEntity<ResponseStructure<Owner>> saveOwner(Owner owner);
+
+}
