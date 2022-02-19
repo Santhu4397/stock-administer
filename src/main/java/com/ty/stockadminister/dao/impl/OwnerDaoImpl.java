@@ -15,13 +15,11 @@ public class OwnerDaoImpl implements OwnerDao {
 
 	@Override
 	public Owner saveOwner(Owner owner) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.save(owner);
 	}
 
 	@Override
 	public Owner loginOwner(String email, String password) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
