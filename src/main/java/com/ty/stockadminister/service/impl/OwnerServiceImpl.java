@@ -3,6 +3,7 @@ package com.ty.stockadminister.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.ty.stockadminister.dao.OwnerDao;
 import com.ty.stockadminister.dto.Owner;
@@ -10,6 +11,7 @@ import com.ty.stockadminister.dto.Staff;
 import com.ty.stockadminister.service.OwnerService;
 import com.ty.stockadminister.util.ResponseStructure;
 
+@Service
 public class OwnerServiceImpl implements OwnerService {
 
 	@Autowired

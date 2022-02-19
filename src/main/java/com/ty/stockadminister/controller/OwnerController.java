@@ -11,6 +11,7 @@ import com.ty.stockadminister.dto.LoginDto;
 import com.ty.stockadminister.dto.Owner;
 import com.ty.stockadminister.service.OwnerService;
 import com.ty.stockadminister.service.StaffService;
+import com.ty.stockadminister.service.impl.OwnerServiceImpl;
 import com.ty.stockadminister.util.ResponseStructure;
 
 @RestController

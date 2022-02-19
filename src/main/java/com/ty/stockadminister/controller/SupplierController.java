@@ -40,8 +40,8 @@ public class SupplierController {
 		return service.getall();
 	}
 
-	@GetMapping("supplier")
-	public ResponseEntity<ResponseStructure<SupplierDto>> getbyid(@RequestParam int id) {
+	@GetMapping("supplier/{id}")
+	public ResponseEntity<ResponseStructure<SupplierDto>> getbyid(@PathVariable int id) {
 		return service.getbyid(id);
 	}
 
