@@ -19,6 +19,11 @@ import com.ty.stockadminister.service.StaffService;
 import com.ty.stockadminister.service.impl.StaffServiceImpl;
 import com.ty.stockadminister.util.ResponseStructure;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 public class StaffController {
 
@@ -26,33 +31,58 @@ public class StaffController {
 	private StaffService service;
 
 	@PostMapping("staff/login")
-	public ResponseEntity<ResponseStructure<Staff>> loginStaff(@RequestBody LoginDto dto) {
-		String email=dto.getEmail();
-		String password=dto.getPassword();
+	@ApiOperation("To Staff Login")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Staff Loged In"),
+			@ApiResponse(code = 404, message = " Didnot Find"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
+	public ResponseEntity<ResponseStructure<Staff>> loginStaff(@ApiParam("Login for Staff") @RequestBody LoginDto dto) {
+		String email = dto.getEmail();
+		String password = dto.getPassword();
 		return service.loginStaff(email, password);
 	}
 
 	@PostMapping("staff")
-	public ResponseEntity<ResponseStructure<Staff>> saveStaff(@RequestBody Staff staff) {
+	@ApiOperation("To Save Staff")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Staff Created"),
+			@ApiResponse(code = 404, message = " Didnot Persist"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
+	public ResponseEntity<ResponseStructure<Staff>> saveStaff(@ApiParam("To Save Staff") @RequestBody Staff staff) {
 		return service.saveStaff(staff);
 	}
 
 	@PutMapping("staff/{id}")
-	public ResponseEntity<ResponseStructure<Staff>> updateStaff(@PathVariable int id, @RequestBody Staff staff) {
+	@ApiOperation("To Update Staff")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Staff Updated"),
+			@ApiResponse(code = 404, message = " Didnot update"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
+	public ResponseEntity<ResponseStructure<Staff>> updateStaff(@ApiParam("Update for Staff") @PathVariable int id,
+			@RequestBody Staff staff) {
 		return service.updateStaff(id, staff);
 	}
 
 	@DeleteMapping("staff")
-	public ResponseEntity<ResponseStructure<String>> deleteStaff(@RequestParam int id) {
+	@ApiOperation("To Delete Staff")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Staff Deleted"),
+			@ApiResponse(code = 404, message = " Didnot delete"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
+	public ResponseEntity<ResponseStructure<String>> deleteStaff(@ApiParam("Delete for Staff") @RequestParam int id) {
 		return service.deleteStaff(id);
 	}
 
 	@GetMapping("staff/{id}")
-	public ResponseEntity<ResponseStructure<Staff>> getStaffById(@PathVariable int id) {
+	@ApiOperation("To Get Staff By Id")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Found the Staff by ID"),
+			@ApiResponse(code = 404, message = " Didnot Find"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
+	public ResponseEntity<ResponseStructure<Staff>> getStaffById(@ApiParam("To Get Staff By ID") @PathVariable int id) {
 		return service.getStaffById(id);
 	}
 
 	@GetMapping("staff")
+	@ApiOperation("To GetAll Staff")
+	@ApiResponses({ @ApiResponse(code = 200, message = "List of Staff Found"),
+			@ApiResponse(code = 404, message = " Didnot Find"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
 	public ResponseEntity<ResponseStructure<List<Staff>>> getAllStaff() {
 		return service.getAllStaff();
 	}

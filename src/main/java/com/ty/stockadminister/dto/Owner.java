@@ -25,8 +25,6 @@ public class Owner {
 	private List<Staff> staffs;
 	@OneToMany(mappedBy = "owner1")
 	private List<Stock> stocks;
-	
-	
 
 	public List<Staff> getStaffs() {
 		return staffs;
