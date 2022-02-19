@@ -49,5 +49,4 @@ public class StockController {
 		return stockservice.deleteStock(id);
 
 	}
-
 }
