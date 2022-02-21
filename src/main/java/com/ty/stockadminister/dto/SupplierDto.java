@@ -1,9 +1,12 @@
 package com.ty.stockadminister.dto;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class SupplierDto {
@@ -14,6 +17,8 @@ public class SupplierDto {
 	private String mailId;
 	private long phone;
 	private String address;
+	@OneToMany(mappedBy = "supplier")
+	private List<Stock> stocks;
 	public int getId() {
 		return id;
 	}
@@ -43,6 +48,12 @@ public class SupplierDto {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public List<Stock> getStocks() {
+		return stocks;
+	}
+	public void setStocks(List<Stock> stocks) {
+		this.stocks = stocks;
 	}
 	
 	

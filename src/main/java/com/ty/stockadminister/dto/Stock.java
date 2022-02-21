@@ -1,9 +1,14 @@
 package com.ty.stockadminister.dto;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Stock {
@@ -17,6 +22,42 @@ public class Stock {
 	private double total_Cost;
 	private int reorder_Level;
 	private int reorder_Quantity;
+	@ManyToOne
+	@JoinColumn
+	private Staff staff;
+	@ManyToOne
+	@JoinColumn
+	private Owner owner1; 
+	@ManyToOne
+	@JoinColumn
+	private SupplierDto supplier;
+	@OneToMany(mappedBy = "stock")
+	private List<Sales> sales;
+	
+	
+	public SupplierDto getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(SupplierDto supplier) {
+		this.supplier = supplier;
+	}
+
+	public Owner getOwner1() {
+		return owner1;
+	}
+
+	public void setOwner1(Owner owner1) {
+		this.owner1 = owner1;
+	}
+
+	public Staff getStaff() {
+		return staff;
+	}
+
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
 
 	public int getId() {
 		return id;

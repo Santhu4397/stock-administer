@@ -40,7 +40,7 @@ public class SupplierController {
 		return service.getall();
 	}
 
-	@GetMapping("supplier")
+	@GetMapping("supplier/{id}")
 	public ResponseEntity<ResponseStructure<SupplierDto>> getbyid(@RequestParam int id) {
 		return service.getbyid(id);
 	}

@@ -1,9 +1,12 @@
 package com.ty.stockadminister.dto;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Owner {
@@ -18,6 +21,34 @@ public class Owner {
 	private String comapnyName;
 	private String department;
 	private String address;
+	@OneToMany(mappedBy = "owner")
+	private List<Staff> staffs;
+	@OneToMany(mappedBy = "owner1")
+	private List<Stock> stocks;
+
+	public List<Staff> getStaffs() {
+		return staffs;
+	}
+
+	public void setStaffs(List<Staff> staffs) {
+		this.staffs = staffs;
+	}
+
+	public List<Stock> getStocks() {
+		return stocks;
+	}
+
+	public void setStocks(List<Stock> stocks) {
+		this.stocks = stocks;
+	}
+
+	public List<Staff> getList() {
+		return staffs;
+	}
+
+	public void setList(List<Staff> staffs) {
+		this.staffs = staffs;
+	}
 
 	public int getId() {
 		return id;
