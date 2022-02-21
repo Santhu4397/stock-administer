@@ -14,7 +14,7 @@ public class Staff {
 	private String name;
 	private String email;
 	private String password;
-	private Long phone;
+	private Long phone; 
 
 	public int getId() {
 		return id;
