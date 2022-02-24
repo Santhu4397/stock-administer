@@ -24,6 +24,7 @@ public class Staff {
 	private String email;
 	@NotNull(message = "password should not be null")
 	private String password;
+	
 	@NotNull(message = "phone should not be null")
 	private Long phone;
 	@ManyToOne
@@ -32,8 +33,17 @@ public class Staff {
 	@OneToMany(mappedBy = "staff")
 	private List<Stock> stock;
 	
+	@OneToMany(mappedBy = "staff1")
+	private List<Orders> orders;
 	
-	
+	public List<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Orders> orders) {
+		this.orders = orders;
+	}
+
 	public List<Stock> getStock() {
 		return stock;
 	}

@@ -25,43 +25,63 @@ public class SupplierDto {
 	private String address;
 	@OneToMany(mappedBy = "supplier")
 	private List<Stock> stocks;
+	@OneToMany(mappedBy = "dto")
+	private List<Orders> list;
+
+	public List<Orders> getList() {
+		return list;
+	}
+
+	public void setList(List<Orders> list) {
+		this.list = list;
+	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getMailId() {
 		return mailId;
 	}
+
 	public void setMailId(String mailId) {
 		this.mailId = mailId;
 	}
+
 	public long getPhone() {
 		return phone;
 	}
+
 	public void setPhone(long phone) {
 		this.phone = phone;
 	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	public List<Stock> getStocks() {
 		return stocks;
 	}
+
 	public void setStocks(List<Stock> stocks) {
 		this.stocks = stocks;
 	}
-	
-	
 
 }
