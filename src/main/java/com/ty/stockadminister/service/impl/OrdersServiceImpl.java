@@ -5,13 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.ty.stockadminister.dao.OrdersDao;
 import com.ty.stockadminister.dto.Orders;
 import com.ty.stockadminister.dto.Sales;
 import com.ty.stockadminister.service.OrdersService;
 import com.ty.stockadminister.util.ResponseStructure;
-
+@Service
 public class OrdersServiceImpl implements OrdersService {
 	@Autowired
 	OrdersDao dao;
