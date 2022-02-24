@@ -109,4 +109,16 @@ public class StockServiceImpl implements Stockservice {
 		return entity;
 	}
 
+	@Override
+	public ResponseEntity<ResponseStructure<Stock>> getByProduct_Name(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<ResponseStructure<Stock>> getByProductReorder_Level(int level) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

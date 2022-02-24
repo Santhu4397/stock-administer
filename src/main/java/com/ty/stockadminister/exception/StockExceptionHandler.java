@@ -18,4 +18,5 @@ public class StockExceptionHandler extends StockException {
 		structure.setData("Custom Exception");
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
 	}
+	
 }

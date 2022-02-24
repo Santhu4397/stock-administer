@@ -88,5 +88,13 @@ public class StaffController {
 	public ResponseEntity<ResponseStructure<List<Staff>>> getAllStaff() {
 		return service.getAllStaff();
 	}
+	@GetMapping("staff/name/{name}")
+	@ApiOperation("To Get Staff name")
+	@ApiResponses({ @ApiResponse(code = 200, message = "List of Staff Found"),
+			@ApiResponse(code = 404, message = " Didnot Find"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
+	public ResponseEntity<ResponseStructure<Staff>> getStaffByName(@PathVariable String name){
+		return service.getStaffByName(name);
+	}
 
 }

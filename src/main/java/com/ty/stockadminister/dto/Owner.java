@@ -16,11 +16,13 @@ public class Owner {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+
 	@NotNull(message = "Name should not be null")
+
 	private String name;
-	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}",message = "Enter proper email id")
+	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id")
 	private String email;
-	@NotNull(message="Password should not be null")
+	@NotNull(message = "Password should not be null")
 	private String password;
 	@NotNull(message = "Phone should not be null")
 	private Long phone;
