@@ -47,6 +47,14 @@ public class StockController {
 	@DeleteMapping("stock")
 	public ResponseEntity<ResponseStructure<String>> deleteStock(@RequestParam int id) {
 		return stockservice.deleteStock(id);
-
 	}
+	@GetMapping("stock/product/{productname}")
+	public ResponseEntity<ResponseStructure<Stock>> getByProduct_Name(@PathVariable String productname) {
+		return stockservice.getByProduct_Name(productname);
+	}
+	@GetMapping("stock/ProductReorder_Level/{level}")
+	public ResponseEntity<ResponseStructure<Stock>> getByProductReorder_Level(@PathVariable int level) {
+		return stockservice.getByProductReorder_Level(level );
+	}
+	
 }

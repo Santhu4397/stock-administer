@@ -100,4 +100,10 @@ public class StaffServiceImpl implements StaffService {
 		return null;
 	}
 
+	@Override
+	public ResponseEntity<ResponseStructure<Staff>> getStaffByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -46,5 +46,9 @@ public class OwnerController {
 	public ResponseEntity<ResponseStructure<Owner>> saveStaff(@ApiParam("Save the Owner")  @RequestBody Owner owner) {
 		return service.saveOwner(owner);
 	}
-
+	@GetMapping("hi")
+	public Owner get() {
+		return new Owner();
+		
+	}
 }

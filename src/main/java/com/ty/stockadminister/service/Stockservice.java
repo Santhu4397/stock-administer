@@ -18,4 +18,8 @@ public interface Stockservice {
 
 	public ResponseEntity<ResponseStructure<String>> deleteStock(int id);
 
+	public ResponseEntity<ResponseStructure<Stock>> getByProduct_Name(String name);
+
+	public ResponseEntity<ResponseStructure<Stock>>getByProductReorder_Level(int level);
+
 }
