@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.ty.stockadminister.dao.SupplierDao;
 import com.ty.stockadminister.dto.SupplierDto;
 @Repository
-@Component
 public class SupplierDaoImpl implements SupplierDao{
 
 	@Override
