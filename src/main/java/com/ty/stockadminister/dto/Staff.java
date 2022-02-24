@@ -19,15 +19,25 @@ public class Staff {
 	private String name;
 	private String email;
 	private String password;
+
 	private Long phone;
+
 	@ManyToOne
 	@JoinColumn
 	private Owner owner;
 	@OneToMany(mappedBy = "staff")
 	private List<Stock> stock;
-	
-	
-	
+	@OneToMany(mappedBy = "staff1")
+	private List<Orders> orders;
+
+	public List<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Orders> orders) {
+		this.orders = orders;
+	}
+
 	public List<Stock> getStock() {
 		return stock;
 	}
