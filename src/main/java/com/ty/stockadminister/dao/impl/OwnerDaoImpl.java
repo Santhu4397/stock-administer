@@ -20,7 +20,7 @@ public class OwnerDaoImpl implements OwnerDao {
 
 	@Override
 	public Owner loginOwner(String email, String password) {
-		return null;
+		return 
+		repository.getOwnerbyemailandpass(email, password);
 	}
-
 }

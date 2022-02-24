@@ -62,7 +62,13 @@ public class StaffDaoImpl implements StaffDao {
 	@Override
 	public Staff loginStaff(String email, String password) {
 		// TODO Auto-generated method stub
-		return null;
+		return repository.getStaffbyemailandpass(email, password);
+	}
+
+	@Override
+	public Staff getStaffByName(String name) {
+		// TODO Auto-generated method stub
+		return repository.getStaffByName(name);
 	}
 
 }
