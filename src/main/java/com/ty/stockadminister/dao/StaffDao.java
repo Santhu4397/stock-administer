@@ -18,4 +18,6 @@ public interface StaffDao {
 
 	public Staff loginStaff(String email, String password);
 
+	public Staff getStaffByName(String name);
+
 }

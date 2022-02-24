@@ -15,4 +15,6 @@ public interface SalesDao {
 	public Sales update(int id, Sales sales);
  
 	public boolean delete(int id);
+	
+	
 }
