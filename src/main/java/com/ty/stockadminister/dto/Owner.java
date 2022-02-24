@@ -16,7 +16,6 @@ public class Owner {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@NotNull(message = "name should bot be null")
 	private String name;
 	private String email;
 	private String password;

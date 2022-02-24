@@ -1,4 +1,4 @@
-package com.ty.stockadminister.dao.impl;
+ package com.ty.stockadminister.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
