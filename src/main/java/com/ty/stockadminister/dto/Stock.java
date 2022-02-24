@@ -9,16 +9,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Stock {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private int id;
+	@NotNull(message = "Product name should not be null")
 	private String product_Name;
+	@NotNull(message = "category should not be null")
 	private String category;
+	@NotNull(message = "unit_Price should not be null")
 	private double unit_Price;
+	@NotNull(message = "quantity should not be null")
 	private int quantity;
+	@NotNull(message = "total_Cost should not be null")
 	private double total_Cost;
 	private int reorder_Level;
 	private int reorder_Quantity;
