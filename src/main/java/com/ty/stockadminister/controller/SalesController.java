@@ -2,6 +2,8 @@ package com.ty.stockadminister.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,7 +23,7 @@ public class SalesController {
 	@Autowired
 	SalesService service;
 	@PostMapping("sales")
-	public ResponseEntity<ResponseStructure<Sales>> save(@RequestBody Sales sales) {
+	public ResponseEntity<ResponseStructure<Sales>> save(@RequestBody @Valid Sales sales) {
 		return service.save(sales);
 	}
 	@GetMapping("sales")

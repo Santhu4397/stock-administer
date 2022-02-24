@@ -1,5 +1,7 @@
 package com.ty.stockadminister.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +33,7 @@ public class OwnerController {
 	@ApiResponses({@ApiResponse(code = 200,message = "Owner Loged In"),
 		@ApiResponse(code = 404,message = " Didnot Find"),
 		@ApiResponse(code = 500,message = "Internal Server error")})
-	public ResponseEntity<ResponseStructure<Owner>> loginStaff(@ApiParam("Login for Owner") @RequestBody LoginDto dto) {
+	public ResponseEntity<ResponseStructure<Owner>> loginStaff(@ApiParam("Login for Owner") @RequestBody  @Valid LoginDto dto) {
 		String email = dto.getEmail();
 		String password = dto.getPassword();
 		System.out.println(dto.getEmail() + dto.getPassword());
@@ -43,7 +45,7 @@ public class OwnerController {
 	@ApiResponses({@ApiResponse(code = 200,message = "Saved Owner"),
 		@ApiResponse(code = 404,message = " Didnot persist"),
 		@ApiResponse(code = 500,message = "Internal Server error")})
-	public ResponseEntity<ResponseStructure<Owner>> saveStaff(@ApiParam("Save the Owner")  @RequestBody Owner owner) {
+	public ResponseEntity<ResponseStructure<Owner>> saveStaff(@ApiParam("Save the Owner")  @RequestBody  @Valid Owner owner) {
 		return service.saveOwner(owner);
 	}
 	@GetMapping("hi")
