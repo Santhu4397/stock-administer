@@ -2,6 +2,8 @@ package com.ty.stockadminister.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +36,7 @@ public class StockController {
 	}
 
 	@PutMapping("stock")
-	public ResponseEntity<ResponseStructure<Stock>> updateStock(@RequestParam int id, @RequestBody Stock stock) {
+	public ResponseEntity<ResponseStructure<Stock>> updateStock(@RequestParam int id, @RequestBody @Valid Stock stock) {
 		return stockservice.updateStock(id, stock);
 
 	}

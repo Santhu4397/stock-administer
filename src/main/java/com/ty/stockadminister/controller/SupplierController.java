@@ -2,6 +2,8 @@ package com.ty.stockadminister.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,7 +26,7 @@ public class SupplierController {
 	SupplierService service;
 
 	@PostMapping("supplier")
-	public ResponseEntity<ResponseStructure<SupplierDto>> save(@RequestBody SupplierDto dto) {
+	public ResponseEntity<ResponseStructure<SupplierDto>> save(@RequestBody @Valid SupplierDto dto) {
 
 		return service.save(dto);
 	}

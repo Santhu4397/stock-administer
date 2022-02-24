@@ -2,6 +2,8 @@ package com.ty.stockadminister.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,7 +37,7 @@ public class StaffController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Staff Loged In"),
 			@ApiResponse(code = 404, message = " Didnot Find"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Staff>> loginStaff(@ApiParam("Login for Staff") @RequestBody LoginDto dto) {
+	public ResponseEntity<ResponseStructure<Staff>> loginStaff(@ApiParam("Login for Staff") @RequestBody @Valid LoginDto dto) {
 		String email = dto.getEmail();
 		String password = dto.getPassword();
 		return service.loginStaff(email, password);
@@ -46,7 +48,7 @@ public class StaffController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Staff Created"),
 			@ApiResponse(code = 404, message = " Didnot Persist"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Staff>> saveStaff(@ApiParam("To Save Staff") @RequestBody Staff staff) {
+	public ResponseEntity<ResponseStructure<Staff>> saveStaff(@ApiParam("To Save Staff") @RequestBody @Valid Staff staff) {
 		return service.saveStaff(staff);
 	}
 

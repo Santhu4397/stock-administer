@@ -8,17 +8,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 @Entity
 public class Sales {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@NotNull(message = "Name should not be null")
 	private String name;
 	private LocalDateTime date_and_time;
+	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}",message = "Enter proper email id")
 	private String email;
+	@NotNull(message = "Phone should not be null")
 	private long phone;
+	@NotNull(message = "Quantity should not be null")
 	private int qty;
+	@NotNull(message = "Price should not be null")
 	private double price;
 	@ManyToOne
 	@JoinColumn
