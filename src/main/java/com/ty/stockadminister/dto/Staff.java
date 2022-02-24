@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Staff {
@@ -16,9 +18,14 @@ public class Staff {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@NotNull(message = "name should not be null")
 	private String name;
+	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}",message = "Enter proper email id")
 	private String email;
+	@NotNull(message = "password should not be null")
 	private String password;
+	
+	@NotNull(message = "phone should not be null")
 	private Long phone;
 	@ManyToOne
 	@JoinColumn
@@ -26,8 +33,17 @@ public class Staff {
 	@OneToMany(mappedBy = "staff")
 	private List<Stock> stock;
 	
+	@OneToMany(mappedBy = "staff1")
+	private List<Orders> orders;
 	
-	
+	public List<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Orders> orders) {
+		this.orders = orders;
+	}
+
 	public List<Stock> getStock() {
 		return stock;
 	}

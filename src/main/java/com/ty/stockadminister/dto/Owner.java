@@ -33,6 +33,16 @@ public class Owner {
 	private List<Staff> staffs;
 	@OneToMany(mappedBy = "owner1")
 	private List<Stock> stocks;
+	@OneToMany(mappedBy = "owner2")
+	private List<Orders> orders;
+
+	public List<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Orders> orders) {
+		this.orders = orders;
+	}
 
 	public List<Staff> getStaffs() {
 		return staffs;
@@ -133,7 +143,7 @@ public class Owner {
 		super();
 		this.id = id;
 		this.name = name;
-		
+
 		this.phone = phone;
 		this.comapnyName = comapnyName;
 		this.department = department;
