@@ -1,4 +1,4 @@
-package com.ty.stockadminister.dto;
+  package com.ty.stockadminister.dto;
 
 import java.util.List;
 
@@ -7,15 +7,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class SupplierDto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@NotNull(message = "name should not be null")
 	private String name;
+	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}",message = "Enter proper email id")
 	private String mailId;
+	@NotNull(message = "phone should not be null")
 	private long phone;
+	@NotNull(message = "address name should not be null")
 	private String address;
 	@OneToMany(mappedBy = "supplier")
 	private List<Stock> stocks;
