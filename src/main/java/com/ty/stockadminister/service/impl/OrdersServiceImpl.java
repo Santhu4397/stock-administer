@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.ty.stockadminister.dao.OrdersDao;
 import com.ty.stockadminister.dto.Orders;
-import com.ty.stockadminister.dto.Sales;
 import com.ty.stockadminister.service.OrdersService;
 import com.ty.stockadminister.util.ResponseStructure;
+
 @Service
 public class OrdersServiceImpl implements OrdersService {
 	@Autowired
@@ -72,8 +72,6 @@ public class OrdersServiceImpl implements OrdersService {
 		return entity;
 	}
 
-
-
 	@Override
 	public ResponseEntity<ResponseStructure<Orders>> getByOrderId(int orderId) {
 		ResponseStructure<Orders> structuer = new ResponseStructure<Orders>();
@@ -93,10 +91,5 @@ public class OrdersServiceImpl implements OrdersService {
 		}
 		return responseEntity;
 	}
-
-
-
-	
-	
 
 }
