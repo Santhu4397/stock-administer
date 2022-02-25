@@ -1,5 +1,7 @@
 package com.ty.stockadminister.repositroy;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -8,8 +10,8 @@ import com.ty.stockadminister.dto.Stock;
 public interface StockRepository extends JpaRepository<Stock, Integer> {
 	
 	@Query
-	public Stock getByProduct_Name(String name);
+	public List< Stock> findByProductName(String name);
 	@Query
-	public Stock getByProductReorder_Level(int level);
+	public List< Stock> findByReorderLevel(int level);
 
 }

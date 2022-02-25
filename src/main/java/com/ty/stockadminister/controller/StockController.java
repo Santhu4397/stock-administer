@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.stockadminister.dto.Stock;
 import com.ty.stockadminister.service.Stockservice;
+import com.ty.stockadminister.service.impl.StockServiceImpl;
 import com.ty.stockadminister.util.ResponseStructure;
 
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +27,7 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 public class StockController {
 	@Autowired
-	Stockservice stockservice;
+	StockServiceImpl stockservice;
 
 	@PostMapping("stock")
 	@ApiOperation("To save stock")
@@ -76,21 +77,13 @@ public class StockController {
 	}
 
 	@GetMapping("stock/product/{productname}")
-	@ApiOperation("To get stock by product name")
-	@ApiResponses({@ApiResponse(code = 200,message = "Stock found by stock name"),
-		@ApiResponse(code = 404,message = "Class not found"),
-		@ApiResponse(code = 500,message = "Internal Server error")})
-	public ResponseEntity<ResponseStructure<Stock>> getByProduct_Name(@PathVariable String productname) {
+	public ResponseEntity<ResponseStructure<List<Stock>>> getByProduct_Name(@PathVariable String productname) {
 		return stockservice.getByProduct_Name(productname);
 	}
 
 	@GetMapping("stock/ProductReorder_Level/{level}")
-	@ApiOperation("To Get stock by product reorder level")
-	@ApiResponses({@ApiResponse(code = 200,message = "Products found"),
-		@ApiResponse(code = 404,message = "Class not found"),
-		@ApiResponse(code = 500,message = "Internal Server error")})
-	public ResponseEntity<ResponseStructure<Stock>> getByProductReorder_Level(@PathVariable int level) {
-		return stockservice.getByProductReorder_Level(level);
+	public ResponseEntity<ResponseStructure<List<Stock>>> getByProductReorder_Level(@PathVariable int level) {
+		return stockservice.getByReorder_Level(level );
 	}
 
 }
