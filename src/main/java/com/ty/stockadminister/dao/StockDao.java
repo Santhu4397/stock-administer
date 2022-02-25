@@ -15,8 +15,8 @@ public interface StockDao {
 
 	public boolean deleteStock(int id);
 	
-	public Stock getByProduct_Name(String name);
+	public List<Stock> getByProduct_Name(String name);
 	
-	public Stock getByProductReorder_Level(int level);
+	public List< Stock> getByProductReorder_Level(int level);
 
 }
