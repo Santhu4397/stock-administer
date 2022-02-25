@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.ty.stockadminister.validation.PhoneNumber;
+
 @Entity
 public class Owner {
 
@@ -21,7 +23,7 @@ public class Owner {
 	private String email;
 	@NotNull(message = "Password should not be null")
 	private String password;
-	@NotNull(message = "Phone should not be null")
+	@PhoneNumber
 	private Long phone;
 	@NotNull(message = "Company name should not be null")
 	private String comapnyName;

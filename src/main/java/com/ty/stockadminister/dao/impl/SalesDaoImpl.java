@@ -1,6 +1,7 @@
 package com.ty.stockadminister.dao.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,32 +17,52 @@ public class SalesDaoImpl implements SalesDao {
 
 	@Override
 	public Sales save(Sales sales) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.save(sales);
 	}
 
 	@Override
 	public Sales getByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findByName(name);
 	}
 
 	@Override
 	public List<Sales> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findAll();
 	}
 
 	@Override
 	public Sales update(int id, Sales sales) {
-		// TODO Auto-generated method stub
+		Sales exsitingproduct = getById(id);
+		if (exsitingproduct != null) {
+			exsitingproduct.setName(sales.getName());
+			exsitingproduct.setEmail(sales.getEmail());
+			exsitingproduct.setDate_and_time(sales.getDate_and_time());
+			exsitingproduct.setPhone(sales.getPhone());
+			exsitingproduct.setQty(sales.getQty());
+			exsitingproduct.setPrice(sales.getPrice());
+			return repository.save(exsitingproduct);
+		}
 		return null;
 	}
 
 	@Override
 	public boolean delete(int id) {
-		return false;
-		// TODO Auto-generated method stub
-		
+		Sales sales = getById(id);
+		if (sales != null) {
+			repository.delete(sales);
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	@Override
+	public Sales getById(int id) {
+		Optional<Sales> optional = repository.findById(id);
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+		return null;
 	}
 }

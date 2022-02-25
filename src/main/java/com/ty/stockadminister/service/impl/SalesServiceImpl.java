@@ -108,4 +108,24 @@ public class SalesServiceImpl implements SalesService {
 		return entity;
 	}
 
+	@Override
+	public ResponseEntity<ResponseStructure<Sales>> getById(int id) {
+		ResponseStructure<Sales> structuer = new ResponseStructure<Sales>();
+		ResponseEntity<ResponseStructure<Sales>> responseEntity;
+		Sales sales = dao.getById(id);
+		if (sales != null) {
+			structuer.setStatus(HttpStatus.OK.value());
+			structuer.setMessage("successfull");
+			structuer.setData(dao.getById(id));
+			responseEntity = new ResponseEntity<ResponseStructure<Sales>>(structuer, HttpStatus.OK);
+
+		} else {
+			structuer.setStatus(HttpStatus.NOT_FOUND.value());
+			structuer.setMessage("Name :" + id + " NOTFOUND");
+			structuer.setData(null);
+			responseEntity = new ResponseEntity<ResponseStructure<Sales>>(structuer, HttpStatus.NOT_FOUND);
+		}
+		return responseEntity;
+	}
+
 }
