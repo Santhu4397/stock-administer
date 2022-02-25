@@ -94,4 +94,9 @@ public class StockController {
 		return stockservice.getByReorder_Level(level);
 	}
 
+	@GetMapping("stockobject")
+	public Stock imTheStockObject() {
+		return new Stock();
+	}
+
 }
