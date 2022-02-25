@@ -45,15 +45,16 @@ public class StockDaoImpl implements StockDao {
 	}
 
 	@Override
-	public Stock getByProduct_Name(String name) {
-		repository.getByProduct_Name(name);
-		return null;
+	public List<Stock> getByProduct_Name(String name) {
+		return repository.findByProductName(name);
+		 
 	}
 
 	@Override
-	public Stock getByProductReorder_Level(int level) {
-		repository.getByProductReorder_Level(level);
-		return null;
+	public List< Stock> getByProductReorder_Level(int level) {
+		return repository.findByReorderLevel(level);
+		
+	
 	}
 
 }
