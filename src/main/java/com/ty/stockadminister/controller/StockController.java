@@ -59,5 +59,9 @@ public class StockController {
 	public ResponseEntity<ResponseStructure<List<Stock>>> getByProductReorder_Level(@PathVariable int level) {
 		return stockservice.getByReorder_Level(level );
 	}
+	@GetMapping("stockobject")
+	public Stock imTheStockObject() {
+		return new Stock();
+	}
 	
 }
