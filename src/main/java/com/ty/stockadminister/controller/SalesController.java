@@ -36,6 +36,11 @@ public class SalesController {
 		return service.getByName(name);
 	}
 	
+	@GetMapping("sales/{id}")
+	public ResponseEntity<ResponseStructure<Sales>> getById(@PathVariable int id) {
+		return service.getById(id);
+	}
+	
 	@DeleteMapping("sales")
 	public ResponseEntity<ResponseStructure<String>> delete(@RequestParam int id) {
 		return service.delete(id);

@@ -9,6 +9,8 @@ public interface SalesDao {
 	public Sales save(Sales sales);
 
 	public Sales getByName(String name);
+	
+	public Sales getById(int id);
 
 	public List<Sales> getAll();
 
