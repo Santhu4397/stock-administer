@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.ty.stockadminister.validation.PhoneNumber;
+
 @Entity
 public class SupplierDto {
 	@Id
@@ -19,7 +21,7 @@ public class SupplierDto {
 	private String name;
 	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}",message = "Enter proper email id")
 	private String mailId;
-	@NotNull(message = "phone should not be null")
+	@PhoneNumber
 	private long phone;
 	@NotNull(message = "address name should not be null")
 	private String address;

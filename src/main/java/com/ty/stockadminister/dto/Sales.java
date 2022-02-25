@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
+import com.ty.stockadminister.validation.PhoneNumber;
 @Entity
 public class Sales {
 
@@ -21,7 +23,7 @@ public class Sales {
 	private LocalDateTime date_and_time;
 	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}",message = "Enter proper email id")
 	private String email;
-	@NotNull(message = "Phone should not be null")
+	@PhoneNumber
 	private long phone;
 	@NotNull(message = "Quantity should not be null")
 	private int qty;
