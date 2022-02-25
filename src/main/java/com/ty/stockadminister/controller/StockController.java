@@ -17,12 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.stockadminister.dto.Stock;
 import com.ty.stockadminister.service.Stockservice;
+import com.ty.stockadminister.service.impl.StockServiceImpl;
 import com.ty.stockadminister.util.ResponseStructure;
 
 @RestController
 public class StockController {
 	@Autowired
-	Stockservice stockservice;
+	StockServiceImpl stockservice;
 
 	@PostMapping("stock")
 	public ResponseEntity<ResponseStructure<Stock>> saveStock(@RequestBody Stock stock) {
@@ -51,12 +52,12 @@ public class StockController {
 		return stockservice.deleteStock(id);
 	}
 	@GetMapping("stock/product/{productname}")
-	public ResponseEntity<ResponseStructure<Stock>> getByProduct_Name(@PathVariable String productname) {
+	public ResponseEntity<ResponseStructure<List<Stock>>> getByProduct_Name(@PathVariable String productname) {
 		return stockservice.getByProduct_Name(productname);
 	}
 	@GetMapping("stock/ProductReorder_Level/{level}")
-	public ResponseEntity<ResponseStructure<Stock>> getByProductReorder_Level(@PathVariable int level) {
-		return stockservice.getByProductReorder_Level(level );
+	public ResponseEntity<ResponseStructure<List<Stock>>> getByProductReorder_Level(@PathVariable int level) {
+		return stockservice.getByReorder_Level(level );
 	}
 	
 }

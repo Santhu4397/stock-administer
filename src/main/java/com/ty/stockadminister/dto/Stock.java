@@ -17,17 +17,17 @@ public class Stock {
 	@Id
 	private int id;
 	@NotNull(message = "Product name should not be null")
-	private String product_Name;
+	private String productName;
 	@NotNull(message = "category should not be null")
 	private String category;
 	@NotNull(message = "unit_Price should not be null")
-	private double unit_Price;
+	private double unitPrice;
 	@NotNull(message = "quantity should not be null")
 	private int quantity;
 	@NotNull(message = "total_Cost should not be null")
 	private double total_Cost;
-	private int reorder_Level;
-	private int reorder_Quantity;
+	private int reorderLevel;
+	private int reorderQuantity;
 	@ManyToOne
 	@JoinColumn
 	private Staff staff;
@@ -74,11 +74,11 @@ public class Stock {
 	}
 
 	public String getProduct_Name() {
-		return product_Name;
+		return productName;
 	}
 
 	public void setProduct_Name(String product_Name) {
-		this.product_Name = product_Name;
+		this.productName = product_Name;
 	}
 
 	public String getCategory() {
@@ -90,11 +90,11 @@ public class Stock {
 	}
 
 	public double getUnit_Price() {
-		return unit_Price;
+		return unitPrice;
 	}
 
 	public void setUnit_Price(double unit_Price) {
-		this.unit_Price = unit_Price;
+		this.unitPrice = unit_Price;
 	}
 
 	public int getQuantity() {
@@ -114,19 +114,19 @@ public class Stock {
 	}
 
 	public int getReorder_Level() {
-		return reorder_Level;
+		return reorderLevel;
 	}
 
 	public void setReorder_Level(int reorder_Level) {
-		this.reorder_Level = reorder_Level;
+		this.reorderLevel = reorder_Level;
 	}
 
 	public int getReorder_Quantity() {
-		return reorder_Quantity;
+		return reorderQuantity;
 	}
 
 	public void setReorder_Quantity(int reorder_Quantity) {
-		this.reorder_Quantity = reorder_Quantity;
+		this.reorderQuantity = reorder_Quantity;
 	}
 
 }
