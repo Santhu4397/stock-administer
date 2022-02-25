@@ -56,6 +56,13 @@ public class SalesController {
 		return service.getByName(name);
 	}
 
+	
+	@GetMapping("sales/{id}")
+	public ResponseEntity<ResponseStructure<Sales>> getById(@PathVariable int id) {
+		return service.getById(id);
+	}
+	
+
 	@DeleteMapping("sales")
 	@ApiOperation("To delete the stock")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Sales deleted"),

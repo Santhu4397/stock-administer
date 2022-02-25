@@ -13,6 +13,8 @@ public interface SalesService {
 	public ResponseEntity<ResponseStructure<Sales>> save(Sales sales);
 
 	public ResponseEntity<ResponseStructure<Sales>> getByName(String name);
+	
+	public ResponseEntity<ResponseStructure<Sales>> getById(int id);
 
 	public ResponseEntity<ResponseStructure<List<Sales>>> getAll();
 
