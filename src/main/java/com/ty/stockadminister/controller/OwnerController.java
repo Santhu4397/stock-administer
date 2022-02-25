@@ -29,11 +29,12 @@ public class OwnerController {
 	private OwnerService service;
 
 	@PostMapping("owner/login")
-	@ApiOperation("To Owner Login")
-	@ApiResponses({@ApiResponse(code = 200,message = "Owner Loged In"),
-		@ApiResponse(code = 404,message = " Didnot Find"),
-		@ApiResponse(code = 500,message = "Internal Server error")})
-	public ResponseEntity<ResponseStructure<Owner>> loginStaff(@ApiParam("Login for Owner") @RequestBody  @Valid LoginDto dto) {
+	@ApiOperation("Login for owner")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Owner Loged In"),
+			@ApiResponse(code = 404, message = " Didnot Find"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
+	public ResponseEntity<ResponseStructure<Owner>> loginStaff(
+			@ApiParam("Login for Owner") @RequestBody @Valid LoginDto dto) {
 		String email = dto.getEmail();
 		String password = dto.getPassword();
 		System.out.println(dto.getEmail() + dto.getPassword());
@@ -42,15 +43,17 @@ public class OwnerController {
 
 	@PostMapping("owner")
 	@ApiOperation("To save the owner")
-	@ApiResponses({@ApiResponse(code = 200,message = "Saved Owner"),
-		@ApiResponse(code = 404,message = " Didnot persist"),
-		@ApiResponse(code = 500,message = "Internal Server error")})
-	public ResponseEntity<ResponseStructure<Owner>> saveStaff(@ApiParam("Save the Owner")  @RequestBody  @Valid Owner owner) {
+	@ApiResponses({ @ApiResponse(code = 200, message = "Saved Owner"),
+			@ApiResponse(code = 404, message = " Didnot persist"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
+	public ResponseEntity<ResponseStructure<Owner>> saveStaff(
+			@ApiParam("Save the Owner") @RequestBody @Valid Owner owner) {
 		return service.saveOwner(owner);
 	}
+
 	@GetMapping("hi")
 	public Owner get() {
 		return new Owner();
-		
+
 	}
 }

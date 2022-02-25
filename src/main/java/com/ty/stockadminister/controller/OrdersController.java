@@ -15,26 +15,49 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ty.stockadminister.dto.Orders;
 import com.ty.stockadminister.service.OrdersService;
 import com.ty.stockadminister.util.ResponseStructure;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 public class OrdersController {
 	@Autowired
 	OrdersService service;
-	
+
 	@PostMapping("orders")
+	@ApiOperation("To Save order")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Order Saved"),
+			@ApiResponse(code = 404, message = "Class not found"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
 	public ResponseEntity<ResponseStructure<Orders>> save(@RequestBody Orders orders) {
 		return service.save(orders);
 	}
+
 	@GetMapping("orders")
-	public ResponseEntity<ResponseStructure<List<Orders>>> getAll(){
+	@ApiOperation("To Get all the orders")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Orders Found"),
+			@ApiResponse(code = 404, message = "Class not found"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
+	public ResponseEntity<ResponseStructure<List<Orders>>> getAll() {
 		return service.getAll();
-		
+
 	}
+
 	@GetMapping("orders/{ordersId}")
+	@ApiOperation("To Get order by order Id ")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Order found"),
+			@ApiResponse(code = 404, message = "Class not found"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
 	public ResponseEntity<ResponseStructure<Orders>> getByOrderId(@PathVariable int orderId) {
 		return service.getByOrderId(orderId);
 	}
-	
+
 	@DeleteMapping("orders")
+	@ApiOperation("To Get order by order Id ")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Order deleted"),
+			@ApiResponse(code = 404, message = "Class not found"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
 	public ResponseEntity<ResponseStructure<String>> delete(@RequestParam int id) {
 		return service.delete(id);
 	}
