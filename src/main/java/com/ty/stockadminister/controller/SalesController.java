@@ -1,6 +1,6 @@
 package com.ty.stockadminister.controller;
 
-import java.util.List;
+import java.util.List; 
 
 import javax.validation.Valid;
 
@@ -36,7 +36,7 @@ public class SalesController {
 	public ResponseEntity<ResponseStructure<Sales>> save(@RequestBody @Valid Sales sales) {
 		return service.save(sales);
 	}
-
+ 
 	@GetMapping("sales")
 	@ApiOperation("To Get all the sales")
 	@ApiResponses({ @ApiResponse(code = 200, message = "List of Sales Founds"),
