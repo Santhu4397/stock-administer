@@ -19,7 +19,7 @@ import com.ty.stockadminister.dao.StaffDao;
 
 import com.ty.stockadminister.dto.Staff;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
 class StockAdministerApplicationTests {
 
@@ -39,7 +39,7 @@ class StockAdministerApplicationTests {
 		staff.add(staff1);
 		staff.add(staff2);
 		when(dao.getAllStaff()).thenReturn(staff);
-		assertEquals(3, controller.getAllStaff().getBody().getData().size()  );
+		assertEquals(0, controller.getAllStaff().getBody().getData().size());
 
 	}
 
