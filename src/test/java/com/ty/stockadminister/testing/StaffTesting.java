@@ -17,6 +17,7 @@ import com.ty.stockadminister.controller.StaffController;
 import com.ty.stockadminister.dao.StaffDao;
 import com.ty.stockadminister.dto.LoginDto;
 import com.ty.stockadminister.dto.Staff;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StaffTesting {
@@ -33,25 +34,20 @@ public class StaffTesting {
 	public void getstaff() {
 		List<Staff> liststaff = new ArrayList<Staff>();
 		liststaff.add(staff3);
-		liststaff.add(staff1); 
+		liststaff.add(staff1);
 		liststaff.add(staff2);
 		when(dao.getAllStaff()).thenReturn(liststaff);
-		assertEquals(3, controller.getAllStaff().getBody().getData().size()); 
+		assertEquals(3, controller.getAllStaff().getBody().getData().size());
 
 	}
+
 	@Test
 	public void savestaff() {
 		when(dao.saveStaff(staff1)).thenReturn(staff1);
-	assertEquals(staff1, controller.saveStaff(staff1).getBody().getData());
-		
+		assertEquals(staff1, controller.saveStaff(staff1).getBody().getData());
+
 	}
-//	@Test
-//	public void saveAdminTest() {
-//
-//		
-//		when(dao.saveAdmin(admin)).thenReturn(admin);
-//		assertEquals(admin, controller.saveAdmin(admin).getBody().getData());
-//	}
+
 
 	@Test
 	public void getstaffByIdTest() { 
@@ -61,21 +57,20 @@ public class StaffTesting {
 
 	}
 
-	
-
 	@Test
 	public void updatestaff() {
 
-	
-		when(dao.updateStaff(1, staff3)).thenReturn(staff3);
-		assertEquals(staff3, controller.updateStaff(1, staff3).getBody().getData());
+
+		when(dao.updateStaff(1, staff2)).thenReturn(staff2);
+		assertEquals(staff2, controller.updateStaff(1, staff2).getBody().getData());
+
 	}
 
 	@org.junit.jupiter.api.Test
 	public void deleteownerTest() {
 
 		boolean bt = true;
-		String respon="Staff deleted";
+		String respon = "Staff deleted";
 		when(dao.deleteStaff(1)).thenReturn(bt);
 		assertEquals(respon, controller.deleteStaff(1).getBody().getData());
 

@@ -78,4 +78,26 @@ public class Orders {
 		this.totalOrderRecived = totalOrderRecived;
 	}
 
+	public Orders(int orderId, @NotNull(message = "Product name should not be null") String productName, int qtyOrder,
+			double totalOrderCost, double qtyRecived, double totalOrderRecived, SupplierDto dto, Owner owner2,
+			Staff staff1) {
+		super();
+		this.orderId = orderId;
+		this.productName = productName;
+		this.qtyOrder = qtyOrder;
+		this.totalOrderCost = totalOrderCost;
+		this.qtyRecived = qtyRecived;
+		this.totalOrderRecived = totalOrderRecived;
+		this.dto = dto;
+		this.owner2 = owner2;
+		this.staff1 = staff1;
+	}
+
+	public Orders() {
+		super();
+		
+	}
+	
+	
+
 }
