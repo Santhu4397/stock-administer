@@ -33,7 +33,7 @@ public class OwnerController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Owner Loged In"),
 			@ApiResponse(code = 404, message = " Didnot Find"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Owner>> loginStaff(
+	public ResponseEntity<ResponseStructure<Owner>> loginOwner(
 			@ApiParam("Login for Owner") @RequestBody @Valid LoginDto dto) {
 		String email = dto.getEmail();
 		String password = dto.getPassword();
@@ -46,7 +46,7 @@ public class OwnerController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Saved Owner"),
 			@ApiResponse(code = 404, message = " Didnot persist"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Owner>> saveStaff(
+	public ResponseEntity<ResponseStructure<Owner>> saveOwner(
 			@ApiParam("Save the Owner") @RequestBody @Valid Owner owner) {
 		return service.saveOwner(owner);
 	}

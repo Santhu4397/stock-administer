@@ -61,7 +61,7 @@ public class StockServiceImpl implements Stockservice {
 			responseStructure.setData(null);
 			ResponseEntity<ResponseStructure<Stock>> entity = new ResponseEntity<ResponseStructure<Stock>>(
 					responseStructure, HttpStatus.NOT_FOUND);
-			return entity;
+			return entity; 
 		}
 
 	}

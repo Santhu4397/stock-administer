@@ -28,7 +28,7 @@ public class StockDaoImpl implements StockDao {
 	@Override
 	public Stock updateStock(int id, Stock stock) {
 		// TODO Auto-generated method stub
-		Stock existingstock=getStockById(id);
+		Stock existingstock=getStockById(id); 
 		if(existingstock != null) {
 			existingstock.setId(stock.getId());
 			existingstock.setProduct_Name(stock.getProduct_Name());
