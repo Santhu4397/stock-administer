@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ty.stockadminister.dao.OwnerDao;
 import com.ty.stockadminister.dto.Owner;
-
+import com.ty.stockadminister.dto.Staff;
 import com.ty.stockadminister.service.OwnerService;
 import com.ty.stockadminister.util.ResponseStructure;
 
@@ -31,8 +31,23 @@ public class OwnerServiceImpl implements OwnerService {
 	}
 
 	public ResponseEntity<ResponseStructure<Owner>> loginOwner(String email, String password) {
-		dao.loginOwner(email, password);
-		return null;
+		 Owner owner = dao.loginOwner(email, password);
+			ResponseStructure<Owner> structure = new ResponseStructure<Owner>();
+			ResponseEntity<ResponseStructure<Owner>> responseEntity = null;
+			if (owner !=null) {
+				structure.setStatus(HttpStatus.OK.value());
+				structure.setMessage("Sucess");
+				structure.setData( dao.loginOwner(email, password));
+				responseEntity = new ResponseEntity<ResponseStructure<Owner>>(structure, HttpStatus.OK);
+			} else {
+				structure.setStatus(HttpStatus.NOT_FOUND.value());
+				structure.setMessage("data not fond");
+				structure.setData(null);
+				responseEntity = new ResponseEntity<ResponseStructure<Owner>>(structure, HttpStatus.NOT_FOUND);
+			}
+			return responseEntity;
+		
+		
 	}
 
 }
