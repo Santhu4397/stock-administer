@@ -61,7 +61,7 @@ public class OrdersServiceImpl implements OrdersService {
 		if (dao.delete(orderId)) {
 			structuer.setStatus(HttpStatus.OK.value());
 			structuer.setMessage("successfull");
-			structuer.setData("User deleted");
+			structuer.setData("Order deleted");
 			entity = new ResponseEntity<ResponseStructure<String>>(structuer, HttpStatus.OK);
 		} else {
 			structuer.setStatus(HttpStatus.OK.value());
