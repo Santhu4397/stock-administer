@@ -52,7 +52,9 @@ public class StaffServiceImpl implements StaffService {
 			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.OK);
 
 		} else {
-
+			structure.setMessage("not Sucess");
+			structure.setData(null);
+			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.NOT_FOUND);
 		}
 		return responseEntity;
 	}
@@ -61,17 +63,17 @@ public class StaffServiceImpl implements StaffService {
 	public ResponseEntity<ResponseStructure<Staff>> updateStaff(int id, Staff staff) {
 		ResponseStructure<Staff> structure = new ResponseStructure<>();
 		ResponseEntity<ResponseStructure<Staff>> responseEntity = null;
-		Staff staff1 = dao.getStaffById(id);
+		Staff staff1 = dao.updateStaff(id, staff);
 		if (staff1 != null) {
 			structure.setStatus(HttpStatus.OK.value());
 			structure.setMessage("Sucess");
-			structure.setData(dao.saveStaff(staff1));
+			structure.setData(dao.updateStaff(id,staff1));
 			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.OK);
 		} else {
-			structure.setStatus(HttpStatus.OK.value());
-			structure.setMessage("Sucess");
-			structure.setData(dao.saveStaff(staff));
-			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.OK);
+			structure.setStatus(HttpStatus.NOT_FOUND.value());
+			structure.setMessage("not Sucess");
+			structure.setData(null);
+			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.NOT_FOUND);
 		}
 		return responseEntity;
 	}
@@ -96,14 +98,43 @@ public class StaffServiceImpl implements StaffService {
 
 	@Override
 	public ResponseEntity<ResponseStructure<Staff>> loginStaff(String email, String password) {
-		dao.loginStaff(email, password);
-		return null;
+		 Staff staff =dao.loginStaff(email, password);
+		ResponseStructure<Staff> structure = new ResponseStructure<Staff>();
+		ResponseEntity<ResponseStructure<Staff>> responseEntity = null;
+		if (staff !=null) {
+			structure.setStatus(HttpStatus.OK.value());
+			structure.setMessage("Sucess");
+			structure.setData(dao.loginStaff(email, password));
+			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.OK);
+		} else {
+			structure.setStatus(HttpStatus.NOT_FOUND.value());
+			structure.setMessage("data not fond");
+			structure.setData(null);
+			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.NOT_FOUND);
+		}
+		return responseEntity;
+		 
 	}
 
 	@Override
 	public ResponseEntity<ResponseStructure<Staff>> getStaffByName(String name) {
 		// TODO Auto-generated method stub
-		return null;
+		ResponseStructure<Staff> structure = new ResponseStructure<Staff>();
+		ResponseEntity<ResponseStructure<Staff>> responseEntity = null;
+		Staff staff = dao.getStaffByName(name);
+		if (staff != null) {
+			structure.setStatus(HttpStatus.OK.value());
+			structure.setMessage("Sucess");
+			structure.setData(dao.getStaffByName(name));
+			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.OK);
+
+		} else {
+			structure.setMessage("not Sucess");
+			structure.setData(null);
+			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.NOT_FOUND);
+		}
+		return responseEntity;
+		
 	}
 
 }

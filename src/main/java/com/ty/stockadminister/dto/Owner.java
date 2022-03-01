@@ -139,20 +139,32 @@ public class Owner {
 				+ ", comapnyName=" + comapnyName + ", department=" + department + ", address=" + address + "]";
 	}
 
-	public Owner(int id, String name, String email, String password, Long phone, String comapnyName, String department,
-			String address) {
+	
+
+	
+
+	public Owner() {
+		super();
+	}
+
+	public Owner(int id, String name,
+			@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id") String email,
+			@NotNull(message = "Password should not be null") String password, Long phone,
+			@NotNull(message = "Company name should not be null") String comapnyName, String department,
+			@NotNull(message = "Address should not be null") String address, List<Staff> staffs, List<Stock> stocks,
+			List<Orders> orders) {
 		super();
 		this.id = id;
 		this.name = name;
-
+		this.email = email;
+		this.password = password;
 		this.phone = phone;
 		this.comapnyName = comapnyName;
 		this.department = department;
 		this.address = address;
-	}
-
-	public Owner() {
-		super();
+		this.staffs = staffs;
+		this.stocks = stocks;
+		this.orders = orders;
 	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ty.stockadminister.controller.StaffController;
 import com.ty.stockadminister.dao.StaffDao;
+import com.ty.stockadminister.dto.LoginDto;
 import com.ty.stockadminister.dto.Staff;
 
 @RunWith(SpringRunner.class)
@@ -26,11 +27,11 @@ public class StaffTesting {
 	private StaffDao dao;
 
 	Staff staff3 = new Staff(1, "deepak", "deepak@gamil.com", "1234", 15697465l);
-	Staff staff1 = new Staff(2, "deepak", "deepak@gamil.com", "1234", 15697465l);
-	Staff staff2 = new Staff(3, "deepak", "deepak@gamil.com", "1234", 15697465l);
+	Staff staff1 = new Staff(2, "sagara", "deepak@gamil.com", "1234", 15697465l);
+	Staff staff2 = new Staff(3, "abi", "deepak@gamil.com", "1234", 15697465l);
 
 	@Test
-	public void getowner() {
+	public void getstaff() {
 		List<Staff> liststaff = new ArrayList<Staff>();
 		liststaff.add(staff3);
 		liststaff.add(staff1);
@@ -41,7 +42,7 @@ public class StaffTesting {
 	}
 
 	@Test
-	public void saveowner() {
+	public void savestaff() {
 		when(dao.saveStaff(staff1)).thenReturn(staff1);
 		assertEquals(staff1, controller.saveStaff(staff1).getBody().getData());
 
@@ -49,18 +50,20 @@ public class StaffTesting {
 
 
 	@Test
-	public void getownerByIdTest() {
-
-		when(dao.getStaffByName("deepak")).thenReturn(staff1);
-		assertEquals(staff1, controller.getStaffByName("deepak").getBody().getData());
+	public void getstaffByIdTest() { 
+		
+		when(dao.getStaffById(1)).thenReturn(staff3);
+		assertEquals(staff3, controller.getStaffById(1).getBody().getData());
 
 	}
 
 	@Test
-	public void updateowner() {
+	public void updatestaff() {
+
 
 		when(dao.updateStaff(1, staff2)).thenReturn(staff2);
 		assertEquals(staff2, controller.updateStaff(1, staff2).getBody().getData());
+
 	}
 
 	@org.junit.jupiter.api.Test
@@ -72,5 +75,17 @@ public class StaffTesting {
 		assertEquals(respon, controller.deleteStaff(1).getBody().getData());
 
 	}
-
+	@Test
+	public void getByStaffName() {
+		when(dao.getStaffByName("deepak")).thenReturn(staff3);
+		assertEquals(staff3, controller.getStaffByName("deepak").getBody().getData());
+	}
+	@Test
+	public void login() {
+		LoginDto dto=new LoginDto();
+		dto.setEmail("deepak@gamil.com");
+		dto.setPassword("1234");
+		when(dao.loginStaff("deepak@gamil.com","1234")).thenReturn(staff3);
+		assertEquals(staff3, controller.loginStaff(dto).getBody().getData());
+	}
 }

@@ -27,6 +27,20 @@ public class SupplierDto {
 	private String address;
 	@OneToMany(mappedBy = "supplier")
 	private List<Stock> stocks;
+	public SupplierDto(int id, @NotNull(message = "name should not be null") String name,
+			@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id") String mailId,
+			long phone, @NotNull(message = "address name should not be null") String address, List<Stock> stocks,
+			List<Orders> list) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.mailId = mailId;
+		this.phone = phone;
+		this.address = address;
+		this.stocks = stocks;
+		this.list = list;
+	}
+
 	@OneToMany(mappedBy = "dto")
 	private List<Orders> list;
 
