@@ -88,4 +88,24 @@ public class Sales {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+	public Sales(int id, @NotNull(message = "Name should not be null") String name, LocalDateTime date_and_time,
+			@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id") String email,
+			long phone, @NotNull(message = "Quantity should not be null") int qty,
+			@NotNull(message = "Price should not be null") double price, Stock stock) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.date_and_time = date_and_time;
+		this.email = email;
+		this.phone = phone;
+		this.qty = qty;
+		this.price = price;
+		this.stock = stock;
+	}
+
+	public Sales() {
+		super();
+	}
+	
 }
