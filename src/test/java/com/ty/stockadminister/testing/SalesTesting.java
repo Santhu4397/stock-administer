@@ -1,6 +1,7 @@
 package com.ty.stockadminister.testing;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
@@ -17,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.ty.stockadminister.controller.SalesController;
 import com.ty.stockadminister.dao.SalesDao;
 import com.ty.stockadminister.dto.Sales;
-import com.ty.stockadminister.dto.Staff;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -33,7 +34,7 @@ public class SalesTesting {
 	@Test
 	public void savesales() {
 		when(dao.save(sales)).thenReturn(sales);
-		assertEquals(sales, controller.save(sales).getBody().getData());
+		assertEquals(sales, controller.save(sales ,0).getBody().getData());
 
 	}
 
