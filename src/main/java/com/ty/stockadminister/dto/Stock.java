@@ -129,4 +129,34 @@ public class Stock {
 		this.reorderQuantity = reorder_Quantity;
 	}
 
+	public Stock(int id, @NotNull(message = "Product name should not be null") String productName,
+			@NotNull(message = "category should not be null") String category,
+			@NotNull(message = "unit_Price should not be null") double unitPrice,
+			@NotNull(message = "quantity should not be null") int quantity,
+			@NotNull(message = "total_Cost should not be null") double total_Cost, int reorderLevel,
+			int reorderQuantity, Staff staff, Owner owner1, SupplierDto supplier, List<Sales> sales) {
+		super();
+		this.id = id;
+		this.productName = productName;
+		this.category = category;
+		this.unitPrice = unitPrice;
+		this.quantity = quantity;
+		this.total_Cost = total_Cost;
+		this.reorderLevel = reorderLevel;
+		this.reorderQuantity = reorderQuantity;
+		this.staff = staff;
+		this.owner1 = owner1;
+		this.supplier = supplier;
+		this.sales = sales;
+	}
+
+	public Stock() {
+		super();
+		
+	}
+	
+	
+	
+	
+
 }
