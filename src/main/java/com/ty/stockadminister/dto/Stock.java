@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Stock {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +30,15 @@ public class Stock {
 	private double total_Cost;
 	private int reorderLevel;
 	private int reorderQuantity;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
 	private Staff staff;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
 	private Owner owner1; 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
 	private SupplierDto supplier;

@@ -13,5 +13,7 @@ public interface StockRepository extends JpaRepository<Stock, Integer> {
 	public List< Stock> findByProductName(String name);
 	@Query
 	public List< Stock> findByReorderLevel(int level);
+	@Query("select s from Stock s where s.quantity<=s.reorderLevel")
+    public List<Stock> findByLowReorderLevel();
 
 }
