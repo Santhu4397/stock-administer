@@ -8,8 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import com.ty.stockadminister.dao.OwnerDao;
+import com.ty.stockadminister.dao.StaffDao;
 import com.ty.stockadminister.dao.SupplierDao;
 import com.ty.stockadminister.dao.impl.SupplierDaoImpl;
+import com.ty.stockadminister.dto.Owner;
+import com.ty.stockadminister.dto.Staff;
 import com.ty.stockadminister.dto.Stock;
 import com.ty.stockadminister.dto.SupplierDto;
 import com.ty.stockadminister.service.SupplierService;
@@ -19,15 +23,39 @@ import com.ty.stockadminister.util.ResponseStructure;
 public class SupplierServiceImpl implements SupplierService  {
 	@Autowired
 	SupplierDao dao;
+	@Autowired
+	StaffDao staffDao;
+	@Autowired
+	OwnerDao ownerDao;
 	@Override
-	public ResponseEntity<ResponseStructure<SupplierDto>> save(SupplierDto dto) {
-		// TODO Auto-generated method stub
+	public ResponseEntity<ResponseStructure<SupplierDto>> save(SupplierDto dto,String id) {
+	
+		Staff staff = null;
 		ResponseStructure<SupplierDto> responseStructure=new ResponseStructure<SupplierDto>();
+		Owner owner=ownerDao.getOwnerById(id);
+		dto.setOwner(owner);
+		if(owner==null) {
+			staff=staffDao.getStaffById(id);
+			dto.setStaff(staff);
+		}
+		
+		
+		if(staff !=null||owner !=null) {
+		
 		responseStructure.setStatus(HttpStatus.OK.value());
 		responseStructure.setMessage("successfull");
 		responseStructure.setData(dao.save(dto));
 		ResponseEntity<ResponseStructure<SupplierDto>> responseEntity=new ResponseEntity<ResponseStructure<SupplierDto>>(responseStructure,HttpStatus.OK);
 		return responseEntity;
+		}
+		else {
+			
+			responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMessage("ID"+id+" not found");
+			responseStructure.setData(null);
+			ResponseEntity<ResponseStructure<SupplierDto>> responseEntity=new ResponseEntity<ResponseStructure<SupplierDto>>(responseStructure,HttpStatus.NOT_FOUND);
+			return responseEntity;
+		}
 	}
 
 	@Override

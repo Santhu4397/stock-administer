@@ -29,7 +29,7 @@ public class OwnerDaoImpl implements OwnerDao {
 	}
 
 	@Override
-	public Owner getOwnerById(int id) {
+	public Owner getOwnerById(String id) {
 		Optional<Owner> owner = repository.findById(id);
 		if (owner.isPresent()) {
 			return owner.get();

@@ -64,7 +64,7 @@ public class OwnerServiceImpl implements OwnerService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Owner>> getOwnerById(int id) {
+	public ResponseEntity<ResponseStructure<Owner>> getOwnerById(String id) {
 		ResponseStructure<Owner> structure = new ResponseStructure<Owner>();
 		ResponseEntity<ResponseStructure<Owner>> responseEntity = null;
 		Owner owner = dao.getOwnerById(id);

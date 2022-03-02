@@ -27,7 +27,7 @@ public class StaffDaoImpl implements StaffDao {
 	}
 
 	@Override
-	public Staff getStaffById(int id) {
+	public Staff getStaffById(String id) {
 		Optional<Staff> staff = repository.findById(id);
 		if (staff.isPresent()) {
 			return staff.get();
@@ -36,7 +36,7 @@ public class StaffDaoImpl implements StaffDao {
 	}
 
 	@Override
-	public Staff updateStaff(int id, Staff staff) {
+	public Staff updateStaff(String id, Staff staff) {
 		Staff existingStaff = getStaffById(id);
 		if (existingStaff != null) {
 			existingStaff.setEmail(staff.getEmail());
@@ -49,7 +49,7 @@ public class StaffDaoImpl implements StaffDao {
 	}
 
 	@Override
-	public boolean deleteStaff(int id) {
+	public boolean deleteStaff(String id) {
 		Staff staff = getStaffById(id);
 		if (staff != null) {
 			repository.delete(staff);

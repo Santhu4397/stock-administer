@@ -157,11 +157,6 @@ public class Stock {
 
 	public Stock() {
 		super();
-		
 	}
 	
-	
-	
-	
-
 }
