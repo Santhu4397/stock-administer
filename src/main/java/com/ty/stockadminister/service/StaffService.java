@@ -13,11 +13,11 @@ public interface StaffService {
 
 	public ResponseEntity<ResponseStructure<List<Staff>>> getAllStaff();
 
-	public ResponseEntity<ResponseStructure<Staff>> getStaffById(int id);
+	public ResponseEntity<ResponseStructure<Staff>> getStaffById(String id);
 
-	public ResponseEntity<ResponseStructure<Staff>> updateStaff(int id, Staff staff);
+	public ResponseEntity<ResponseStructure<Staff>> updateStaff(String id, Staff staff);
 
-	public ResponseEntity<ResponseStructure<String>> deleteStaff(int id);
+	public ResponseEntity<ResponseStructure<String>> deleteStaff(String id);
 
 	public ResponseEntity<ResponseStructure<Staff>> loginStaff(String email, String password);
 

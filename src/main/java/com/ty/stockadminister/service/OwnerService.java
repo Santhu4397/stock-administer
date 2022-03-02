@@ -16,7 +16,7 @@ public interface OwnerService {
 
 	public ResponseEntity<ResponseStructure<List<Owner>>> getAll();
 
-	public ResponseEntity<ResponseStructure<Owner>> getOwnerById(int id);
+	public ResponseEntity<ResponseStructure<Owner>> getOwnerById(String id);
 
 	public ResponseEntity<ResponseStructure<Owner>> updateOwner(int id, Owner owner);
 

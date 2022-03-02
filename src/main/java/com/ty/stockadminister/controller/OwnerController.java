@@ -73,7 +73,7 @@ public class OwnerController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Found the Owner by ID"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Owner>> getOwnerById(@ApiParam("To Get Owner By ID") @PathVariable int id) {
+	public ResponseEntity<ResponseStructure<Owner>> getOwnerById(@ApiParam("To Get Owner By ID") @PathVariable String id) {
 		return service.getOwnerById(id);
 	}
 	

@@ -10,6 +10,9 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ty.stockadminister.validation.PhoneNumber;
 
@@ -17,8 +20,12 @@ import com.ty.stockadminister.validation.PhoneNumber;
 public class Owner {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emp_seq")
+	@GenericGenerator(name = "emp_seq", strategy = "com.ty.stockadminister.dto.StringPrefixedSequenceIdGenerator", parameters = {
+			@Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "50"),
+			@Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "Adm_"),
+			@Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
+	private String id;
 	private String name;
 	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id")
 	private String email;
@@ -73,11 +80,11 @@ public class Owner {
 		this.staffs = staffs;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -143,15 +150,11 @@ public class Owner {
 				+ ", comapnyName=" + comapnyName + ", department=" + department + ", address=" + address + "]";
 	}
 
-	
-
-	
-
 	public Owner() {
 		super();
 	}
 
-	public Owner(int id, String name,
+	public Owner(String id, String name,
 			@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id") String email,
 			@NotNull(message = "Password should not be null") String password, Long phone,
 			@NotNull(message = "Company name should not be null") String comapnyName, String department,
