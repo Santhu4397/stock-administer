@@ -83,7 +83,7 @@ public class OwnerController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Owner Updated"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Owner>> updateStaff(@ApiParam("Update for Owner") @PathVariable int id,
+	public ResponseEntity<ResponseStructure<Owner>> updateStaff(@ApiParam("Update for Owner") @PathVariable String id,
 			@RequestBody Owner owner) {
 		return service.updateOwner(id, owner);
 	}
@@ -93,7 +93,7 @@ public class OwnerController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Owner Deleted"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<String>> deleteOwner(@ApiParam("Delete for Owner") @RequestParam int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteOwner(@ApiParam("Delete for Owner") @RequestParam String id) {
 		return service.deleteOwner(id);
 	}
 

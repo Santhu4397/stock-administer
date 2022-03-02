@@ -14,7 +14,7 @@ public interface OwnerDao {
 
 	public List<Owner> getAllOwner();
 
-	public Owner updateOwner(int id, Owner owner);
+	public Owner updateOwner(String id, Owner owner);
 
-	public boolean deleteOwner(int id);
+	public boolean deleteOwner(String id);
 }
