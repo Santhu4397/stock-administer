@@ -44,7 +44,7 @@ public class StaffTesting {
 	@Test
 	public void savestaff() {
 		when(dao.saveStaff(staff1)).thenReturn(staff1);
-		assertEquals(staff1, controller.saveStaff(staff1).getBody().getData());
+		assertEquals(staff1, controller.saveStaff(staff1, 1).getBody().getData());
 
 	}
 

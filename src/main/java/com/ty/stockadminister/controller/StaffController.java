@@ -43,14 +43,14 @@ public class StaffController {
 		return service.loginStaff(email, password);
 	}
 
-	@PostMapping("staff")
+	@PostMapping("staff/ownerid")
 	@ApiOperation("To Save Staff")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Staff Created"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
 	public ResponseEntity<ResponseStructure<Staff>> saveStaff(
-			@ApiParam("To Save Staff") @RequestBody @Valid Staff staff) {
-		return service.saveStaff(staff);
+			@ApiParam("To Save Staff") @RequestBody @Valid Staff staff, @RequestParam int id) {
+		return service.saveStaff(staff, id);
 	}
 
 	@PutMapping("staff/{id}")
