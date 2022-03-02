@@ -58,7 +58,7 @@ public class StaffController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Staff Updated"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Staff>> updateStaff(@ApiParam("Update for Staff") @PathVariable int id,
+	public ResponseEntity<ResponseStructure<Staff>> updateStaff(@ApiParam("Update for Staff") @PathVariable String id,
 			@RequestBody Staff staff) {
 		return service.updateStaff(id, staff);
 	}
@@ -68,7 +68,7 @@ public class StaffController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Staff Deleted"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<String>> deleteStaff(@ApiParam("Delete for Staff") @RequestParam int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteStaff(@ApiParam("Delete for Staff") @RequestParam String id) {
 		return service.deleteStaff(id);
 	}
 
@@ -77,7 +77,7 @@ public class StaffController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Found the Staff by ID"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Staff>> getStaffById(@ApiParam("To Get Staff By ID") @PathVariable int id) {
+	public ResponseEntity<ResponseStructure<Staff>> getStaffById(@ApiParam("To Get Staff By ID") @PathVariable String id) {
 		return service.getStaffById(id);
 	}
 
@@ -97,6 +97,10 @@ public class StaffController {
 			@ApiResponse(code = 500, message = "Internal Server error") })
 	public ResponseEntity<ResponseStructure<Staff>> getStaffByName(@PathVariable String name) {
 		return service.getStaffByName(name);
+	}
+	@GetMapping("staff/hi")
+	public Staff hi() {
+		return new Staff();
 	}
 
 }

@@ -41,7 +41,7 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Staff>> getStaffById(int id) {
+	public ResponseEntity<ResponseStructure<Staff>> getStaffById(String id) {
 		ResponseStructure<Staff> structure = new ResponseStructure<Staff>();
 		ResponseEntity<ResponseStructure<Staff>> responseEntity = null;
 		Staff staff = dao.getStaffById(id);
@@ -60,7 +60,7 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Staff>> updateStaff(int id, Staff staff) {
+	public ResponseEntity<ResponseStructure<Staff>> updateStaff(String id, Staff staff) {
 		ResponseStructure<Staff> structure = new ResponseStructure<>();
 		ResponseEntity<ResponseStructure<Staff>> responseEntity = null;
 		Staff staff1 = dao.updateStaff(id, staff);
@@ -79,7 +79,7 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<String>> deleteStaff(int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteStaff(String id) {
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 		ResponseEntity<ResponseStructure<String>> responseEntity = null;
 		if (dao.deleteStaff(id)) {

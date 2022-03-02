@@ -11,13 +11,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 
 @Entity
 public class Staff {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	
+
+	  @Id
+	    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emp_seq")
+	    @GenericGenerator(name = "emp_seq", strategy = "com.ty.stockadminister.dto.StringPrefixedSequenceIdGenerator",
+	            parameters = {
+	            @Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "50"),
+	            @Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "Emp_"),
+	            @Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
+	private String id;
 	@NotNull(message = "name should not be null")
 	private String name;
 	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}",message = "Enter proper email id")
@@ -60,11 +70,11 @@ public class Staff {
 		this.owner = owner;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -106,7 +116,7 @@ public class Staff {
 				+ "]";
 	}
 
-	public Staff(int id, String name, String email, String password, Long phone) {
+	public Staff(String id, String name, String email, String password, Long phone) {
 		super();
 		this.id = id;
 		this.name = name;

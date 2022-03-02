@@ -10,11 +10,11 @@ public interface StaffDao {
 
 	public List<Staff> getAllStaff();
 
-	public Staff getStaffById(int id);
+	public Staff getStaffById(String id);
 
-	public Staff updateStaff(int id, Staff staff);
+	public Staff updateStaff(String id, Staff staff);
 
-	public boolean deleteStaff(int id);
+	public boolean deleteStaff(String id);
 
 	public Staff loginStaff(String email, String password);
 

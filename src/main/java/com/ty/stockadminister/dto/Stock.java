@@ -129,4 +129,44 @@ public class Stock {
 		this.reorderQuantity = reorder_Quantity;
 	}
 
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public double getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+
+	public int getReorderLevel() {
+		return reorderLevel;
+	}
+
+	public void setReorderLevel(int reorderLevel) {
+		this.reorderLevel = reorderLevel;
+	}
+
+	public int getReorderQuantity() {
+		return reorderQuantity;
+	}
+
+	public void setReorderQuantity(int reorderQuantity) {
+		this.reorderQuantity = reorderQuantity;
+	}
+
+	public List<Sales> getSales() {
+		return sales;
+	}
+
+	public void setSales(List<Sales> sales) {
+		this.sales = sales;
+	}
+
 }

@@ -29,14 +29,14 @@ public class SupplierController {
 	@Autowired
 	SupplierService service;
 
-	@PostMapping("supplier")
+	@PostMapping("supplier/userid/{id}")
 	@ApiOperation("To save the supplier")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Supplier saved"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<SupplierDto>> save(@RequestBody @Valid SupplierDto dto) {
+	public ResponseEntity<ResponseStructure<SupplierDto>> save(@RequestBody @Valid SupplierDto dto,@PathVariable String id) {
 
-		return service.save(dto);
+		return service.save(dto,id);
 	}
 
 	@PutMapping("supplier/{supplieID}")
@@ -74,5 +74,10 @@ public class SupplierController {
 			@ApiResponse(code = 500, message = "Internal Server error") })
 	public ResponseEntity<ResponseStructure<String>> delete(@RequestParam int id) {
 		return service.delete(id);
+	}
+	@GetMapping("supplier/hi")
+	public SupplierDto hi() {
+		return new SupplierDto();
+		
 	}
 }

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -27,22 +28,28 @@ public class SupplierDto {
 	private String address;
 	@OneToMany(mappedBy = "supplier")
 	private List<Stock> stocks;
-	public SupplierDto(int id, @NotNull(message = "name should not be null") String name,
-			@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id") String mailId,
-			long phone, @NotNull(message = "address name should not be null") String address, List<Stock> stocks,
-			List<Orders> list) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.mailId = mailId;
-		this.phone = phone;
-		this.address = address;
-		this.stocks = stocks;
-		this.list = list;
-	}
-
 	@OneToMany(mappedBy = "dto")
 	private List<Orders> list;
+	@ManyToOne
+	private Staff staff;
+	@ManyToOne
+	private Owner  owner;
+	
+	public Staff getStaff() {
+		return staff;
+	}
+
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
+
+	public Owner getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Owner owner) {
+		this.owner = owner;
+	}
 
 	public List<Orders> getList() {
 		return list;
@@ -99,5 +106,23 @@ public class SupplierDto {
 	public void setStocks(List<Stock> stocks) {
 		this.stocks = stocks;
 	}
+	 public SupplierDto(int id, @NotNull(message = "name should not be null") String name,
+				@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id") String mailId,
+				long phone, @NotNull(message = "address name should not be null") String address, List<Stock> stocks,
+				List<Orders> list) {
+			super();
+			this.id = id;
+			this.name = name;
+			this.mailId = mailId;
+			this.phone = phone;
+			this.address = address;
+			this.stocks = stocks;
+			this.list = list;
+		}
+
+	public SupplierDto() {
+		super();
+	}
+	 
 
 }

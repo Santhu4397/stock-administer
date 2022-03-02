@@ -28,7 +28,7 @@ public class SupplierTesting {
 	@Test
 	public void saveSupplier() {
 		when(dao.save(dto)).thenReturn(dto);
-		assertEquals(dto, controller.save(dto).getBody().getData());
+		assertEquals(dto, controller.save(dto, 1).getBody().getData());
 	}
 	@Test
 	public void updateSupplier() {

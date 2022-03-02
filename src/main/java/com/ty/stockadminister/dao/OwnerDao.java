@@ -10,7 +10,7 @@ public interface OwnerDao {
 
 	public Owner loginOwner(String email, String password);
 
-	public Owner getOwnerById(int id);
+	public Owner getOwnerById(String id);
 
 	public List<Owner> getAllOwner();
 }
