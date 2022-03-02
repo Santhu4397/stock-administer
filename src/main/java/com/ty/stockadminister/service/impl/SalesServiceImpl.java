@@ -1,5 +1,6 @@
 package com.ty.stockadminister.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,23 +10,42 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import com.ty.stockadminister.util.ResponseStructure;
 import com.ty.stockadminister.dao.SalesDao;
+import com.ty.stockadminister.dao.StockDao;
 import com.ty.stockadminister.dto.Sales;
+import com.ty.stockadminister.dto.Stock;
 import com.ty.stockadminister.service.SalesService;
 @Component
 @Service
 public class SalesServiceImpl implements SalesService {
 	@Autowired
 	SalesDao dao;
+	@Autowired
+	StockDao dao2;
 
 	@Override
-	public ResponseEntity<ResponseStructure<Sales>> save(Sales sales) {
+	public ResponseEntity<ResponseStructure<Sales>> save(Sales sales, int stockid) {
 		ResponseStructure<Sales> structuer = new ResponseStructure<Sales>();
+		Stock stock=dao2.getStockById(stockid);
+		sales.setStock(stock);
+		sales.setDate_and_time(LocalDateTime.now());
+		if(stock != null) {
+	
 		structuer.setStatus(HttpStatus.OK.value());
 		structuer.setMessage("successfull");
 		structuer.setData(dao.save(sales));
 		ResponseEntity<ResponseStructure<Sales>> responseEntity = new ResponseEntity<ResponseStructure<Sales>>(
 				structuer, HttpStatus.OK);
 		return responseEntity;
+		}
+		else {
+			structuer.setStatus(HttpStatus.OK.value());
+			structuer.setMessage("ID not found");
+			structuer.setData(null);
+			ResponseEntity<ResponseStructure<Sales>> responseEntity = new ResponseEntity<ResponseStructure<Sales>>(
+					structuer, HttpStatus.NOT_FOUND);
+			return responseEntity;
+		}
+		
 	}
 
 	@Override

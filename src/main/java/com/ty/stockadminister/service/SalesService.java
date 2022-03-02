@@ -10,7 +10,7 @@ import com.ty.stockadminister.util.ResponseStructure;
 public interface SalesService {
 	
 	
-	public ResponseEntity<ResponseStructure<Sales>> save(Sales sales);
+	public ResponseEntity<ResponseStructure<Sales>> save(Sales sales,int stockid);
 
 	public ResponseEntity<ResponseStructure<Sales>> getByName(String name);
 	
