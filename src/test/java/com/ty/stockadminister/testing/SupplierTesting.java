@@ -48,7 +48,7 @@ public class SupplierTesting {
 		assertEquals(dto, controller.getbyid(1).getBody().getData());
 	}
 	public void getAll() {
-		List<SupplierDto> list=new ArrayList();
+		List<SupplierDto> list= new ArrayList();
 		list.add(dto);
 		when(dao.getall()).thenReturn(list);
 		assertEquals(1, controller.getall().getBody().getData());

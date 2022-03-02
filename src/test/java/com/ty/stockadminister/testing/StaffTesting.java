@@ -41,10 +41,10 @@ public class StaffTesting {
 
 	}
 
-	@Test
+	@org.junit.Test
 	public void savestaff() {
 		when(dao.saveStaff(staff1)).thenReturn(staff1);
-		assertEquals(staff1, controller.saveStaff(staff1, 1).getBody().getData());
+		assertEquals(staff1, controller.saveStaff(staff1, 2).getBody().getData());
 
 	}
 

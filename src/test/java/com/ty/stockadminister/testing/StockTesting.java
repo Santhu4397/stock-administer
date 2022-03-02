@@ -15,27 +15,27 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ty.stockadminister.controller.StockController;
 import com.ty.stockadminister.dao.StockDao;
-import com.ty.stockadminister.dto.Sales;
 import com.ty.stockadminister.dto.Stock;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StockTesting {
 	@Autowired
-	private  StockController controller;
+	private StockController controller;
 	@MockBean
 	private StockDao dao;
-	
-	Stock stock = new Stock(1,"samsung","mobail",5000.0,5,50000.0,5,5,null,null,null,null);
-	Stock stock1 = new Stock(2,"samsung","mobail",5000.0,5,50000.0,5,5,null,null,null,null);
-	Stock stock2 = new Stock(3,"samsung","mobail",5000.0,5,50000.0,5,5,null,null,null,null);
-	
+
+	Stock stock = new Stock(1, "samsung", "mobail", 5000.0, 5, 50000.0, 5, 5, null, null, null, null);
+	Stock stock1 = new Stock(2, "samsung", "mobail", 5000.0, 5, 50000.0, 5, 5, null, null, null, null);
+	Stock stock2 = new Stock(3, "samsung", "mobail", 5000.0, 5, 50000.0, 5, 5, null, null, null, null);
+
 	@Test
 	public void saveStock() {
 		when(dao.saveStock(stock)).thenReturn(stock);
 		assertEquals(stock, controller.saveStock(stock).getBody().getData());
 
 	}
-	
+
 	@Test
 	public void getAllStock() {
 		List<Stock> listStock = new ArrayList<Stock>();
@@ -46,14 +46,14 @@ public class StockTesting {
 		assertEquals(3, controller.getStock().getBody().getData().size());
 
 	}
-	
+
 	@Test
 	public void updateStock() {
 
 		when(dao.updateStock(1, stock)).thenReturn(stock);
 		assertEquals(stock, controller.updateStock(1, stock).getBody().getData());
 	}
-	
+
 	@Test
 	public void getByIdTest() {
 
@@ -61,7 +61,7 @@ public class StockTesting {
 		assertEquals(stock, controller.getStockById(1).getBody().getData());
 
 	}
-	
+
 	@Test
 	public void getByProductNameTest() {
 		List<Stock> listStock = new ArrayList<Stock>();
@@ -72,7 +72,7 @@ public class StockTesting {
 		assertEquals(3, controller.getByProduct_Name("samsung").getBody().getData().size());
 
 	}
-	
+
 	@Test
 	public void getByProductReorderLevelTest() {
 		List<Stock> listStock = new ArrayList<Stock>();
@@ -82,7 +82,7 @@ public class StockTesting {
 		when(dao.getByProductReorder_Level(1)).thenReturn(listStock);
 		assertEquals(3, controller.getByProductReorder_Level(1).getBody().getData().size());
 	}
-	
+
 	@Test
 	public void deleteStockTest() {
 
