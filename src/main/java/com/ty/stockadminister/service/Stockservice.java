@@ -8,7 +8,7 @@ import com.ty.stockadminister.dto.Stock;
 import com.ty.stockadminister.util.ResponseStructure;
 
 public interface Stockservice {
-	public ResponseEntity<ResponseStructure<Stock>> saveService(Stock product);
+	public ResponseEntity<ResponseStructure<Stock>> saveService(Stock stock,int userId,int supplierId);
 
 	public ResponseEntity<ResponseStructure<List<Stock>>> getStock();
 
@@ -21,5 +21,7 @@ public interface Stockservice {
 	public ResponseEntity<ResponseStructure<List<Stock>>> getByProduct_Name(String name);
 
 	public ResponseEntity<ResponseStructure<List<Stock>>> getByReorder_Level(int level);
+
+	public ResponseEntity<ResponseStructure<List<Stock>>> getByLowReorderLevel();
 
 }

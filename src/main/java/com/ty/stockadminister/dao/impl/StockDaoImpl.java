@@ -81,4 +81,10 @@ public class StockDaoImpl implements StockDao {
 	
 	}
 
+	@Override
+	public List<Stock> getByLowReorderLevel() {
+		
+		return repository.findByLowReorderLevel();
+	}
+
 }

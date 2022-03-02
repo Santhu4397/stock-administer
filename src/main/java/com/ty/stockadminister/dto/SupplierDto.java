@@ -14,6 +14,10 @@ import com.ty.stockadminister.validation.PhoneNumber;
 
 @Entity
 public class SupplierDto {
+	private SupplierDto() {
+		super();
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
