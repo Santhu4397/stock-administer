@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-
 import com.ty.stockadminister.dao.OwnerDao;
 import com.ty.stockadminister.dao.StaffDao;
 import com.ty.stockadminister.dao.StockDao;
@@ -30,28 +29,27 @@ public class StockServiceImpl implements Stockservice {
 	StaffDao staffDao;
 	@Autowired
 	SupplierDao supplierDao;
-	
 
 	@Override
-	public ResponseEntity<ResponseStructure<Stock>> saveService(Stock stock,int userId,int supplierId) {
-		Owner owner=ownerDao.getOwnerById(userId);
-		Staff staff=null;
-		if(owner==null) {
-		 staff=staffDao.getStaffById(userId);
+	public ResponseEntity<ResponseStructure<Stock>> saveService(Stock stock, int userId, int supplierId) {
+		Owner owner = ownerDao.getOwnerById(userId);
+		Staff staff = null;
+		if (owner == null) {
+			staff = staffDao.getStaffById(userId);
 		}
-		SupplierDto supplierDto=supplierDao.getbyid(supplierId);
-		if((owner!=null)||(staff!=null)&&(supplierDto!=null)){
-		stock.setOwner1(owner);
-		stock.setStaff(staff);
-		stock.setSupplier(supplierDto);
-		ResponseStructure<Stock> structure = new ResponseStructure<Stock>();
-		structure.setStatus(HttpStatus.OK.value());
-		structure.setMessage("success");
-		structure.setData(dao.saveStock(stock));
-		ResponseEntity<ResponseStructure<Stock>> entity = new ResponseEntity<ResponseStructure<Stock>>(structure,
-				HttpStatus.OK);
-		return entity;
-		}else {
+		SupplierDto supplierDto = supplierDao.getbyid(supplierId);
+		if ((owner != null) || (staff != null) && (supplierDto != null)) {
+			stock.setOwner1(owner);
+			stock.setStaff(staff);
+			stock.setSupplier(supplierDto);
+			ResponseStructure<Stock> structure = new ResponseStructure<Stock>();
+			structure.setStatus(HttpStatus.OK.value());
+			structure.setMessage("success");
+			structure.setData(dao.saveStock(stock));
+			ResponseEntity<ResponseStructure<Stock>> entity = new ResponseEntity<ResponseStructure<Stock>>(structure,
+					HttpStatus.OK);
+			return entity;
+		} else {
 			ResponseStructure<Stock> responseStructure = new ResponseStructure<Stock>();
 			responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
 			responseStructure.setMessage("id not found");
@@ -145,14 +143,41 @@ public class StockServiceImpl implements Stockservice {
 
 	@Override
 	public ResponseEntity<ResponseStructure<List<Stock>>> getByProduct_Name(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		ResponseStructure<List<Stock>> structure = new ResponseStructure<List<Stock>>();
+		ResponseEntity<ResponseStructure<List<Stock>>> entity;
+		List<Stock> stock = dao.getByProduct_Name(name);
+		if (stock != null) {
+			structure.setStatus(HttpStatus.OK.value());
+			structure.setMessage("success");
+			structure.setData(dao.getByProduct_Name(name));
+			entity = new ResponseEntity<ResponseStructure<List<Stock>>>(structure, HttpStatus.OK);
+		} else {
+			structure.setStatus(HttpStatus.NOT_FOUND.value());
+			structure.setMessage("name " + name + " not found");
+			structure.setData(null);
+			entity = new ResponseEntity<ResponseStructure<List<Stock>>>(structure, HttpStatus.NOT_FOUND);
+		}
+		return entity;
 	}
 
 	@Override
 	public ResponseEntity<ResponseStructure<List<Stock>>> getByReorder_Level(int level) {
-		// TODO Auto-generated method stub
-		return null;
+		ResponseStructure<List<Stock>> structure = new ResponseStructure<List<Stock>>();
+		ResponseEntity<ResponseStructure<List<Stock>>> entity;
+		List<Stock> list = dao.getByProductReorder_Level(level);
+		if (list != null) {
+			structure.setStatus(HttpStatus.OK.value());
+			structure.setMessage("success");
+			structure.setData(dao.getByProductReorder_Level(level));
+			entity = new ResponseEntity<ResponseStructure<List<Stock>>>(structure, HttpStatus.OK);
+		} else {
+			structure.setStatus(HttpStatus.NOT_FOUND.value());
+			structure.setMessage("Product Record levele" + level + " not found");
+			structure.setData(null);
+			entity = new ResponseEntity<ResponseStructure<List<Stock>>>(structure, HttpStatus.NOT_FOUND);
+		}
+		return entity;
+
 	}
 
 	@Override

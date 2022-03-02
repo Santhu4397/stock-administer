@@ -6,27 +6,50 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
+import com.ty.stockadminister.dao.OwnerDao;
 import com.ty.stockadminister.dao.StaffDao;
+import com.ty.stockadminister.dto.Owner;
 import com.ty.stockadminister.dto.Staff;
 import com.ty.stockadminister.service.StaffService;
 import com.ty.stockadminister.util.ResponseStructure;
 
-@Repository
+@Service
 public class StaffServiceImpl implements StaffService {
 
 	@Autowired
 	private StaffDao dao;
+	@Autowired
+	private OwnerDao ownerDao;
 
 	@Override
-	public ResponseEntity<ResponseStructure<Staff>> saveStaff(Staff staff) {
+	public ResponseEntity<ResponseStructure<Staff>> saveStaff(Staff staff, int id) {
 		ResponseStructure<Staff> structure = new ResponseStructure<>();
-		structure.setStatus(HttpStatus.OK.value());
-		structure.setMessage("Sucess");
-		structure.setData(dao.saveStaff(staff));
-		ResponseEntity<ResponseStructure<Staff>> responseEntity = new ResponseEntity<ResponseStructure<Staff>>(
-				structure, HttpStatus.OK);
+		ResponseEntity<ResponseStructure<Staff>> responseEntity = null;
+		Owner owner = ownerDao.getOwnerById(id);
+		staff.setOwner(owner);
+		if (owner != null) {
+			structure.setStatus(HttpStatus.OK.value());
+			structure.setMessage("Sucess");
+			structure.setData(dao.saveStaff(staff));
+			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.OK);
+
+		} else {
+			structure.setMessage("not Sucess");
+			structure.setData(null);
+			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.NOT_FOUND);
+		}
 		return responseEntity;
+
+		/*
+		 * ResponseStructure<Staff> structure = new ResponseStructure<>();
+		 * structure.setStatus(HttpStatus.OK.value()); structure.setMessage("Sucess");
+		 * structure.setData(dao.saveStaff(staff));
+		 * ResponseEntity<ResponseStructure<Staff>> responseEntity = new
+		 * ResponseEntity<ResponseStructure<Staff>>( structure, HttpStatus.OK); return
+		 * responseEntity;
+		 */
 	}
 
 	@Override
@@ -67,7 +90,7 @@ public class StaffServiceImpl implements StaffService {
 		if (staff1 != null) {
 			structure.setStatus(HttpStatus.OK.value());
 			structure.setMessage("Sucess");
-			structure.setData(dao.updateStaff(id,staff1));
+			structure.setData(dao.updateStaff(id, staff1));
 			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.OK);
 		} else {
 			structure.setStatus(HttpStatus.NOT_FOUND.value());
@@ -98,10 +121,10 @@ public class StaffServiceImpl implements StaffService {
 
 	@Override
 	public ResponseEntity<ResponseStructure<Staff>> loginStaff(String email, String password) {
-		 Staff staff =dao.loginStaff(email, password);
+		Staff staff = dao.loginStaff(email, password);
 		ResponseStructure<Staff> structure = new ResponseStructure<Staff>();
 		ResponseEntity<ResponseStructure<Staff>> responseEntity = null;
-		if (staff !=null) {
+		if (staff != null) {
 			structure.setStatus(HttpStatus.OK.value());
 			structure.setMessage("Sucess");
 			structure.setData(dao.loginStaff(email, password));
@@ -113,7 +136,7 @@ public class StaffServiceImpl implements StaffService {
 			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.NOT_FOUND);
 		}
 		return responseEntity;
-		 
+
 	}
 
 	@Override
@@ -134,7 +157,7 @@ public class StaffServiceImpl implements StaffService {
 			responseEntity = new ResponseEntity<ResponseStructure<Staff>>(structure, HttpStatus.NOT_FOUND);
 		}
 		return responseEntity;
-		
+
 	}
 
 }

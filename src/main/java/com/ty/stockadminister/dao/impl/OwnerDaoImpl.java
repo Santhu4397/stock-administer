@@ -41,4 +41,31 @@ public class OwnerDaoImpl implements OwnerDao {
 	public List<Owner> getAllOwner() {
 		return repository.findAll();
 	}
+
+	@Override
+	public Owner updateOwner(int id, Owner owner) {
+		Owner existingOwner = getOwnerById(id);
+		if (existingOwner != null) {
+			existingOwner.setEmail(owner.getEmail());
+			existingOwner.setName(owner.getName());
+			existingOwner.setPassword(owner.getPassword());
+			existingOwner.setPhone(owner.getPhone());
+			existingOwner.setAddress(owner.getAddress());
+			existingOwner.setComapnyName(owner.getComapnyName());
+			existingOwner.setDepartment(owner.getDepartment());
+			return repository.save(existingOwner);
+		}
+		return null;
+	}
+
+	@Override
+	public boolean deleteOwner(int id) {
+		Owner owner = getOwnerById(id);
+		if (owner != null) {
+			repository.delete(owner);
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

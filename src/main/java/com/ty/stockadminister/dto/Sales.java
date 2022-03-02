@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ty.stockadminister.validation.PhoneNumber;
 @Entity
 public class Sales {
@@ -29,9 +30,20 @@ public class Sales {
 	private int qty;
 	@NotNull(message = "Price should not be null")
 	private double price;
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
-	private Stock stock; 
+	private Stock stock;
+	
+
+	public Stock getStock() {
+		return stock;
+	}
+
+	public void setStock(Stock stock) {
+		this.stock = stock;
+	}
 
 	public int getId() {
 		return id;

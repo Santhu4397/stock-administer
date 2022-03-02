@@ -13,4 +13,8 @@ public interface OwnerDao {
 	public Owner getOwnerById(int id);
 
 	public List<Owner> getAllOwner();
+
+	public Owner updateOwner(int id, Owner owner);
+
+	public boolean deleteOwner(int id);
 }
