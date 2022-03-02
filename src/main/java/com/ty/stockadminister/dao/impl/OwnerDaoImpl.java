@@ -43,7 +43,7 @@ public class OwnerDaoImpl implements OwnerDao {
 	}
 
 	@Override
-	public Owner updateOwner(int id, Owner owner) {
+	public Owner updateOwner(String id, Owner owner) {
 		Owner existingOwner = getOwnerById(id);
 		if (existingOwner != null) {
 			existingOwner.setEmail(owner.getEmail());
@@ -59,7 +59,7 @@ public class OwnerDaoImpl implements OwnerDao {
 	}
 
 	@Override
-	public boolean deleteOwner(int id) {
+	public boolean deleteOwner(String id) {
 		Owner owner = getOwnerById(id);
 		if (owner != null) {
 			repository.delete(owner);
