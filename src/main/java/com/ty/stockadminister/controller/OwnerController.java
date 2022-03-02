@@ -1,5 +1,7 @@
 package com.ty.stockadminister.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.stockadminister.dto.LoginDto;
 import com.ty.stockadminister.dto.Owner;
+import com.ty.stockadminister.dto.Sales;
+import com.ty.stockadminister.dto.Staff;
 import com.ty.stockadminister.service.OwnerService;
 import com.ty.stockadminister.service.StaffService;
 import com.ty.stockadminister.service.impl.OwnerServiceImpl;
@@ -50,6 +54,27 @@ public class OwnerController {
 			@ApiParam("Save the Owner") @RequestBody @Valid Owner owner) {
 		return service.saveOwner(owner);
 	}
+	
+	@GetMapping("owner")
+	@ApiOperation("To get all owner")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Owners list found"),
+			@ApiResponse(code = 404, message = " Didnot find"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
+	public ResponseEntity<ResponseStructure<List<Owner>>> getAll() {
+		return service.getAll();
+
+	}
+	
+	@GetMapping("owner/{id}")
+	@ApiOperation("To Get Owner By Id")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Found the Owner by ID"),
+			@ApiResponse(code = 404, message = "Class not found"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
+	public ResponseEntity<ResponseStructure<Owner>> getOwnerById(@ApiParam("To Get Owner By ID") @PathVariable int id) {
+		return service.getOwnerById(id);
+	}
+	
+	
 
 	@GetMapping("hi")
 	public Owner get() {

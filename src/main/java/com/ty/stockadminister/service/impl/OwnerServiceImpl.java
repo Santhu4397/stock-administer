@@ -1,5 +1,7 @@
 package com.ty.stockadminister.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +50,36 @@ public class OwnerServiceImpl implements OwnerService {
 			return responseEntity;
 		
 		
+	}
+
+	@Override
+	public ResponseEntity<ResponseStructure<List<Owner>>> getAll() {
+		ResponseStructure<List<Owner>> structure = new ResponseStructure<>();
+		ResponseEntity<ResponseStructure<List<Owner>>> responseEntity = null;
+		structure.setStatus(HttpStatus.OK.value());
+		structure.setMessage("Sucess");
+		structure.setData(dao.getAllOwner());
+		responseEntity = new ResponseEntity<ResponseStructure<List<Owner>>>(structure, HttpStatus.OK);
+		return responseEntity;
+	}
+
+	@Override
+	public ResponseEntity<ResponseStructure<Owner>> getOwnerById(int id) {
+		ResponseStructure<Owner> structure = new ResponseStructure<Owner>();
+		ResponseEntity<ResponseStructure<Owner>> responseEntity = null;
+		Owner owner = dao.getOwnerById(id);
+		if (owner != null) {
+			structure.setStatus(HttpStatus.OK.value());
+			structure.setMessage("Sucess");
+			structure.setData(dao.getOwnerById(id));
+			responseEntity = new ResponseEntity<ResponseStructure<Owner>>(structure, HttpStatus.OK);
+
+		} else {
+			structure.setMessage("not Sucess");
+			structure.setData(null);
+			responseEntity = new ResponseEntity<ResponseStructure<Owner>>(structure, HttpStatus.NOT_FOUND);
+		}
+		return responseEntity;
 	}
 
 }

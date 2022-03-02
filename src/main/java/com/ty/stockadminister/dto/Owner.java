@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ty.stockadminister.validation.PhoneNumber;
 
 @Entity
@@ -30,10 +31,13 @@ public class Owner {
 	private String department;
 	@NotNull(message = "Address should not be null")
 	private String address;
+	@JsonIgnore
 	@OneToMany(mappedBy = "owner")
 	private List<Staff> staffs;
+	@JsonIgnore
 	@OneToMany(mappedBy = "owner1")
 	private List<Stock> stocks;
+	@JsonIgnore
 	@OneToMany(mappedBy = "owner2")
 	private List<Orders> orders;
 
