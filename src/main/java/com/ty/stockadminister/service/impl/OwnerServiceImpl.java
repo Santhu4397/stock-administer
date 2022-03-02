@@ -83,7 +83,7 @@ public class OwnerServiceImpl implements OwnerService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Owner>> updateOwner(int id, Owner owner) {
+	public ResponseEntity<ResponseStructure<Owner>> updateOwner(String id, Owner owner) {
 		ResponseStructure<Owner> structure = new ResponseStructure<>();
 		ResponseEntity<ResponseStructure<Owner>> responseEntity = null;
 		Owner owner1 = dao.updateOwner(id, owner);
@@ -102,7 +102,7 @@ public class OwnerServiceImpl implements OwnerService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<String>> deleteOwner(int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteOwner(String id) {
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 		ResponseEntity<ResponseStructure<String>> responseEntity = null;
 		if (dao.deleteOwner(id)) {

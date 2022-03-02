@@ -15,7 +15,7 @@ import com.ty.stockadminister.validation.PhoneNumber;
 
 @Entity
 public class SupplierDto {
-	private SupplierDto() {
+	public SupplierDto() {
 		super();
 	}
 
@@ -124,9 +124,9 @@ public class SupplierDto {
 			this.list = list;
 		}
 
-	public SupplierDto() {
-		super();
-	}
+	
+
+	
 	 
 
 }
