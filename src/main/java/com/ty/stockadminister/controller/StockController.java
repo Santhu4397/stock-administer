@@ -29,13 +29,14 @@ public class StockController {
 	@Autowired
 	StockServiceImpl stockservice;
 
-	@PostMapping("stock")
+	@PostMapping("stock/userId/{userId}/supplierId")
 	@ApiOperation("To save stock")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Stock saved"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Stock>> saveStock(@RequestBody Stock stock) {
-		return stockservice.saveService(stock);
+	public ResponseEntity<ResponseStructure<Stock>> saveStock(@RequestBody Stock stock, @PathVariable int userId,
+			@RequestParam int supplierId) {
+		return stockservice.saveService(stock, userId, supplierId);
 	}
 
 	@GetMapping("stock")
@@ -97,6 +98,16 @@ public class StockController {
 	@GetMapping("stockobject")
 	public Stock imTheStockObject() {
 		return new Stock();
+	}
+
+	@GetMapping("stock/notification")
+	@ApiOperation("To get the product when quantity is less than or equal to reorder level")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Stock found with low reorder level"),
+			@ApiResponse(code = 404, message = "Class not found"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
+	public ResponseEntity<ResponseStructure<List<Stock>>> getByLowReorderLevel() {
+		return stockservice.getByLowReorderLevel();
+
 	}
 
 }
