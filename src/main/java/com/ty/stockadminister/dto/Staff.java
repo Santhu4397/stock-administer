@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Staff {
 
@@ -27,6 +29,7 @@ public class Staff {
 	
 	@NotNull(message = "phone should not be null")
 	private Long phone;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
 	private Owner owner;
