@@ -15,6 +15,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Staff {
 
@@ -37,6 +39,7 @@ public class Staff {
 	
 	@NotNull(message = "phone should not be null")
 	private Long phone;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
 	private Owner owner;

@@ -44,14 +44,13 @@ public class StaffTesting {
 	@Test
 	public void savestaff() {
 		when(dao.saveStaff(staff1)).thenReturn(staff1);
-		assertEquals(staff1, controller.saveStaff(staff1).getBody().getData());
+		assertEquals(staff1, controller.saveStaff(staff1, 1).getBody().getData());
 
 	}
 
-
 	@Test
-	public void getstaffByIdTest() { 
-		
+	public void getstaffByIdTest() {
+
 		when(dao.getStaffById(1)).thenReturn(staff3);
 		assertEquals(staff3, controller.getStaffById(1).getBody().getData());
 
@@ -59,7 +58,6 @@ public class StaffTesting {
 
 	@Test
 	public void updatestaff() {
-
 
 		when(dao.updateStaff(1, staff2)).thenReturn(staff2);
 		assertEquals(staff2, controller.updateStaff(1, staff2).getBody().getData());
@@ -75,17 +73,19 @@ public class StaffTesting {
 		assertEquals(respon, controller.deleteStaff(1).getBody().getData());
 
 	}
+
 	@Test
 	public void getByStaffName() {
 		when(dao.getStaffByName("deepak")).thenReturn(staff3);
 		assertEquals(staff3, controller.getStaffByName("deepak").getBody().getData());
 	}
+
 	@Test
 	public void login() {
-		LoginDto dto=new LoginDto();
+		LoginDto dto = new LoginDto();
 		dto.setEmail("deepak@gamil.com");
 		dto.setPassword("1234");
-		when(dao.loginStaff("deepak@gamil.com","1234")).thenReturn(staff3);
+		when(dao.loginStaff("deepak@gamil.com", "1234")).thenReturn(staff3);
 		assertEquals(staff3, controller.loginStaff(dto).getBody().getData());
 	}
 }

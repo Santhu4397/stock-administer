@@ -6,10 +6,13 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.stockadminister.dto.LoginDto;
@@ -54,7 +57,7 @@ public class OwnerController {
 			@ApiParam("Save the Owner") @RequestBody @Valid Owner owner) {
 		return service.saveOwner(owner);
 	}
-	
+
 	@GetMapping("owner")
 	@ApiOperation("To get all owner")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Owners list found"),
@@ -64,7 +67,7 @@ public class OwnerController {
 		return service.getAll();
 
 	}
-	
+
 	@GetMapping("owner/{id}")
 	@ApiOperation("To Get Owner By Id")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Found the Owner by ID"),
@@ -75,10 +78,23 @@ public class OwnerController {
 	}
 	
 	
-
-	@GetMapping("hi")
-	public Owner get() {
-		return new Owner();
-
+	@PutMapping("owner/{id}")
+	@ApiOperation("To Update owner")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Owner Updated"),
+			@ApiResponse(code = 404, message = "Class not found"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
+	public ResponseEntity<ResponseStructure<Owner>> updateStaff(@ApiParam("Update for Owner") @PathVariable int id,
+			@RequestBody Owner owner) {
+		return service.updateOwner(id, owner);
 	}
+	
+	@DeleteMapping("owner")
+	@ApiOperation("To Delete owner")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Owner Deleted"),
+			@ApiResponse(code = 404, message = "Class not found"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
+	public ResponseEntity<ResponseStructure<String>> deleteOwner(@ApiParam("Delete for Owner") @RequestParam int id) {
+		return service.deleteOwner(id);
+	}
+
 }

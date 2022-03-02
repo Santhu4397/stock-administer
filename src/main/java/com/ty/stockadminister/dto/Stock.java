@@ -129,44 +129,29 @@ public class Stock {
 		this.reorderQuantity = reorder_Quantity;
 	}
 
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
+	public Stock(int id, @NotNull(message = "Product name should not be null") String productName,
+			@NotNull(message = "category should not be null") String category,
+			@NotNull(message = "unit_Price should not be null") double unitPrice,
+			@NotNull(message = "quantity should not be null") int quantity,
+			@NotNull(message = "total_Cost should not be null") double total_Cost, int reorderLevel,
+			int reorderQuantity, Staff staff, Owner owner1, SupplierDto supplier, List<Sales> sales) {
+		super();
+		this.id = id;
 		this.productName = productName;
-	}
-
-	public double getUnitPrice() {
-		return unitPrice;
-	}
-
-	public void setUnitPrice(double unitPrice) {
+		this.category = category;
 		this.unitPrice = unitPrice;
-	}
-
-	public int getReorderLevel() {
-		return reorderLevel;
-	}
-
-	public void setReorderLevel(int reorderLevel) {
+		this.quantity = quantity;
+		this.total_Cost = total_Cost;
 		this.reorderLevel = reorderLevel;
-	}
-
-	public int getReorderQuantity() {
-		return reorderQuantity;
-	}
-
-	public void setReorderQuantity(int reorderQuantity) {
 		this.reorderQuantity = reorderQuantity;
-	}
-
-	public List<Sales> getSales() {
-		return sales;
-	}
-
-	public void setSales(List<Sales> sales) {
+		this.staff = staff;
+		this.owner1 = owner1;
+		this.supplier = supplier;
 		this.sales = sales;
 	}
 
+	public Stock() {
+		super();
+	}
+	
 }

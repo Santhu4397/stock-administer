@@ -2,6 +2,7 @@ package com.ty.stockadminister.service.impl;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -111,14 +112,42 @@ public class StockServiceImpl implements Stockservice {
 
 	@Override
 	public ResponseEntity<ResponseStructure<List<Stock>>> getByProduct_Name(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		ResponseStructure<List<Stock>> structure = new ResponseStructure<List<Stock>>();
+		ResponseEntity<ResponseStructure<List<Stock>>> entity ;
+		List<Stock> stock=dao.getByProduct_Name(name);
+		if(stock!=null) {
+			structure.setStatus(HttpStatus.OK.value());
+			structure.setMessage("success");
+			structure.setData(dao.getByProduct_Name(name));
+			 entity = new ResponseEntity<ResponseStructure<List<Stock>>>(structure,HttpStatus.OK);	
+		}
+		else {
+			structure.setStatus(HttpStatus.NOT_FOUND.value());
+			structure.setMessage("name " + name + " not found");
+			structure.setData(null);
+			entity = new ResponseEntity<ResponseStructure<List<Stock>>>(structure,HttpStatus.NOT_FOUND);
+		}
+		return entity;
 	}
 
 	@Override
 	public ResponseEntity<ResponseStructure<List<Stock>>>getByReorder_Level(int level) {
-		// TODO Auto-generated method stub
-		return null;
+		ResponseStructure<List<Stock>> structure = new ResponseStructure<List<Stock>>();
+		ResponseEntity<ResponseStructure<List<Stock>>> entity ;
+		List<Stock> list = dao.getByProductReorder_Level(level);
+		if(list !=null) {
+			structure.setStatus(HttpStatus.OK.value());
+			structure.setMessage("success");
+			structure.setData(dao.getByProductReorder_Level(level));
+			 entity = new ResponseEntity<ResponseStructure<List<Stock>>>(structure,HttpStatus.OK);	
+		}
+		else {
+			structure.setStatus(HttpStatus.NOT_FOUND.value());
+			structure.setMessage("Product Record levele" + level + " not found");
+			structure.setData(null);
+			entity = new ResponseEntity<ResponseStructure<List<Stock>>>(structure,HttpStatus.NOT_FOUND);
+		}
+		return entity;
 	}
 
 }
