@@ -31,7 +31,7 @@ public class StockServiceImpl implements Stockservice {
 	SupplierDao supplierDao;
 
 	@Override
-	public ResponseEntity<ResponseStructure<Stock>> saveService(Stock stock, int userId, int supplierId) {
+	public ResponseEntity<ResponseStructure<Stock>> saveService(Stock stock, String userId, int supplierId) {
 		Owner owner = ownerDao.getOwnerById(userId);
 		Staff staff = null;
 		if (owner == null) {

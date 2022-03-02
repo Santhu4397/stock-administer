@@ -34,7 +34,7 @@ public class StockController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Stock saved"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Stock>> saveStock(@RequestBody Stock stock, @PathVariable int userId,
+	public ResponseEntity<ResponseStructure<Stock>> saveStock(@RequestBody Stock stock, @PathVariable String userId,
 			@RequestParam int supplierId) {
 		return stockservice.saveService(stock, userId, supplierId);
 	}
