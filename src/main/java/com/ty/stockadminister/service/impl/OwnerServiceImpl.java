@@ -82,4 +82,41 @@ public class OwnerServiceImpl implements OwnerService {
 		return responseEntity;
 	}
 
+	@Override
+	public ResponseEntity<ResponseStructure<Owner>> updateOwner(int id, Owner owner) {
+		ResponseStructure<Owner> structure = new ResponseStructure<>();
+		ResponseEntity<ResponseStructure<Owner>> responseEntity = null;
+		Owner owner1 = dao.updateOwner(id, owner);
+		if (owner1 != null) {
+			structure.setStatus(HttpStatus.OK.value());
+			structure.setMessage("Sucess");
+			structure.setData(dao.updateOwner(id,owner1));
+			responseEntity = new ResponseEntity<ResponseStructure<Owner>>(structure, HttpStatus.OK);
+		} else {
+			structure.setStatus(HttpStatus.NOT_FOUND.value());
+			structure.setMessage("not Sucess");
+			structure.setData(null);
+			responseEntity = new ResponseEntity<ResponseStructure<Owner>>(structure, HttpStatus.NOT_FOUND);
+		}
+		return responseEntity;
+	}
+
+	@Override
+	public ResponseEntity<ResponseStructure<String>> deleteOwner(int id) {
+		ResponseStructure<String> structure = new ResponseStructure<String>();
+		ResponseEntity<ResponseStructure<String>> responseEntity = null;
+		if (dao.deleteOwner(id)) {
+			structure.setStatus(HttpStatus.OK.value());
+			structure.setMessage("Sucess");
+			structure.setData("Owner deleted");
+			responseEntity = new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.OK);
+		} else {
+			structure.setStatus(HttpStatus.NOT_FOUND.value());
+			structure.setMessage("data not fond");
+			structure.setData("Owner not  deleted");
+			responseEntity = new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
+		}
+		return responseEntity;
+	}
+
 }
