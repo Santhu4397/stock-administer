@@ -24,7 +24,7 @@ public class StaffServiceImpl implements StaffService {
 	private OwnerDao ownerDao;
 
 	@Override
-	public ResponseEntity<ResponseStructure<Staff>> saveStaff(Staff staff, int id) {
+	public ResponseEntity<ResponseStructure<Staff>> saveStaff(Staff staff, String id) {
 		ResponseStructure<Staff> structure = new ResponseStructure<>();
 		ResponseEntity<ResponseStructure<Staff>> responseEntity = null;
 		Owner owner = ownerDao.getOwnerById(id);

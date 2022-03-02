@@ -9,7 +9,7 @@ import com.ty.stockadminister.util.ResponseStructure;
 
 public interface StaffService {
 
-	public ResponseEntity<ResponseStructure<Staff>> saveStaff(Staff staff, int id);
+	public ResponseEntity<ResponseStructure<Staff>> saveStaff(Staff staff, String id);
 
 	public ResponseEntity<ResponseStructure<List<Staff>>> getAllStaff();
 

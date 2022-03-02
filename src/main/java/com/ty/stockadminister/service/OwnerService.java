@@ -18,8 +18,8 @@ public interface OwnerService {
 
 	public ResponseEntity<ResponseStructure<Owner>> getOwnerById(String id);
 
-	public ResponseEntity<ResponseStructure<Owner>> updateOwner(int id, Owner owner);
+	public ResponseEntity<ResponseStructure<Owner>> updateOwner(String id, Owner owner);
 
-	public ResponseEntity<ResponseStructure<String>> deleteOwner(int id);
+	public ResponseEntity<ResponseStructure<String>> deleteOwner(String id);
 
 }
