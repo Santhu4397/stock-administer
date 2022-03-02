@@ -8,7 +8,7 @@ import com.ty.stockadminister.dto.Stock;
 import com.ty.stockadminister.util.ResponseStructure;
 
 public interface Stockservice {
-	public ResponseEntity<ResponseStructure<Stock>> saveService(Stock stock,int userId,int supplierId);
+	public ResponseEntity<ResponseStructure<Stock>> saveService(Stock stock,String userId,int supplierId);
 
 	public ResponseEntity<ResponseStructure<List<Stock>>> getStock();
 
