@@ -36,8 +36,8 @@ public class SalesController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Sales Saved"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Sales>> save(@RequestBody @Valid Sales sales,@RequestParam int id) {
-		return service.save(sales,id);
+	public ResponseEntity<ResponseStructure<Sales>> save(@RequestBody @Valid Sales sales, @RequestParam int id) {
+		return service.save(sales, id);
 	}
 
 	@GetMapping("sales")
@@ -82,7 +82,7 @@ public class SalesController {
 			@RequestBody Sales sales) {
 		return service.update(id, sales);
 	}
-	
+
 	@GetMapping("salesobject")
 	public Sales imSalesObject() {
 		return new Sales();
