@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ty.stockadminister.controller.SupplierController;
 import com.ty.stockadminister.dao.SupplierDao;
+import com.ty.stockadminister.dto.Staff;
 import com.ty.stockadminister.dto.SupplierDto;
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,12 +24,12 @@ public class SupplierTesting {
 	SupplierController controller;
 	@MockBean
 	SupplierDao dao;
-	
+	Staff staff = new Staff("1","abhi","abhi@gmail.com","abhi",357132l);
 	SupplierDto dto=new SupplierDto(1, "kumar", "alone", 23, "serty", null, null);
-	@Test
+	@org.junit.Test
 	public void saveSupplier() {
 		when(dao.save(dto)).thenReturn(dto);
-		assertEquals(dto, controller.save(dto, 1).getBody().getData());
+		assertEquals(dto, controller.save(dto, "1").getBody().getData());
 	}
 	@Test
 	public void updateSupplier() {
@@ -48,7 +49,7 @@ public class SupplierTesting {
 		assertEquals(dto, controller.getbyid(1).getBody().getData());
 	}
 	public void getAll() {
-		List<SupplierDto> list=new ArrayList();
+		List<SupplierDto> list= new ArrayList();
 		list.add(dto);
 		when(dao.getall()).thenReturn(list);
 		assertEquals(1, controller.getall().getBody().getData());

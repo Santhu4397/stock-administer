@@ -8,7 +8,7 @@ import com.ty.stockadminister.dto.Orders;
 import com.ty.stockadminister.util.ResponseStructure;
 
 public interface OrdersService {
-	public ResponseEntity<ResponseStructure<Orders>> save(Orders orders);
+	public ResponseEntity<ResponseStructure<Orders>> save(Orders orders, String uid, int sid);
 
 	public ResponseEntity<ResponseStructure<Orders>> getByOrderId(int orderId);
 

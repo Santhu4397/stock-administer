@@ -73,32 +73,31 @@ public class OwnerController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Found the Owner by ID"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Owner>> getOwnerById(@ApiParam("To Get Owner By ID") @PathVariable String id) {
+	public ResponseEntity<ResponseStructure<Owner>> getOwnerById(
+			@ApiParam("To Get Owner By ID") @PathVariable String id) {
 		return service.getOwnerById(id);
 	}
-	
-	
+
 	@PutMapping("owner/{id}")
 	@ApiOperation("To Update owner")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Owner Updated"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Owner>> updateStaff(@ApiParam("Update for Owner") @PathVariable String id,
+
+	public ResponseEntity<ResponseStructure<Owner>> updateOwener(@ApiParam("Update for Owner") @PathVariable String id,
+
 			@RequestBody Owner owner) {
 		return service.updateOwner(id, owner);
 	}
-	
+
 	@DeleteMapping("owner")
 	@ApiOperation("To Delete owner")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Owner Deleted"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<String>> deleteOwner(@ApiParam("Delete for Owner") @RequestParam String id) {
+	public ResponseEntity<ResponseStructure<String>> deleteOwner(
+			@ApiParam("Delete for Owner") @RequestParam String id) {
 		return service.deleteOwner(id);
-	}
-	@GetMapping("ownerObject")
-	public Owner getOwner() {
-		return new Owner();
 	}
 
 }

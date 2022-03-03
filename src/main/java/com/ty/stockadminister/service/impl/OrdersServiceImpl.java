@@ -8,24 +8,57 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ty.stockadminister.dao.OrdersDao;
+import com.ty.stockadminister.dao.OwnerDao;
+import com.ty.stockadminister.dao.StaffDao;
+import com.ty.stockadminister.dao.SupplierDao;
 import com.ty.stockadminister.dto.Orders;
+import com.ty.stockadminister.dto.Owner;
+import com.ty.stockadminister.dto.Staff;
+import com.ty.stockadminister.dto.SupplierDto;
 import com.ty.stockadminister.service.OrdersService;
 import com.ty.stockadminister.util.ResponseStructure;
+
+import ch.qos.logback.core.joran.spi.NoAutoStart;
 
 @Service
 public class OrdersServiceImpl implements OrdersService {
 	@Autowired
 	OrdersDao dao;
+	@Autowired
+	OwnerDao ownerDao;
+	@Autowired
+	StaffDao staffDao;
+	@Autowired
+	SupplierDao supplierDao;
 
 	@Override
-	public ResponseEntity<ResponseStructure<Orders>> save(Orders orders) {
+	public ResponseEntity<ResponseStructure<Orders>> save(Orders orders, String uid, int sid) {
+		Owner owner = ownerDao.getOwnerById(uid);
+
+		Staff staff = null;
+		SupplierDto supplier = supplierDao.getbyid(sid);
 		ResponseStructure<Orders> structuer = new ResponseStructure<Orders>();
-		structuer.setStatus(HttpStatus.OK.value());
-		structuer.setMessage("successfull");
-		structuer.setData(dao.save(orders));
-		ResponseEntity<ResponseStructure<Orders>> responseEntity = new ResponseEntity<ResponseStructure<Orders>>(
-				structuer, HttpStatus.OK);
-		return responseEntity;
+		ResponseEntity<ResponseStructure<Orders>> responseEntity;
+		if (owner == null) {
+			staff = staffDao.getStaffById(uid);
+
+		}
+		if ((owner != null || staff != null) && supplier != null) {
+			orders.setOwner2(owner);
+			orders.setStaff1(staff);
+			orders.setDto(supplier);
+			structuer.setStatus(HttpStatus.OK.value());
+			structuer.setMessage("successfull");
+			structuer.setData(dao.save(orders));
+			responseEntity = new ResponseEntity<ResponseStructure<Orders>>(structuer, HttpStatus.OK);
+			return responseEntity;
+		} else {
+			structuer.setStatus(HttpStatus.NOT_FOUND.value());
+			structuer.setMessage("successfull");
+			structuer.setData(null);
+			responseEntity = new ResponseEntity<ResponseStructure<Orders>>(structuer, HttpStatus.NOT_FOUND);
+			return responseEntity;
+		}
 	}
 
 	@Override

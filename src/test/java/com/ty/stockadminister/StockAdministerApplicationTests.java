@@ -28,9 +28,9 @@ class StockAdministerApplicationTests {
 	@MockBean
 	private StaffDao dao;
 
-	Staff staff3 = new Staff(1, "deepak", "deepak@gamil.com", "1234", 15697465l);
-	Staff staff1 = new Staff(1, "deepak", "deepak@gamil.com", "1234", 15697465l);
-	Staff staff2 = new Staff(1, "deepak", "deepak@gamil.com", "1234", 15697465l);
+	Staff staff3 = new Staff("1", "deepak", "deepak@gamil.com", "1234", 15697465l);
+	Staff staff1 = new Staff("1", "deepak", "deepak@gamil.com", "1234", 15697465l);
+	Staff staff2 = new Staff("1", "deepak", "deepak@gamil.com", "1234", 15697465l);
 
 	@Test
 	public void getowner() {
