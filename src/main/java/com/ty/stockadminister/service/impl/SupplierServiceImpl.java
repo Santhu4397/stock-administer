@@ -33,15 +33,16 @@ public class SupplierServiceImpl implements SupplierService  {
 		Staff staff = null;
 		ResponseStructure<SupplierDto> responseStructure=new ResponseStructure<SupplierDto>();
 		Owner owner=ownerDao.getOwnerById(id);
-		dto.setOwner(owner);
+		
 		if(owner==null) {
 			staff=staffDao.getStaffById(id);
-			dto.setStaff(staff);
+			
 		}
 		
 		
 		if(staff !=null||owner !=null) {
-		
+			dto.setStaff(staff);
+			dto.setOwner(owner);
 		responseStructure.setStatus(HttpStatus.OK.value());
 		responseStructure.setMessage("successfull");
 		responseStructure.setData(dao.save(dto));

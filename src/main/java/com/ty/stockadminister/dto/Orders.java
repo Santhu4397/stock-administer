@@ -20,6 +20,30 @@ public class Orders {
 	private double qtyRecived;
 	private double totalOrderRecived;
 
+	public SupplierDto getDto() {
+		return dto;
+	}
+
+	public void setDto(SupplierDto dto) {
+		this.dto = dto;
+	}
+
+	public Owner getOwner2() {
+		return owner2;
+	}
+
+	public void setOwner2(Owner owner2) {
+		this.owner2 = owner2;
+	}
+
+	public Staff getStaff1() {
+		return staff1;
+	}
+
+	public void setStaff1(Staff staff1) {
+		this.staff1 = staff1;
+	}
+
 	@ManyToOne
 	@JoinColumn
 	private SupplierDto dto;
