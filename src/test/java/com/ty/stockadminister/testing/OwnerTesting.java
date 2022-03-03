@@ -26,12 +26,9 @@ public class OwnerTesting {
 	private OwnerController controller;
 	@MockBean
 	private OwnerDao dao;
-	Owner owner = new Owner(1, "Santhosh", "Santhosh@143", "143", 98143l, "Shakila Motors", "Manufacturing",
-			"jubli hills hyd", null, null, null);
-	Owner owner1 = new Owner(1, "Santhosh", "Santhosh@143", "143", 98143l, "Shakila Motors", "Manufacturing",
-			"jubli hills hyd", null, null, null);
-	Owner owner2 = new Owner(1, "Santhosh", "Santhosh@143", "143", 98143l, "Shakila Motors", "Manufacturing",
-			"jubli hills hyd", null, null, null);
+	Owner owner = new Owner("1","abhi","abhi@gmail.com","abhi",42516314l,"Tyss","devp","blr",null,null,null);
+	Owner owner1 = new Owner("2","abhi","abhi@gmail.com","abhi",42516314l,"Tyss","devp","blr",null,null,null);
+	Owner owner2 = new Owner("3","abhi","abhi@gmail.com","abhi",42516314l,"Tyss","devp","blr",null,null,null);
 
 	@Test
 	public void loginOwner() {
@@ -50,8 +47,8 @@ public class OwnerTesting {
 
 	@Test
 	public void getOwnerByIdTest() {
-		when(dao.getOwnerById(1)).thenReturn(owner);
-		assertEquals(owner, controller.getOwnerById(1).getBody().getData());
+		when(dao.getOwnerById("1")).thenReturn(owner);
+		assertEquals(owner, controller.getOwnerById("1").getBody().getData());
 	}
 
 	@Test
@@ -67,8 +64,8 @@ public class OwnerTesting {
 	@Test
 	public void updateOwner() {
 
-		when(dao.updateOwner(1, owner)).thenReturn(owner);
-		assertEquals(owner, controller.updateOwener(1, owner).getBody().getData());
+		when(dao.updateOwner("1", owner)).thenReturn(owner);
+		assertEquals(owner, controller.updateOwener("1", owner).getBody().getData());
 	}
 	
 	@Test
@@ -76,8 +73,8 @@ public class OwnerTesting {
 
 		boolean bt = true;
 		String respon = "Owner deleted";
-		when(dao.deleteOwner(1)).thenReturn(bt);
-		assertEquals(respon, controller.deleteOwner(1).getBody().getData());
+		when(dao.deleteOwner("1")).thenReturn(bt);
+		assertEquals(respon, controller.deleteOwner("1").getBody().getData());
 
 	}
 

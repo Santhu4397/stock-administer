@@ -26,14 +26,14 @@ public class StaffTesting {
 	@MockBean
 	private StaffDao dao;
 
-	Staff staff3 = new Staff(1, "deepak", "deepak@gamil.com", "1234", 15697465l);
-	Staff staff1 = new Staff(2, "sagara", "deepak@gamil.com", "1234", 15697465l);
-	Staff staff2 = new Staff(3, "abi", "deepak@gamil.com", "1234", 15697465l);
+	Staff staff = new Staff("1", "deepak", "deepak@gamil.com", "1234", 15697465l);
+	Staff staff1 = new Staff("2", "sagara", "deepak@gamil.com", "1234", 15697465l);
+	Staff staff2 = new Staff("3", "abi", "deepak@gamil.com", "1234", 15697465l);
 
 	@Test
 	public void getstaff() {
 		List<Staff> liststaff = new ArrayList<Staff>();
-		liststaff.add(staff3);
+		liststaff.add(staff);
 		liststaff.add(staff1);
 		liststaff.add(staff2);
 		when(dao.getAllStaff()).thenReturn(liststaff);
@@ -44,23 +44,23 @@ public class StaffTesting {
 	@org.junit.Test
 	public void savestaff() {
 		when(dao.saveStaff(staff1)).thenReturn(staff1);
-		assertEquals(staff1, controller.saveStaff(staff1, 2).getBody().getData());
+		assertEquals(staff1, controller.saveStaff(staff1, "2").getBody().getData());
 
 	}
 
 	@Test
 	public void getstaffByIdTest() {
 
-		when(dao.getStaffById(1)).thenReturn(staff3);
-		assertEquals(staff3, controller.getStaffById(1).getBody().getData());
+		when(dao.getStaffById("1")).thenReturn(staff);
+		assertEquals(staff, controller.getStaffById("1").getBody().getData());
 
 	}
 
 	@Test
 	public void updatestaff() {
 
-		when(dao.updateStaff(1, staff2)).thenReturn(staff2);
-		assertEquals(staff2, controller.updateStaff(1, staff2).getBody().getData());
+		when(dao.updateStaff("1", staff2)).thenReturn(staff2);
+		assertEquals(staff2, controller.updateStaff("1", staff2).getBody().getData());
 
 	}
 
@@ -69,15 +69,15 @@ public class StaffTesting {
 
 		boolean bt = true;
 		String respon = "Staff deleted";
-		when(dao.deleteStaff(1)).thenReturn(bt);
-		assertEquals(respon, controller.deleteStaff(1).getBody().getData());
+		when(dao.deleteStaff("1")).thenReturn(bt);
+		assertEquals(respon, controller.deleteStaff("1").getBody().getData());
 
 	}
 
 	@Test
 	public void getByStaffName() {
-		when(dao.getStaffByName("deepak")).thenReturn(staff3);
-		assertEquals(staff3, controller.getStaffByName("deepak").getBody().getData());
+		when(dao.getStaffByName("deepak")).thenReturn(staff);
+		assertEquals(staff, controller.getStaffByName("deepak").getBody().getData());
 	}
 
 	@Test
@@ -85,7 +85,7 @@ public class StaffTesting {
 		LoginDto dto = new LoginDto();
 		dto.setEmail("deepak@gamil.com");
 		dto.setPassword("1234");
-		when(dao.loginStaff("deepak@gamil.com", "1234")).thenReturn(staff3);
-		assertEquals(staff3, controller.loginStaff(dto).getBody().getData());
+		when(dao.loginStaff("deepak@gamil.com", "1234")).thenReturn(staff);
+		assertEquals(staff, controller.loginStaff(dto).getBody().getData());
 	}
 }

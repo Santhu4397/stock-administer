@@ -29,10 +29,10 @@ public class StockTesting {
 	Stock stock1 = new Stock(2, "samsung", "mobail", 5000.0, 5, 50000.0, 5, 5, null, null, null, null);
 	Stock stock2 = new Stock(3, "samsung", "mobail", 5000.0, 5, 50000.0, 5, 5, null, null, null, null);
 
-	@Test
+	@org.junit.Test
 	public void saveStock() {
 		when(dao.saveStock(stock)).thenReturn(stock);
-		assertEquals(stock, controller.saveStock(stock).getBody().getData());
+		assertEquals(stock, controller.saveStock(stock, "1", 1).getBody().getData());
 
 	}
 
