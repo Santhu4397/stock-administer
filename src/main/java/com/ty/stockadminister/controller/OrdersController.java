@@ -28,13 +28,14 @@ public class OrdersController {
 	@Autowired
 	OrdersService service;
 
-	@PostMapping("orders")
+	@PostMapping("orders/userid/{uid}/supplierid/{sid}")
 	@ApiOperation("To Save order")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Order Saved"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Orders>> save(@RequestBody Orders orders) {
-		return service.save(orders);
+	public ResponseEntity<ResponseStructure<Orders>> save(@RequestBody Orders orders, @PathVariable String uid,
+			@PathVariable int sid) {
+		return service.save(orders, uid, sid);
 	}
 
 	@GetMapping("orders")
@@ -64,7 +65,7 @@ public class OrdersController {
 	public ResponseEntity<ResponseStructure<String>> delete(@RequestParam int id) {
 		return service.delete(id);
 	}
-	
+
 	@PutMapping("orders/{id}")
 	@ApiOperation("To Update orders")
 	@ApiResponses({ @ApiResponse(code = 200, message = "sales orders"),
