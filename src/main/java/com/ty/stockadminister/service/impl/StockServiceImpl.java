@@ -41,6 +41,7 @@ public class StockServiceImpl implements Stockservice {
 		if ((owner != null) || (staff != null) && (supplierDto != null)) {
 			stock.setOwner1(owner);
 			stock.setStaff(staff);
+			stock.setTotal_Cost(stock.getQuantity()*stock.getUnit_Price());
 			stock.setSupplier(supplierDto);
 			ResponseStructure<Stock> structure = new ResponseStructure<Stock>();
 			structure.setStatus(HttpStatus.OK.value());

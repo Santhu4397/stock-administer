@@ -14,6 +14,7 @@ import com.ty.stockadminister.dao.StockDao;
 import com.ty.stockadminister.dto.Sales;
 import com.ty.stockadminister.dto.Stock;
 import com.ty.stockadminister.service.SalesService;
+
 @Component
 @Service
 public class SalesServiceImpl implements SalesService {
@@ -25,19 +26,22 @@ public class SalesServiceImpl implements SalesService {
 	@Override
 	public ResponseEntity<ResponseStructure<Sales>> save(Sales sales, int stockid) {
 		ResponseStructure<Sales> structuer = new ResponseStructure<Sales>();
-		Stock stock=dao2.getStockById(stockid);
+		Stock stock = dao2.getStockById(stockid);
 		sales.setStock(stock);
 		sales.setDate_and_time(LocalDateTime.now());
-		if(stock != null) {
-	
-		structuer.setStatus(HttpStatus.OK.value());
-		structuer.setMessage("successfull");
-		structuer.setData(dao.save(sales));
-		ResponseEntity<ResponseStructure<Sales>> responseEntity = new ResponseEntity<ResponseStructure<Sales>>(
-				structuer, HttpStatus.OK);
-		return responseEntity;
-		}
-		else {
+		if (stock != null && stock.getQuantity() > sales.getQty()) {
+
+			int new_qnt = stock.getQuantity() - sales.getQty();
+			stock.setQuantity(new_qnt);
+			dao2.updateStock(stockid, stock);
+
+			structuer.setStatus(HttpStatus.OK.value());
+			structuer.setMessage("successfull");
+			structuer.setData(dao.save(sales));
+			ResponseEntity<ResponseStructure<Sales>> responseEntity = new ResponseEntity<ResponseStructure<Sales>>(
+					structuer, HttpStatus.OK);
+			return responseEntity;
+		} else {
 			structuer.setStatus(HttpStatus.OK.value());
 			structuer.setMessage("ID not found");
 			structuer.setData(null);
@@ -45,7 +49,7 @@ public class SalesServiceImpl implements SalesService {
 					structuer, HttpStatus.NOT_FOUND);
 			return responseEntity;
 		}
-		
+
 	}
 
 	@Override
