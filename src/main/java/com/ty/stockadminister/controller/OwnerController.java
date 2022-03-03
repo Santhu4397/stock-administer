@@ -96,5 +96,9 @@ public class OwnerController {
 	public ResponseEntity<ResponseStructure<String>> deleteOwner(@ApiParam("Delete for Owner") @RequestParam String id) {
 		return service.deleteOwner(id);
 	}
+	@GetMapping("ownerObject")
+	public Owner getOwner() {
+		return new Owner();
+	}
 
 }
