@@ -32,7 +32,7 @@ public class OrderTesting {
 	@Test
 	public void saveOrders() {
 		when(dao.save(orders)).thenReturn(orders);
-		assertEquals(orders, controller.save(orders).getBody().getData());
+		assertEquals(orders, controller.save(orders, "adm_00001", 1).getBody().getData());
 
 	}
 
