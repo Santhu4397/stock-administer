@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Orders {
 	@Id
@@ -44,12 +46,15 @@ public class Orders {
 		this.staff1 = staff1;
 	}
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
 	private SupplierDto dto;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
 	private Owner owner2;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
 	private Staff staff1;
