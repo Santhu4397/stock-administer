@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.stockadminister.dto.Orders;
-import com.ty.stockadminister.dto.Sales;
 import com.ty.stockadminister.service.OrdersService;
 import com.ty.stockadminister.util.ResponseStructure;
 
@@ -43,7 +42,7 @@ public class OrdersController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Orders Found"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<List<Orders>>> getAll() {
+	public ResponseEntity<ResponseStructure<List<Orders>>> getAll() { 
 		return service.getAll();
 
 	}
@@ -53,7 +52,9 @@ public class OrdersController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Order found"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
+
 	public ResponseEntity<ResponseStructure<Orders>> getByOrderId(@PathVariable int orderId) {
+		System.out.println(orderId);
 		return service.getByOrderId(orderId);
 	}
 
@@ -74,5 +75,10 @@ public class OrdersController {
 	public ResponseEntity<ResponseStructure<Orders>> update(@ApiParam("Update for orders") @PathVariable int id,
 			@RequestBody Orders orders) {
 		return service.update(id, orders);
+	}
+	
+	@GetMapping("ordersobject")
+	public Orders imTheStockObject() {
+		return new Orders();
 	}
 }
