@@ -66,7 +66,7 @@ public class SupplierController {
 			@ApiResponse(code = 500, message = "Internal Server error") })
 	public ResponseEntity<ResponseStructure<SupplierDto>> getbyid(@PathVariable int id) {
 		return service.getbyid(id);
-	}
+	} 
 
 	@DeleteMapping("supplier")
 	@ApiOperation("To delete the supplier by ID")

@@ -15,9 +15,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ty.stockadminister.controller.OwnerController;
 import com.ty.stockadminister.dao.OwnerDao;
+import com.ty.stockadminister.dao.StaffDao;
 import com.ty.stockadminister.dto.LoginDto;
 import com.ty.stockadminister.dto.Owner;
 import com.ty.stockadminister.dto.Sales;
+import com.ty.stockadminister.dto.Staff;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,6 +28,10 @@ public class OwnerTesting {
 	private OwnerController controller;
 	@MockBean
 	private OwnerDao dao;
+	@MockBean
+	private StaffDao dao2;
+	
+	Staff staff = new Staff("Adm_000011","abhi","abhi@gamil.com","abhi",1234567890l);
 	Owner owner = new Owner("1","abhi","abhi@gmail.com","abhi",42516314l,"Tyss","devp","blr",null,null,null);
 	Owner owner1 = new Owner("2","abhi","abhi@gmail.com","abhi",42516314l,"Tyss","devp","blr",null,null,null);
 	Owner owner2 = new Owner("3","abhi","abhi@gmail.com","abhi",42516314l,"Tyss","devp","blr",null,null,null);
@@ -76,6 +82,12 @@ public class OwnerTesting {
 		when(dao.deleteOwner("1")).thenReturn(bt);
 		assertEquals(respon, controller.deleteOwner("1").getBody().getData());
 
+	}
+	
+	@Test 
+	public void updateStaffTest() {
+		when(dao2.updateStaff("Adm_00001", staff)).thenReturn(staff);
+		assertEquals(staff, controller.updateStaff("Adm_00001", staff).getBody().getData());
 	}
 
 }
