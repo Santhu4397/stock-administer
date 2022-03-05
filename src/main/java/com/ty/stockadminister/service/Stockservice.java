@@ -12,7 +12,7 @@ public interface Stockservice {
 
 	public ResponseEntity<ResponseStructure<List<Stock>>> getStock();
 
-	public ResponseEntity<ResponseStructure<Stock>> updateStock(int id, Stock product);
+	public ResponseEntity<ResponseStructure<Stock>> updateStock(int id, Stock product,String userId);
 
 	public ResponseEntity<ResponseStructure<Stock>> getStockById(int id);
 

@@ -49,13 +49,13 @@ public class StockController {
 		return stockservice.getStock();
 	}
 
-	@PutMapping("stock")
+	@PutMapping("stock/userId/{userId}")
 	@ApiOperation("To update the stock")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Stock updated"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Stock>> updateStock(@RequestParam int id, @RequestBody @Valid Stock stock) {
-		return stockservice.updateStock(id, stock);
+	public ResponseEntity<ResponseStructure<Stock>> updateStock(@RequestParam int id, @RequestBody @Valid Stock stock,@PathVariable String userId ) {
+		return stockservice.updateStock(id, stock,userId);
 
 	}
 
