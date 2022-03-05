@@ -38,6 +38,8 @@ public class OrdersDaoImpl implements OrdersDao {
 	public Orders update(int orderId, Orders orders) {
 		Orders exsitingproduct = getByOrderId(orderId);
 		if (exsitingproduct != null) {
+			exsitingproduct.setOwner2(orders.getOwner2());
+			exsitingproduct.setStaff1(orders.getStaff1());
 			exsitingproduct.setProductName(orders.getProductName());
 			exsitingproduct.setQtyOrder(orders.getQtyOrder());
 			exsitingproduct.setQtyRecived(orders.getQtyRecived());
