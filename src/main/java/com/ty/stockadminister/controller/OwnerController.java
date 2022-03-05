@@ -101,7 +101,7 @@ public class OwnerController {
 	public ResponseEntity<ResponseStructure<String>> deleteOwner(@ApiParam("Delete for Owner") @RequestParam String id) {
 		return service.deleteOwner(id);
 	}
-	
+
 	@PutMapping("owner/staff/{id}")
 	@ApiOperation("To Update Staff")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Staff Updated"),
@@ -116,5 +116,6 @@ public class OwnerController {
 	public Owner hi() {
 		return new Owner();
 	}
+
 
 }

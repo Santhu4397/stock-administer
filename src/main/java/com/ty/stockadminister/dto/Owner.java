@@ -30,6 +30,7 @@ public class Owner {
 	private String id;
 	private String name;
 	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id")
+	@UniqueElements(message = "email is exsisting already pls  ")
 	private String email;
 	@UniqueElements
 	@NotNull(message = "Password should not be null")
@@ -176,7 +177,5 @@ public class Owner {
 		this.stocks = stocks;
 		this.orders = orders;
 	}
-
-	
 
 }
