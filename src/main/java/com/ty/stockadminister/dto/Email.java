@@ -1,9 +1,29 @@
 package com.ty.stockadminister.dto;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+@Entity
 public class Email {
+	@Id
+	private int id;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Stock getStock() {
+		return stock;
+	}
+	public void setStock(Stock stock) {
+		this.stock = stock;
+	}
 	private String toEmail;
 	private String body;
 	private String subject;
+	@OneToOne
+	private Stock stock;
 	public String getToEmail() {
 		return toEmail;
 	}
