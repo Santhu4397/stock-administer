@@ -1,6 +1,6 @@
 package com.ty.stockadminister.controller;
 
-import java.util.List;
+import java.util.List; 
 
 import javax.validation.Valid;
 
@@ -22,7 +22,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 import com.ty.stockadminister.dto.Sales;
-import com.ty.stockadminister.dto.Stock;
 import com.ty.stockadminister.service.SalesService;
 
 @RestController
@@ -32,7 +31,7 @@ public class SalesController {
 	SalesService service;
 
 	@PostMapping("sales/stockid")
-	@ApiOperation("To save the sales")
+	@ApiOperation("To save the sales")  
 	@ApiResponses({ @ApiResponse(code = 200, message = "Sales Saved"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
@@ -41,14 +40,14 @@ public class SalesController {
 	}
 
 	@GetMapping("sales")
-	@ApiOperation("To Get all the sales")
+	@ApiOperation("To Get all the sales") 
 	@ApiResponses({ @ApiResponse(code = 200, message = "List of Sales Founds"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
 	public ResponseEntity<ResponseStructure<List<Sales>>> getAll() {
 		return service.getAll();
 
-	}
+	} 
 
 	@GetMapping("sales/customername/{name}")
 	@ApiOperation("To Get all the sales by name")
