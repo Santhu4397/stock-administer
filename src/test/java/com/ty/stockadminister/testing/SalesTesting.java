@@ -31,7 +31,7 @@ public class SalesTesting {
 	Sales sales1 = new Sales(2, "mobail", LocalDateTime.now(), "abhi@gmail.com", 98809878, 2, 50000.0, null);
 	Sales sales2 = new Sales(3, "mobail", LocalDateTime.now(), "abhi@gmail.com", 98809878, 2, 50000.0, null);
 
-	@Test
+	@org.junit.Test
 	public void savesales() {
 		when(dao.save(sales)).thenReturn(sales);
 		assertEquals(sales, controller.save(sales, 1, "Adm_00001").getBody().getData());
