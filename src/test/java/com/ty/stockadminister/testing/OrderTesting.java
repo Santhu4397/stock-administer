@@ -59,7 +59,7 @@ public class OrderTesting {
 	public void updateOrders() {
 
 		when(dao.update(1, orders)).thenReturn(orders);
-		assertEquals(orders, controller.update(1, orders).getBody().getData());
+		assertEquals(orders, controller.update("Adm_00001", 1, orders).getBody().getData());
 	}
 
 	@Test
