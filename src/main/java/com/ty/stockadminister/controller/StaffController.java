@@ -53,15 +53,7 @@ public class StaffController {
 		return service.saveStaff(staff, id);
 	}
 
-	@PutMapping("staff/{id}")
-	@ApiOperation("To Update Staff")
-	@ApiResponses({ @ApiResponse(code = 200, message = "Staff Updated"),
-			@ApiResponse(code = 404, message = "Class not found"),
-			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Staff>> updateStaff(@ApiParam("Update for Staff") @PathVariable String id,
-			@RequestBody Staff staff) {
-		return service.updateStaff(id, staff);
-	}
+	
 
 	@DeleteMapping("staff")
 	@ApiOperation("To Delete Staff")

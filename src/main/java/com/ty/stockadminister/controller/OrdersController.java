@@ -67,14 +67,14 @@ public class OrdersController {
 		return service.delete(id);
 	}
 
-	@PutMapping("orders/{id}")
+	@PutMapping("orders/userid/{uid}/orderid/{id}")
 	@ApiOperation("To Update orders")
 	@ApiResponses({ @ApiResponse(code = 200, message = "sales orders"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Orders>> update(@ApiParam("Update for orders") @PathVariable int id,
-			@RequestBody Orders orders) {
-		return service.update(id, orders);
+	public ResponseEntity<ResponseStructure<Orders>> update(@ApiParam("Update for orders") @PathVariable String uid,
+			@PathVariable int id, @RequestBody Orders orders) {
+		return service.update(uid,id, orders);
 	}
 	
 	@GetMapping("ordersobject")

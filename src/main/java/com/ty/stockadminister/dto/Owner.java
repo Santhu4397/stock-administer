@@ -2,6 +2,7 @@ package com.ty.stockadminister.dto;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,6 +32,7 @@ public class Owner {
 	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id")
 	@UniqueElements(message = "email is exsisting already pls  ")
 	private String email;
+	@UniqueElements
 	@NotNull(message = "Password should not be null")
 	private String password;
 	@PhoneNumber
@@ -41,7 +43,7 @@ public class Owner {
 	@NotNull(message = "Address should not be null")
 	private String address;
 	@JsonIgnore
-	@OneToMany(mappedBy = "owner")
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
 	private List<Staff> staffs;
 	@JsonIgnore
 	@OneToMany(mappedBy = "owner1")
