@@ -1,11 +1,9 @@
 package com.ty.stockadminister.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
-@Entity
+
 public class Email {
-	@Id
+
 	private int id;
 	public int getId() {
 		return id;
