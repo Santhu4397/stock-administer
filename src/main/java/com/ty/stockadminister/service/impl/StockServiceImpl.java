@@ -76,10 +76,16 @@ public class StockServiceImpl implements Stockservice {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Stock>> updateStock(int id, Stock stock) {
+	public ResponseEntity<ResponseStructure<Stock>> updateStock(int id, Stock stock,String userId) {
 		// TODO Auto-generated method stub
-		Stock exist = dao.updateStock(id, stock);
-		if (exist != null) {
+		Staff staff=null;
+		Owner owner=ownerDao.getOwnerById(userId);
+		if(owner==null) {
+			staff=staffDao.getStaffById(userId);
+		}
+		if(owner!=null || staff!=null) {
+			stock.setOwner1(owner);
+			stock.setStaff(staff);
 			ResponseStructure<Stock> responseStructure = new ResponseStructure<Stock>();
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("success");
