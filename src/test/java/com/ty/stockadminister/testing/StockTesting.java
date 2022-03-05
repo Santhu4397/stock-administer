@@ -51,7 +51,7 @@ public class StockTesting {
 	public void updateStock() {
 
 		when(dao.updateStock(1, stock)).thenReturn(stock);
-		assertEquals(stock, controller.updateStock(1, stock).getBody().getData());
+		assertEquals(stock, controller.updateStock(1, stock, "Adm_00001").getBody().getData());
 	}
 
 	@Test
