@@ -30,7 +30,6 @@ public class StockDaoImpl implements StockDao {
 		// TODO Auto-generated method stub
 		Stock existingstock=getStockById(id); 
 		if(existingstock != null) {
-			existingstock.setId(stock.getId());
 			existingstock.setProduct_Name(stock.getProduct_Name());
 			existingstock.setQuantity(stock.getQuantity());
 			existingstock.setCategory(stock.getCategory());
@@ -39,8 +38,8 @@ public class StockDaoImpl implements StockDao {
 			existingstock.setTotal_Cost(stock.getTotal_Cost());
 			existingstock.setUnit_Price(stock.getUnit_Price());
 			existingstock.setOwner1(stock.getOwner1());
+			existingstock.setStaff(stock.getStaff());
 			existingstock.setSupplier(stock.getSupplier());
-			
 			return repository.save(existingstock);
 		}
 		return null;
