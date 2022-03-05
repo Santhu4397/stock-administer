@@ -34,7 +34,7 @@ public class SalesTesting {
 	@Test
 	public void savesales() {
 		when(dao.save(sales)).thenReturn(sales);
-		assertEquals(sales, controller.save(sales ,0).getBody().getData());
+		assertEquals(sales, controller.save(sales, 1, "Adm_00001").getBody().getData());
 
 	}
 
@@ -61,7 +61,7 @@ public class SalesTesting {
 	public void updateSalesr() {
 
 		when(dao.update(1, sales)).thenReturn(sales);
-		assertEquals(sales, controller.update(1, sales).getBody().getData());
+		assertEquals(sales, controller.update(1, "Adm_00001", sales).getBody().getData());
 	}
 
 	@Test

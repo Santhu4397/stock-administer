@@ -95,10 +95,21 @@ public class SupplierServiceImpl implements SupplierService  {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<SupplierDto>> update(int id, SupplierDto supplierDto) {
+	public ResponseEntity<ResponseStructure<SupplierDto>> update(int id,String userid, SupplierDto supplierDto) {
 		// TODO Auto-generated method stub
 		SupplierDto dto=dao.update(id, supplierDto);
+		Staff staff = null;
+	
+		Owner owner=ownerDao.getOwnerById(userid);
+		
+		if(owner==null) {
+			staff=staffDao.getStaffById(userid);
+			
+		}
+		
 		if(dto!=null) {
+			dto.setStaff(staff);
+			dto.setOwner(owner);
 		ResponseStructure<SupplierDto> responseStructure=new ResponseStructure<SupplierDto>();
 		responseStructure.setStatus(HttpStatus.OK.value());
 		responseStructure.setMessage("successfull");

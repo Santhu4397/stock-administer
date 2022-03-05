@@ -34,7 +34,7 @@ public class SupplierTesting {
 	@Test
 	public void updateSupplier() {
 		when(dao.update(1, dto)).thenReturn(dto);
-		assertEquals(dto, controller.update(1, dto).getBody().getData());
+		assertEquals(dto, controller.update(1, "Adm_00001", dto).getBody().getData());
 	}
 	@Test
 	public void deleteSupplier() {

@@ -34,19 +34,20 @@ public class SupplierController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Supplier saved"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<SupplierDto>> save(@RequestBody @Valid SupplierDto dto,@PathVariable String id) {
+	public ResponseEntity<ResponseStructure<SupplierDto>> save(@RequestBody @Valid SupplierDto dto,
+			@PathVariable String id) {
 
-		return service.save(dto,id);
+		return service.save(dto, id);
 	}
 
-	@PutMapping("supplier/{supplieID}")
+	@PutMapping("supplier/{supplieID}/usertid/{userid}")
 	@ApiOperation("To update the supplier")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Supplier updated"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
 	public ResponseEntity<ResponseStructure<SupplierDto>> update(@PathVariable int supplieID,
-			@RequestBody SupplierDto dto) {
-		return service.update(supplieID, dto);
+			@PathVariable String userid, @RequestBody SupplierDto dto) {
+		return service.update(supplieID, userid,dto);
 	}
 
 	@GetMapping("supplier")
@@ -75,9 +76,10 @@ public class SupplierController {
 	public ResponseEntity<ResponseStructure<String>> delete(@RequestParam int id) {
 		return service.delete(id);
 	}
+
 	@GetMapping("supplier/hi")
 	public SupplierDto hi() {
 		return new SupplierDto();
-		
+
 	}
 }
