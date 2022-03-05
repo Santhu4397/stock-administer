@@ -9,10 +9,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import com.ty.stockadminister.util.ResponseStructure;
+import com.ty.stockadminister.dao.OwnerDao;
 import com.ty.stockadminister.dao.SalesDao;
+import com.ty.stockadminister.dao.StaffDao;
 import com.ty.stockadminister.dao.StockDao;
+import com.ty.stockadminister.dto.Owner;
 import com.ty.stockadminister.dto.Sales;
+import com.ty.stockadminister.dto.Staff;
 import com.ty.stockadminister.dto.Stock;
+import com.ty.stockadminister.dto.SupplierDto;
 import com.ty.stockadminister.service.SalesService;
 
 @Component
@@ -22,9 +27,16 @@ public class SalesServiceImpl implements SalesService {
 	SalesDao dao;
 	@Autowired
 	StockDao dao2;
+	@Autowired
+	StaffDao staffDao;
+	@Autowired
+	OwnerDao ownerDao;
 
 	@Override
-	public ResponseEntity<ResponseStructure<Sales>> save(Sales sales, int stockid) {
+	public ResponseEntity<ResponseStructure<Sales>> save(Sales sales, int stockid, String staffid) {
+		Staff staff= staffDao.getStaffById(staffid);
+
+
 		ResponseStructure<Sales> structuer = new ResponseStructure<Sales>();
 		Stock stock = dao2.getStockById(stockid);
 		sales.setStock(stock);
@@ -35,6 +47,7 @@ public class SalesServiceImpl implements SalesService {
 			stock.setQuantity(new_qnt);
 			dao2.updateStock(stockid, stock);
 
+			sales.setStaff(staff);
 			structuer.setStatus(HttpStatus.OK.value());
 			structuer.setMessage("successfull");
 			structuer.setData(dao.save(sales));
@@ -83,22 +96,6 @@ public class SalesServiceImpl implements SalesService {
 		return responseEntity;
 	}
 
-//	(Doubt)
-//	@Override
-//	public ResponseEntity<ResponseStructure<Sales>> update(int id, Sales sales) {
-//		ResponseStructure<Sales> structuer=new ResponseStructure<Sales>();
-//		ResponseEntity<ResponseStructure<Sales>> entity;
-//		Sales existing=dao.update(id,sales);
-//		if(existing != null) {
-//			structuer.setStatus(HttpStatus.OK.value());
-//			structuer.setMessage("successfull");
-////			structuer.setData(dao.getbyid(id));
-//			entity=new ResponseEntity<ResponseStructure<Sales>>(structuer,HttpStatus.OK);
-//			return entity;
-//		}
-//		
-//	}
-
 	@Override
 	public ResponseEntity<ResponseStructure<String>> delete(int id) {
 		ResponseStructure<String> structuer = new ResponseStructure<String>();
@@ -118,12 +115,15 @@ public class SalesServiceImpl implements SalesService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Sales>> update(int id, Sales sales) {
-		// TODO Auto-generated method stub
+	public ResponseEntity<ResponseStructure<Sales>> update(int id, String staffid, Sales sales) {
+		Staff staff = staffDao.getStaffById(staffid);
+
+
 		ResponseStructure<Sales> structuer = new ResponseStructure<Sales>();
 		ResponseEntity<ResponseStructure<Sales>> entity = null;
 		Sales existing = dao.update(id, sales);
 		if (existing != null) {
+			sales.setStaff(staff);
 			structuer.setStatus(HttpStatus.OK.value());
 			structuer.setMessage("successfull");
 			structuer.setData(dao.update(id, sales));

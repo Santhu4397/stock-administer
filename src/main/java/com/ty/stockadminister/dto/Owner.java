@@ -2,6 +2,7 @@ package com.ty.stockadminister.dto;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ty.stockadminister.validation.PhoneNumber;
@@ -28,7 +30,9 @@ public class Owner {
 	private String id;
 	private String name;
 	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id")
+	@UniqueElements(message = "email is exsisting already pls  ")
 	private String email;
+	@UniqueElements
 	@NotNull(message = "Password should not be null")
 	private String password;
 	@PhoneNumber
@@ -39,7 +43,7 @@ public class Owner {
 	@NotNull(message = "Address should not be null")
 	private String address;
 	@JsonIgnore
-	@OneToMany(mappedBy = "owner")
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
 	private List<Staff> staffs;
 	@JsonIgnore
 	@OneToMany(mappedBy = "owner1")
@@ -173,7 +177,5 @@ public class Owner {
 		this.stocks = stocks;
 		this.orders = orders;
 	}
-
-	
 
 }

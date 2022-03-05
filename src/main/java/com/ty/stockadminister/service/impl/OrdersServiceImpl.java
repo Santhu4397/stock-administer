@@ -74,11 +74,39 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Orders>> update(int orderId, Orders orders) {
+	public ResponseEntity<ResponseStructure<Orders>> update(String uid,int orderId, Orders orders) {
+		
+		
+		Owner owner = ownerDao.getOwnerById(uid);
+		Staff staff = null;
 		ResponseStructure<Orders> structuer = new ResponseStructure<Orders>();
+		if (owner == null) {
+			staff = staffDao.getStaffById(uid);
+
+		}
+
+//		if ((owner != null || staff != null)) {
+//			orders.setOwner2(owner);
+//			orders.setStaff1(staff);
+//			structuer.setStatus(HttpStatus.OK.value());
+//			structuer.setMessage("successfull");
+//			structuer.setData(dao.update(orderId, orders));
+//			responseEntity = new ResponseEntity<ResponseStructure<Orders>>(structuer, HttpStatus.OK);
+//			return responseEntity;
+//		} else {
+//			structuer.setStatus(HttpStatus.NOT_FOUND.value());
+//			structuer.setMessage("successfull");
+//			structuer.setData(null);
+//			responseEntity = new ResponseEntity<ResponseStructure<Orders>>(structuer, HttpStatus.NOT_FOUND);
+//			return responseEntity;
+//		}
+		System.out.println(owner);
+		System.out.println(staff);
 		ResponseEntity<ResponseStructure<Orders>> entity = null;
 		Orders existing = dao.update(orderId, orders);
 		if (existing != null) {
+			orders.setStaff1(staff);
+			orders.setOwner2(owner);
 			structuer.setStatus(HttpStatus.OK.value());
 			structuer.setMessage("successfull");
 			structuer.setData(dao.update(orderId, orders));
