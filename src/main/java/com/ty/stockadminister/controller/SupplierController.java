@@ -64,7 +64,7 @@ public class SupplierController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Supplier found"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<SupplierDto>> getbyid(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<SupplierDto>> getbyid(@PathVariable int id) {
 		return service.getbyid(id);
 	} 
 
