@@ -35,7 +35,18 @@ public class Sales {
 	@ManyToOne
 	@JoinColumn
 	private Stock stock;
+	    
+	@ManyToOne
+	private Staff staff;
 	
+
+	public Staff getStaff() {
+		return staff;
+	}
+
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
 
 	public Stock getStock() {
 		return stock;

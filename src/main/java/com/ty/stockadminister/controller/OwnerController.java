@@ -97,6 +97,9 @@ public class OwnerController {
 			@ApiResponse(code = 500, message = "Internal Server error") })
 	public ResponseEntity<ResponseStructure<String>> deleteOwner(@ApiParam("Delete for Owner") @RequestParam String id) {
 		return service.deleteOwner(id);
-	}    
-
+	}
+	@GetMapping("hi")
+	public Owner hi() {
+		return new Owner();
+	}
 }

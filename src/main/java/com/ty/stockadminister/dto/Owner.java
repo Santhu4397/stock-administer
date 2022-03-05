@@ -12,6 +12,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ty.stockadminister.validation.PhoneNumber;
@@ -28,6 +29,7 @@ public class Owner {
 	private String id;
 	private String name;
 	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id")
+	@UniqueElements(message = "email is exsisting already pls  ")
 	private String email;
 	@NotNull(message = "Password should not be null")
 	private String password;
@@ -173,7 +175,5 @@ public class Owner {
 		this.stocks = stocks;
 		this.orders = orders;
 	}
-
-	
 
 }

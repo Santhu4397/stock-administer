@@ -12,7 +12,7 @@ public interface SupplierService {
 	public ResponseEntity<ResponseStructure<SupplierDto>> save(SupplierDto dto,String id);
 	public ResponseEntity<ResponseStructure<SupplierDto>>  getbyid(int id);
 	public ResponseEntity<ResponseStructure<List<SupplierDto>>>  getall();
-	public ResponseEntity<ResponseStructure<SupplierDto>> update(int id,SupplierDto supplierDto);
+	public ResponseEntity<ResponseStructure<SupplierDto>> update(int id,String userid,SupplierDto supplierDto);
 	public ResponseEntity<ResponseStructure<String>> delete(int id);
 
 }
