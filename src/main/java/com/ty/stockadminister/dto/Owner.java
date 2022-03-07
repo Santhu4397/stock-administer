@@ -18,6 +18,10 @@ import org.hibernate.validator.constraints.UniqueElements;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ty.stockadminister.validation.PhoneNumber;
 
+import io.swagger.annotations.ApiKeyAuthDefinition;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
+
 @Entity
 public class Owner {
 
@@ -42,6 +46,7 @@ public class Owner {
 	private String department;
 	@NotNull(message = "Address should not be null")
 	private String address;
+	@ApiParam(hidden = true)
 	@JsonIgnore
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
 	private List<Staff> staffs;

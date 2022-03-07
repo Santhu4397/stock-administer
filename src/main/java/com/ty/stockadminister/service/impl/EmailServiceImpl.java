@@ -1,86 +1,36 @@
 package com.ty.stockadminister.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.ty.stockadminister.dao.EmailDao;
+import com.ty.stockadminister.dao.StockDao;
 import com.ty.stockadminister.dto.Email;
-import com.ty.stockadminister.util.ResponseStructure;
-
-
+import com.ty.stockadminister.dto.Stock;
 
 @Service
 public class EmailServiceImpl {
+
 	@Autowired
-	EmailDao dao;
-	public ResponseEntity<ResponseStructure<Email>> saveEmail(Email email) {
-		ResponseStructure<Email> structure = new ResponseStructure<Email>();
-		structure.setStatus(HttpStatus.OK.value());
-		structure.setMessage("success");
-		structure.setData(dao.saveEmail(email));
-		ResponseEntity<ResponseStructure<Email>> responseEntity = new ResponseEntity<ResponseStructure<Email>>(
-				structure, HttpStatus.OK);
-		return responseEntity;
+	StockDao stockDao;
+	@Autowired
+	EmailSenderService emailSenderService;
+
+	public String saveEmail( int id) {
+		Stock stock = stockDao.getStockById(id);
+		Email email = new Email();
+		if (stock != null) {
+			email.setStock(stock);
+			email.setToEmail(stock.getSupplier().getMailId());
+			email.setBody("Greetings for the day \n Mr/Ms: "+" "+stock.getSupplier().getName()+" "+"\n From: "+stock.getOwner1().getName()+"\n our stock got diminished,we are in need of this "
+					+ "\n product : "+stock.getProduct_Name()+"\n  quantity : "+stock.getReorder_Quantity()+" sssssssssto be delivered as soon as possible \n "+"thanking you \n"+stock.getOwner1().getName()+"\n"+stock.getOwner1().getComapnyName() 
+					);
+			email.setSubject(stock.getOwner1().getComapnyName()+"\n Regarding the order of stock ");
+			emailSenderService.sendEmail(email.getToEmail(),email.getBody(), email.getSubject());
+			return "email send to email : "+stock.getSupplier().getMailId()+"  name : "+stock.getSupplier().getName();
+		}return "email not send";
+
 	}
 
-	public ResponseEntity<ResponseStructure<List<Email>>> getAllEmail() {
-		ResponseStructure<List<Email>> structure = new ResponseStructure<List<Email>>();
-		structure.setStatus(HttpStatus.OK.value());
-		structure.setMessage("success");
-		structure.setData(dao.getAllEmail());
-		ResponseEntity<ResponseStructure<List<Email>>> responseEntity = new ResponseEntity<ResponseStructure<List<Email>>>(
-				structure, HttpStatus.OK);
-		return responseEntity;
-	}
 
-	public ResponseEntity<ResponseStructure<Email>> getEmailById(int id) {
-		ResponseEntity<ResponseStructure<Email>> entity;
-		ResponseStructure<Email> structure = new ResponseStructure<Email>();
-		Email email = dao.getEmailById(id);
-		if (email != null) {
-			structure.setStatus(HttpStatus.OK.value());
-			structure.setMessage("success");
-			structure.setData(dao.getEmailById(id));
-			entity = new ResponseEntity<ResponseStructure<Email>>(structure, HttpStatus.OK);
-		} else {
-
-			structure.setStatus(HttpStatus.NOT_FOUND.value());
-			structure.setMessage("Id ="+id+"not found ");
-			structure.setData(null);
-			entity = new ResponseEntity<ResponseStructure<Email>>(structure, HttpStatus.NOT_FOUND);
-		}
-		return entity;
-	}
-
-	public ResponseEntity<ResponseStructure<Email>> updateEmail(int id, Email email) {
-		ResponseStructure<Email> structure = new ResponseStructure<Email>();
-		structure.setStatus(HttpStatus.OK.value());
-		structure.setMessage("Order updated");
-		structure.setData(dao.updateEmail(id, email));
-		ResponseEntity<ResponseStructure<Email>> responseEntity = new ResponseEntity<ResponseStructure<Email>>(
-				structure, HttpStatus.OK);
-		return responseEntity;
-	}
-
-	public ResponseEntity<ResponseStructure<String>> deleteEmail(int id) {
-		ResponseStructure<String> structuer = new ResponseStructure<String>();
-		ResponseEntity<ResponseStructure<String>> entity;
-		if (dao.deleteEmail(id)) {
-			structuer.setStatus(HttpStatus.OK.value());
-			structuer.setMessage("successfull");
-			structuer.setData("email deleted");
-			entity = new ResponseEntity<ResponseStructure<String>>(structuer, HttpStatus.OK);
-		} else {
-			structuer.setStatus(HttpStatus.OK.value());
-			structuer.setMessage("ID :" + id + " NOTFOUND");
-			structuer.setData("email not deleted");
-			entity = new ResponseEntity<ResponseStructure<String>>(structuer, HttpStatus.NOT_FOUND);
-		}
-		return entity; 
-	}
 
 }
