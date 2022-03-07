@@ -56,13 +56,7 @@ public class StaffTesting {
 
 	}
 
-	@Test
-	public void updatestaff() {
-
-		when(dao.updateStaff("1", staff2)).thenReturn(staff2);
-		assertEquals(staff2, controller.updateStaff("1", staff2).getBody().getData());
-
-	}
+	
 
 	@org.junit.jupiter.api.Test
 	public void deleteownerTest() {

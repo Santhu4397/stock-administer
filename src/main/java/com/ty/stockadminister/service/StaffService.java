@@ -15,9 +15,9 @@ public interface StaffService {
 
 	public ResponseEntity<ResponseStructure<Staff>> getStaffById(String id);
 
-	public ResponseEntity<ResponseStructure<Staff>> updateStaff(String id, Staff staff);
+	public ResponseEntity<ResponseStructure<Staff>> updateStaff(String uid, String id, Staff staff);
 
-	public ResponseEntity<ResponseStructure<String>> deleteStaff(String id);
+	public ResponseEntity<ResponseStructure<String>> deleteStaff(String uid, String id);
 
 	public ResponseEntity<ResponseStructure<Staff>> loginStaff(String email, String password);
 

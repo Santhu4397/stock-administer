@@ -34,7 +34,10 @@ public class OwnerController {
 
 	@Autowired
 	private OwnerService service;
-	
+
+	@Autowired
+	private StaffService staffService;
+
 	@Autowired
 	private StaffService service1;
 
@@ -103,21 +106,29 @@ public class OwnerController {
 		return service.deleteOwner(id);
 	}
 
-
-	@PutMapping("owner/staff/{id}")
+	@PutMapping("owner/{uid}/staff/{id}")
 	@ApiOperation("To Update Staff")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Staff Updated"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Staff>> updateStaff(@ApiParam("Update for Staff") @PathVariable String id,
-			@RequestBody Staff staff) {
-		return service1.updateStaff(id, staff);
+	public ResponseEntity<ResponseStructure<Staff>> updateStaff(@ApiParam("Update for Staff") @PathVariable String uid,
+			@PathVariable String id, @RequestBody Staff staff) {
+		return service1.updateStaff(uid, id, staff);
 	}
-	
+
+	@DeleteMapping("owner/{uid}/staff")
+	@ApiOperation("To Delete Staff")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Staff Deleted"),
+			@ApiResponse(code = 404, message = "Class not found"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
+	public ResponseEntity<ResponseStructure<String>> deleteStaff(@ApiParam("Delete for Staff") @PathVariable String uid,
+			@RequestParam String id) {
+		return staffService.deleteStaff(uid,id);
+	}
+
 	@GetMapping("owner/hi")
 	public Owner hi() {
 		return new Owner();
 	}
-
 
 }

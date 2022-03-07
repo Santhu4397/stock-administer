@@ -83,11 +83,13 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Staff>> updateStaff(String id, Staff staff) {
+	public ResponseEntity<ResponseStructure<Staff>> updateStaff(String uid,String id, Staff staff) {
+		Owner owner = ownerDao.getOwnerById(uid);
 		ResponseStructure<Staff> structure = new ResponseStructure<>();
 		ResponseEntity<ResponseStructure<Staff>> responseEntity = null;
-		Staff staff1 = dao.updateStaff(id, staff);
-		if (staff1 != null) {
+		Staff staff1=dao.updateStaff(id, staff);
+		if(uid==staff1.getOwner().getId()  && staff1 != null && owner !=null) { 
+			staff.setOwner(owner);	
 			structure.setStatus(HttpStatus.OK.value());
 			structure.setMessage("Sucess");
 			structure.setData(dao.updateStaff(id, staff1));
@@ -102,14 +104,18 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<String>> deleteStaff(String id) {
+	public ResponseEntity<ResponseStructure<String>> deleteStaff(String uid,String id) {
+		
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 		ResponseEntity<ResponseStructure<String>> responseEntity = null;
-		if (dao.deleteStaff(id)) {
+		Staff staff = dao.getStaffById(id);
+		if (uid.equals(staff.getOwner().getId() )) {
+			if(dao.deleteStaff(id)) {
 			structure.setStatus(HttpStatus.OK.value());
 			structure.setMessage("Sucess");
 			structure.setData("Staff deleted");
 			responseEntity = new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.OK);
+			}
 		} else {
 			structure.setStatus(HttpStatus.NOT_FOUND.value());
 			structure.setMessage("data not fond");

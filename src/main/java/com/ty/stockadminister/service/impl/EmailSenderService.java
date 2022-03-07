@@ -1,4 +1,4 @@
-package com.ty.stockadminister.email;
+package com.ty.stockadminister.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
