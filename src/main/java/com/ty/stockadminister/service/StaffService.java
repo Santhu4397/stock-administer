@@ -22,5 +22,4 @@ public interface StaffService {
 	public ResponseEntity<ResponseStructure<Staff>> loginStaff(String email, String password);
 
 	public ResponseEntity<ResponseStructure<Staff>> getStaffByName(String name);
-
 }
