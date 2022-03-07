@@ -18,5 +18,13 @@ public class StockExceptionHandler extends StockException {
 		structure.setData("Custom Exception");
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
 	}
+	@ExceptionHandler(UnexpectedTypeException.class)
+	public ResponseEntity<ResponseStructure<String>> UnexpectedTypeException(StockException stockException){
+		ResponseStructure<String> structure = new ResponseStructure<>();
+		structure.setStatus(HttpStatus.NOT_FOUND.value());
+		structure.setMessage(stockException.getMessage());
+		structure.setData("Custom Exception");
+		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
+	}
 	
 }
