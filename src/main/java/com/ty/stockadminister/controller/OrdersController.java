@@ -28,7 +28,7 @@ public class OrdersController {
 	OrdersService service;
 
 	@PostMapping("orders/userid/{uid}/supplierid/{sid}")
-	@ApiOperation("To Save order")
+	@ApiOperation("To save order")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Order Saved"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
