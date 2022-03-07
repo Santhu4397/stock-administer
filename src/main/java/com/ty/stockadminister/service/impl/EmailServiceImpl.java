@@ -21,13 +21,12 @@ public class EmailServiceImpl {
 		if (stock != null) {
 			email.setStock(stock);
 			email.setToEmail(stock.getSupplier().getMailId());
-			email.setBody("Greetings for the day Mr/Ms: "+" "+stock.getSupplier().getName()+" "+"From: "+stock.getOwner1().getName()+" our stock got diminished,we are in need of this product *** "+
-			
-			stock.getProduct_Name()+"*** "+"of quantity  "+" ***"+stock.getReorder_Quantity()+"*** "+"to be delivered as soon as possible  "
+			email.setBody("Greetings for the day \n Mr/Ms: "+" "+stock.getSupplier().getName()+" "+"\n From: "+stock.getOwner1().getName()+"\n our stock got diminished,we are in need of this "
+					+ "\n product : "+stock.getProduct_Name()+"\n  quantity : "+stock.getReorder_Quantity()+" sssssssssto be delivered as soon as possible \n "+"thanking you \n"+stock.getOwner1().getName()+"\n"+stock.getOwner1().getComapnyName() 
 					);
-			email.setSubject("*****"+stock.getOwner1().getComapnyName()+"**** "+"Regarding the order of stock ");
+			email.setSubject(stock.getOwner1().getComapnyName()+"\n Regarding the order of stock ");
 			emailSenderService.sendEmail(email.getToEmail(),email.getBody(), email.getSubject());
-			return "email send to email : "+stock.getSupplier().getMailId()+"name : "+stock.getSupplier().getName();
+			return "email send to email : "+stock.getSupplier().getMailId()+"  name : "+stock.getSupplier().getName();
 		}return "email not send";
 
 	}
