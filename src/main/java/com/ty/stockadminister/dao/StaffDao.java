@@ -12,7 +12,7 @@ public interface StaffDao {
 
 	public Staff getStaffById(String id);
 
-	public Staff updateStaff(String id, Staff staff);
+	public Staff updateStaff(String uid, Staff staff);
 
 	public boolean deleteStaff(String id);
 

@@ -53,16 +53,6 @@ public class StaffController {
 		return service.saveStaff(staff, id);
 	}
 
-	
-
-	@DeleteMapping("staff")
-	@ApiOperation("To Delete Staff")
-	@ApiResponses({ @ApiResponse(code = 200, message = "Staff Deleted"),
-			@ApiResponse(code = 404, message = "Class not found"),
-			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<String>> deleteStaff(@ApiParam("Delete for Staff") @RequestParam String id) {
-		return service.deleteStaff(id);
-	}
 
 	@GetMapping("staff/{id}")
 	@ApiOperation("To Get Staff By Id")
