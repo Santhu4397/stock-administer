@@ -34,8 +34,7 @@ public class SalesServiceImpl implements SalesService {
 
 	@Override
 	public ResponseEntity<ResponseStructure<Sales>> save(Sales sales, int stockid, String staffid) {
-		Staff staff= staffDao.getStaffById(staffid);
-
+		Staff staff = staffDao.getStaffById(staffid);
 
 		ResponseStructure<Sales> structuer = new ResponseStructure<Sales>();
 		Stock stock = dao2.getStockById(stockid);
@@ -97,15 +96,17 @@ public class SalesServiceImpl implements SalesService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<String>> delete(int id) {
+	public ResponseEntity<ResponseStructure<String>> delete( int id) {
 		ResponseStructure<String> structuer = new ResponseStructure<String>();
-		ResponseEntity<ResponseStructure<String>> entity;
-		if (dao.delete(id)) {
-			structuer.setStatus(HttpStatus.OK.value());
-			structuer.setMessage("successfull");
-			structuer.setData("User deleted");
-			entity = new ResponseEntity<ResponseStructure<String>>(structuer, HttpStatus.OK);
-		} else {
+		ResponseEntity<ResponseStructure<String>> entity = null;
+		Sales sales = dao.getById(id);
+			if (dao.delete(id)) {
+				structuer.setStatus(HttpStatus.OK.value());
+				structuer.setMessage("successfull");
+				structuer.setData("User deleted");
+				entity = new ResponseEntity<ResponseStructure<String>>(structuer, HttpStatus.OK);
+			}
+		 else {
 			structuer.setStatus(HttpStatus.OK.value());
 			structuer.setMessage("ID :" + id + " NOTFOUND");
 			structuer.setData("User not deleted");
@@ -117,7 +118,6 @@ public class SalesServiceImpl implements SalesService {
 	@Override
 	public ResponseEntity<ResponseStructure<Sales>> update(int id, String staffid, Sales sales) {
 		Staff staff = staffDao.getStaffById(staffid);
-
 
 		ResponseStructure<Sales> structuer = new ResponseStructure<Sales>();
 		ResponseEntity<ResponseStructure<Sales>> entity = null;

@@ -20,6 +20,6 @@ public interface SalesService {
 
 	public ResponseEntity<ResponseStructure<Sales>> update(int id,String staffid,Sales sales);
 
-	public ResponseEntity<ResponseStructure<String>> delete(int id);
+	public ResponseEntity<ResponseStructure<String>> delete( int id);
 
 }

@@ -59,18 +59,14 @@ public class SalesController {
 	}
 
 	@GetMapping("sales/{id}")
+	@ApiOperation("To Get sales by ID")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Sales Founds"),
+			@ApiResponse(code = 404, message = "Class not found"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
 	public ResponseEntity<ResponseStructure<Sales>> getById(@PathVariable int id) {
 		return service.getById(id);
 	}
 
-	@DeleteMapping("sales")
-	@ApiOperation("To delete the stock")
-	@ApiResponses({ @ApiResponse(code = 200, message = "Sales deleted"),
-			@ApiResponse(code = 404, message = "Class not found"),
-			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<String>> delete(@RequestParam int id) {
-		return service.delete(id);
-	}
 
 	@PutMapping("sales/{id}/userid/{userid}")
 	@ApiOperation("To Update sales")
