@@ -99,38 +99,46 @@ public class SupplierServiceImpl implements SupplierService {
 
 	@Override
 	public ResponseEntity<ResponseStructure<SupplierDto>> update(int id, String userid, SupplierDto supplierDto) {
-		Owner owner = ownerDao.getOwnerById(userid);
-		SupplierDto existing = dao.getbyid(id);
-		Staff staff = null;
-		String staffId=existing.getStaff().getId();
-		ResponseStructure<SupplierDto> structuer = new ResponseStructure<SupplierDto>();
 		ResponseEntity<ResponseStructure<SupplierDto>> entity = null;
-		if (owner == null) {
+		Staff staff = null;
+		SupplierDto supplier = dao.getbyid(id);
+		Owner owner = ownerDao.getOwnerById(userid);
+		if (supplier != null && owner != null && owner.getId().equals(supplier.getOwner().getId())) {
+			supplier.setOwner(owner);
+			supplier.setStaff(staff);
+			ResponseStructure<SupplierDto> responseStructure = new ResponseStructure<SupplierDto>();
+			responseStructure.setStatus(HttpStatus.OK.value());
+			responseStructure.setMessage("success");
+			responseStructure.setData(dao.update(id, supplier));
+			entity = new ResponseEntity<ResponseStructure<SupplierDto>>(responseStructure, HttpStatus.OK);
+		} else if (owner == null) {
 			staff = staffDao.getStaffById(userid);
+			System.out.println(supplier);
+			if (supplier != null && staff.getOwner().getId().equals(supplier.getOwner().getId())) {
+				supplier.setStaff(staff);
+				owner = staff.getOwner();
+				supplier.setOwner(owner);
+				ResponseStructure<SupplierDto> responseStructure = new ResponseStructure<SupplierDto>();
+				responseStructure.setStatus(HttpStatus.OK.value());
+				responseStructure.setMessage("success");
+				responseStructure.setData(dao.update(id, supplier));
+				entity = new ResponseEntity<ResponseStructure<SupplierDto>>(responseStructure, HttpStatus.OK);
+			} else {
+				ResponseStructure<SupplierDto> responseStructure = new ResponseStructure<SupplierDto>();
+				responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+				responseStructure.setMessage("not found");
+				responseStructure.setData(null);
+				entity = new ResponseEntity<ResponseStructure<SupplierDto>>(responseStructure, HttpStatus.NOT_FOUND);
+
+			}
+		} else {
+			ResponseStructure<SupplierDto> responseStructure = new ResponseStructure<SupplierDto>();
+			responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMessage("not found");
+			responseStructure.setData(null);
+			entity = new ResponseEntity<ResponseStructure<SupplierDto>>(responseStructure, HttpStatus.NOT_FOUND);
+
 		}
-		if (existing != null&&staffId.equalsIgnoreCase(userid)) {
-			supplierDto.setStaff(staff);
-			supplierDto.setOwner(owner);
-			structuer.setStatus(HttpStatus.OK.value());
-			structuer.setMessage("successfull");
-			structuer.setData(dao.update(id, supplierDto));
-			entity = new ResponseEntity<ResponseStructure<SupplierDto>>(structuer, HttpStatus.OK);
-		}else if(existing != null&&owner.getId().equalsIgnoreCase(userid)){
-			supplierDto.setStaff(staff);
-			supplierDto.setOwner(owner);
-			structuer.setStatus(HttpStatus.OK.value());
-			structuer.setMessage("successfull");
-			structuer.setData(dao.update(id, supplierDto));
-			entity = new ResponseEntity<ResponseStructure<SupplierDto>>(structuer, HttpStatus.OK);
-		}else {
-			supplierDto.setStaff(staff);
-			supplierDto.setOwner(owner);
-			structuer.setStatus(HttpStatus.NOT_FOUND.value());
-			structuer.setMessage("your not"+id+ "allowed to update");
-			structuer.setData(dao.update(id, supplierDto));
-			entity = new ResponseEntity<ResponseStructure<SupplierDto>>(structuer, HttpStatus.NOT_FOUND);
-		}
-		
 		return entity;
 
 	}
