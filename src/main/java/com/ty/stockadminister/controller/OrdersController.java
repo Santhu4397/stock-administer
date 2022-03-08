@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ty.stockadminister.dto.Orders;
+import com.ty.stockadminister.dto.OrdersRecievied;
 import com.ty.stockadminister.service.OrdersService;
 import com.ty.stockadminister.util.ResponseStructure;
 
@@ -32,7 +32,7 @@ public class OrdersController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Order Saved"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Orders>> save(@RequestBody Orders orders, @PathVariable String uid,
+	public ResponseEntity<ResponseStructure<OrdersRecievied>> save(@RequestBody OrdersRecievied orders, @PathVariable String uid,
 			@PathVariable int sid) {
 		return service.save(orders, uid, sid);
 	}
@@ -42,7 +42,7 @@ public class OrdersController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Orders Found"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<List<Orders>>> getAll() { 
+	public ResponseEntity<ResponseStructure<List<OrdersRecievied>>> getAll() { 
 		return service.getAll();
 
 	}
@@ -53,7 +53,7 @@ public class OrdersController {
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
 
-	public ResponseEntity<ResponseStructure<Orders>> getByOrderId(@PathVariable int orderId) {
+	public ResponseEntity<ResponseStructure<OrdersRecievied>> getByOrderId(@PathVariable int orderId) {
 		System.out.println(orderId);
 		return service.getByOrderId(orderId);
 	}
@@ -72,13 +72,13 @@ public class OrdersController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "sales orders"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<Orders>> update(@ApiParam("Update for orders") @PathVariable String uid,
-			@PathVariable int id, @RequestBody Orders orders) {
+	public ResponseEntity<ResponseStructure<OrdersRecievied>> update(@ApiParam("Update for orders") @PathVariable String uid,
+			@PathVariable int id, @RequestBody OrdersRecievied orders) {
 		return service.update(uid,id, orders);
 	}
 	
 	@GetMapping("ordersobject")
-	public Orders imTheStockObject() {
-		return new Orders();
+	public OrdersRecievied imTheStockObject() {
+		return new OrdersRecievied();
 	}
 }

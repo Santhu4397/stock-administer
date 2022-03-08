@@ -2,16 +2,16 @@ package com.ty.stockadminister.dao;
 
 import java.util.List;
 
-import com.ty.stockadminister.dto.Orders;
+import com.ty.stockadminister.dto.OrdersRecievied;
 
 public interface OrdersDao {
-	public Orders save(Orders orders);
+	public OrdersRecievied save(OrdersRecievied orders);
 
-	public Orders getByOrderId(int orderId);
+	public OrdersRecievied getByOrderId(int orderId);
 
-	public List<Orders> getAll();
+	public List<OrdersRecievied> getAll();
 
-	public Orders update(int orderId, Orders orders);
+	public OrdersRecievied update(int orderId, OrdersRecievied orders);
 
 	public boolean delete(int orderId);
 }

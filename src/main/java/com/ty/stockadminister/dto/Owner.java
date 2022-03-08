@@ -3,6 +3,7 @@ package com.ty.stockadminister.dto;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,11 +19,12 @@ import org.hibernate.validator.constraints.UniqueElements;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ty.stockadminister.validation.PhoneNumber;
 
-import io.swagger.annotations.ApiKeyAuthDefinition;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
+import springfox.documentation.annotations.ApiIgnore;
 
 @Entity
+
 public class Owner {
 
 	@Id
@@ -34,7 +36,7 @@ public class Owner {
 	private String id;
 	private String name;
 	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id")
-	@UniqueElements(message = "email is exsisting already pls  ")
+	@Column(unique = true)
 	private String email;
 	@UniqueElements
 	@NotNull(message = "Password should not be null")
@@ -46,22 +48,25 @@ public class Owner {
 	private String department;
 	@NotNull(message = "Address should not be null")
 	private String address;
-	@ApiParam(hidden = true)
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+
 	private List<Staff> staffs;
 	@JsonIgnore
 	@OneToMany(mappedBy = "owner1")
+
 	private List<Stock> stocks;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "owner2")
-	private List<Orders> orders;
+	private List<OrdersRecievied> orders;
 
-	public List<Orders> getOrders() {
+	public List<OrdersRecievied> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(List<Orders> orders) {
+	public void setOrders(List<OrdersRecievied> orders) {
 		this.orders = orders;
 	}
 
@@ -168,7 +173,7 @@ public class Owner {
 			@NotNull(message = "Password should not be null") String password, Long phone,
 			@NotNull(message = "Company name should not be null") String comapnyName, String department,
 			@NotNull(message = "Address should not be null") String address, List<Staff> staffs, List<Stock> stocks,
-			List<Orders> orders) {
+			List<OrdersRecievied> orders) {
 		super();
 		this.id = id;
 		this.name = name;

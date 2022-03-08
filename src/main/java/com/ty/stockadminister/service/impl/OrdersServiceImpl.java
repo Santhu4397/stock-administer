@@ -11,7 +11,7 @@ import com.ty.stockadminister.dao.OrdersDao;
 import com.ty.stockadminister.dao.OwnerDao;
 import com.ty.stockadminister.dao.StaffDao;
 import com.ty.stockadminister.dao.SupplierDao;
-import com.ty.stockadminister.dto.Orders;
+import com.ty.stockadminister.dto.OrdersRecievied;
 import com.ty.stockadminister.dto.Owner;
 import com.ty.stockadminister.dto.Staff;
 import com.ty.stockadminister.dto.SupplierDto;
@@ -32,13 +32,13 @@ public class OrdersServiceImpl implements OrdersService {
 	SupplierDao supplierDao;
 
 	@Override
-	public ResponseEntity<ResponseStructure<Orders>> save(Orders orders, String uid, int sid) {
+	public ResponseEntity<ResponseStructure<OrdersRecievied>> save(OrdersRecievied orders, String uid, int sid) {
 		Owner owner = ownerDao.getOwnerById(uid);
 
 		Staff staff = null;
 		SupplierDto supplier = supplierDao.getbyid(sid);
-		ResponseStructure<Orders> structuer = new ResponseStructure<Orders>();
-		ResponseEntity<ResponseStructure<Orders>> responseEntity;
+		ResponseStructure<OrdersRecievied> structuer = new ResponseStructure<OrdersRecievied>();
+		ResponseEntity<ResponseStructure<OrdersRecievied>> responseEntity;
 		if (owner == null) {
 			staff = staffDao.getStaffById(uid);
 
@@ -50,36 +50,36 @@ public class OrdersServiceImpl implements OrdersService {
 			structuer.setStatus(HttpStatus.OK.value());
 			structuer.setMessage("successfull");
 			structuer.setData(dao.save(orders));
-			responseEntity = new ResponseEntity<ResponseStructure<Orders>>(structuer, HttpStatus.OK);
+			responseEntity = new ResponseEntity<ResponseStructure<OrdersRecievied>>(structuer, HttpStatus.OK);
 			return responseEntity;
 		} else {
 			structuer.setStatus(HttpStatus.NOT_FOUND.value());
 			structuer.setMessage("successfull");
 			structuer.setData(null);
-			responseEntity = new ResponseEntity<ResponseStructure<Orders>>(structuer, HttpStatus.NOT_FOUND);
+			responseEntity = new ResponseEntity<ResponseStructure<OrdersRecievied>>(structuer, HttpStatus.NOT_FOUND);
 			return responseEntity;
 		}
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<List<Orders>>> getAll() {
-		ResponseStructure<List<Orders>> structuer = new ResponseStructure<List<Orders>>();
+	public ResponseEntity<ResponseStructure<List<OrdersRecievied>>> getAll() {
+		ResponseStructure<List<OrdersRecievied>> structuer = new ResponseStructure<List<OrdersRecievied>>();
 		structuer.setStatus(HttpStatus.OK.value());
 		structuer.setMessage("successfull");
 		structuer.setData(dao.getAll());
-		ResponseEntity<ResponseStructure<List<Orders>>> responseEntity = new ResponseEntity<ResponseStructure<List<Orders>>>(
+		ResponseEntity<ResponseStructure<List<OrdersRecievied>>> responseEntity = new ResponseEntity<ResponseStructure<List<OrdersRecievied>>>(
 				structuer, HttpStatus.OK);
 		return responseEntity;
 
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Orders>> update(String uid,int orderId, Orders orders) {
+	public ResponseEntity<ResponseStructure<OrdersRecievied>> update(String uid,int orderId, OrdersRecievied orders) {
 		
 		
 		Owner owner = ownerDao.getOwnerById(uid);
 		Staff staff = null;
-		ResponseStructure<Orders> structuer = new ResponseStructure<Orders>();
+		ResponseStructure<OrdersRecievied> structuer = new ResponseStructure<OrdersRecievied>();
 		if (owner == null) {
 			staff = staffDao.getStaffById(uid);
 
@@ -102,15 +102,15 @@ public class OrdersServiceImpl implements OrdersService {
 //		}
 		System.out.println(owner);
 		System.out.println(staff);
-		ResponseEntity<ResponseStructure<Orders>> entity = null;
-		Orders existing = dao.update(orderId, orders);
+		ResponseEntity<ResponseStructure<OrdersRecievied>> entity = null;
+		OrdersRecievied existing = dao.update(orderId, orders);
 		if (existing != null) {
 			orders.setStaff1(staff);
 			orders.setOwner2(owner);
 			structuer.setStatus(HttpStatus.OK.value());
 			structuer.setMessage("successfull");
 			structuer.setData(dao.update(orderId, orders));
-			entity = new ResponseEntity<ResponseStructure<Orders>>(structuer, HttpStatus.OK);
+			entity = new ResponseEntity<ResponseStructure<OrdersRecievied>>(structuer, HttpStatus.OK);
 		}
 		return entity;
 	}
@@ -134,21 +134,21 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Orders>> getByOrderId(int orderId) {
-		ResponseStructure<Orders> structuer = new ResponseStructure<Orders>();
-		ResponseEntity<ResponseStructure<Orders>> responseEntity;
-		Orders orders = dao.getByOrderId(orderId);
+	public ResponseEntity<ResponseStructure<OrdersRecievied>> getByOrderId(int orderId) {
+		ResponseStructure<OrdersRecievied> structuer = new ResponseStructure<OrdersRecievied>();
+		ResponseEntity<ResponseStructure<OrdersRecievied>> responseEntity;
+		OrdersRecievied orders = dao.getByOrderId(orderId);
 		if (orders != null) {
 			structuer.setStatus(HttpStatus.OK.value());
 			structuer.setMessage("successfull");
 			structuer.setData(dao.getByOrderId(orderId));
-			responseEntity = new ResponseEntity<ResponseStructure<Orders>>(structuer, HttpStatus.OK);
+			responseEntity = new ResponseEntity<ResponseStructure<OrdersRecievied>>(structuer, HttpStatus.OK);
 
 		} else {
 			structuer.setStatus(HttpStatus.NOT_FOUND.value());
 			structuer.setMessage("Order id :" + orderId + " NOTFOUND");
 			structuer.setData(null);
-			responseEntity = new ResponseEntity<ResponseStructure<Orders>>(structuer, HttpStatus.NOT_FOUND);
+			responseEntity = new ResponseEntity<ResponseStructure<OrdersRecievied>>(structuer, HttpStatus.NOT_FOUND);
 		}
 		return responseEntity;
 	}

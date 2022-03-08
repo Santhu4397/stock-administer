@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Orders {
+public class OrdersRecievied {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int orderId;
@@ -107,7 +107,7 @@ public class Orders {
 		this.totalOrderRecived = totalOrderRecived;
 	}
 
-	public Orders(int orderId, @NotNull(message = "Product name should not be null") String productName, int qtyOrder,
+	public OrdersRecievied(int orderId, @NotNull(message = "Product name should not be null") String productName, int qtyOrder,
 			double totalOrderCost, double qtyRecived, double totalOrderRecived, SupplierDto dto, Owner owner2,
 			Staff staff1) {
 		super();
@@ -122,7 +122,7 @@ public class Orders {
 		this.staff1 = staff1;
 	}
 
-	public Orders() {
+	public OrdersRecievied() {
 		super();
 		
 	}
