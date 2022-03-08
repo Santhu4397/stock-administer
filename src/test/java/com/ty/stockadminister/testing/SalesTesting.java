@@ -65,16 +65,6 @@ public class SalesTesting {
 	}
 
 	@Test
-	public void deleteSalesTest() {
-
-		boolean bt = true;
-		String respon = "User deleted";
-		when(dao.delete(1)).thenReturn(bt);
-		assertEquals(respon, controller.delete(1).getBody().getData());
-
-	}
-
-	@Test
 	public void getByNameOfSales() {
 
 		when(dao.getByName("mobail")).thenReturn(sales);

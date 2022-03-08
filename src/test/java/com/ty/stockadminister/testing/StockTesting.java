@@ -46,7 +46,7 @@ public class StockTesting {
 
 	}
 
-	@Test
+	@org.junit.Test
 	public void updateStock() {
 
 		when(dao.updateStock(1, stock)).thenReturn(stock);
@@ -82,13 +82,13 @@ public class StockTesting {
 		assertEquals(3, controller.getByProductReorder_Level(1).getBody().getData().size());
 	}
 
-	@Test
+	@org.junit.Test
 	public void deleteStockTest() {
 
 		boolean bt = true;
 		String respon = "deleted";
 		when(dao.deleteStock(1)).thenReturn(bt);
-		assertEquals(respon, controller.deleteStock(1).getBody().getData());
+		assertEquals(respon, controller.deleteStock(1, respon).getBody().getData());
 
 	}
 }
