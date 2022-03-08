@@ -52,7 +52,6 @@ public class OrdersController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Order found"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-
 	public ResponseEntity<ResponseStructure<Orders>> getByOrderId(@PathVariable int orderId) {
 		System.out.println(orderId);
 		return service.getByOrderId(orderId);
