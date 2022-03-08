@@ -27,8 +27,8 @@ public class StaffTesting {
 	private StaffDao dao;
 
 	Staff staff = new Staff("1", "deepak", "deepak@gamil.com", "1234", 15697465l);
-	Staff staff1 = new Staff("2", "sagara", "deepak@gamil.com", "1234", 15697465l);
-	Staff staff2 = new Staff("3", "abi", "deepak@gamil.com", "1234", 15697465l);
+	Staff staff1 =new Staff("2", "sagara", "deepak@gamil.com", "1234", 15697465l);
+	Staff staff2 =new Staff("3", "abi",    "deepak@gamil.com", "1234", 15697465l);
 
 	@Test
 	public void getstaff() {
