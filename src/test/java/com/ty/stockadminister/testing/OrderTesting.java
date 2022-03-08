@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ty.stockadminister.controller.OrdersController;
 import com.ty.stockadminister.dao.OrdersDao;
-import com.ty.stockadminister.dto.Orders;
+import com.ty.stockadminister.dto.OrdersRecievied;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -25,9 +25,9 @@ public class OrderTesting {
 	@MockBean
 	private OrdersDao dao;
 
-	Orders orders = new Orders(1, "mobai", 3, 50000.0, 5, 0, null, null, null);
-	Orders orders1 = new Orders(2, "mobai1", 3, 50000.0, 5, 0, null, null, null);
-	Orders orders2 = new Orders(3, "mobai2", 3, 50000.0, 5, 0, null, null, null);
+	OrdersRecievied orders = new OrdersRecievied(1, "mobai", 3, 50000.0, 5, 0, null, null, null);
+	OrdersRecievied orders1 = new OrdersRecievied(2, "mobai1", 3, 50000.0, 5, 0, null, null, null);
+	OrdersRecievied orders2 = new OrdersRecievied(3, "mobai2", 3, 50000.0, 5, 0, null, null, null);
 
 	@Test
 	public void saveOrders() {
@@ -46,7 +46,7 @@ public class OrderTesting {
 
 	@Test
 	public void getAllOrders() {
-		List<Orders> listSales = new ArrayList<Orders>();
+		List<OrdersRecievied> listSales = new ArrayList<OrdersRecievied>();
 		listSales.add(orders);
 		listSales.add(orders1);
 		listSales.add(orders2);
