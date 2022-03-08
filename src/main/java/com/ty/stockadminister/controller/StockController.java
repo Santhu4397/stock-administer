@@ -68,13 +68,13 @@ public class StockController {
 		return stockservice.getStockById(id);
 	}
 
-	@DeleteMapping("stock")
+	@DeleteMapping("stock/ownerId/{ownerId}")
 	@ApiOperation("To delete the stock")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Stock deleted"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<String>> deleteStock(@RequestParam int id) {
-		return stockservice.deleteStock(id);
+	public ResponseEntity<ResponseStructure<String>> deleteStock(@RequestParam int id,@PathVariable String ownerId) {
+		return stockservice.deleteStock(id,ownerId);
 	}
 
 	@GetMapping("stock/product/{productname}")
