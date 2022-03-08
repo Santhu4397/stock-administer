@@ -27,8 +27,8 @@ public class StaffTesting {
 	private StaffDao dao;
 
 	Staff staff = new Staff("1", "deepak", "deepak@gamil.com", "1234", 15697465l);
-	Staff staff1 = new Staff("2", "sagara", "deepak@gamil.com", "1234", 15697465l);
-	Staff staff2 = new Staff("3", "abi", "deepak@gamil.com", "1234", 15697465l);
+	Staff staff1 =new Staff("2", "sagara", "deepak@gamil.com", "1234", 15697465l);
+	Staff staff2 =new Staff("3", "abi",    "deepak@gamil.com", "1234", 15697465l);
 
 	@Test
 	public void getstaff() {
@@ -53,18 +53,6 @@ public class StaffTesting {
 
 		when(dao.getStaffById("1")).thenReturn(staff);
 		assertEquals(staff, controller.getStaffById("1").getBody().getData());
-
-	}
-
-	
-
-	@org.junit.jupiter.api.Test
-	public void deleteownerTest() {
-
-		boolean bt = true;
-		String respon = "Staff deleted";
-		when(dao.deleteStaff("1")).thenReturn(bt);
-		assertEquals(respon, controller.deleteStaff("1").getBody().getData());
 
 	}
 
