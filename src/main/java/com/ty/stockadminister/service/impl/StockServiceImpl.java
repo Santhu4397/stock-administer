@@ -36,12 +36,15 @@ public class StockServiceImpl implements Stockservice {
 		Staff staff = null;
 		if (owner == null) {
 			staff = staffDao.getStaffById(userId);
+			stock.setStaff(staff);
+			owner = staff.getOwner();
+			stock.setOwner1(owner);
 		}
 		SupplierDto supplierDto = supplierDao.getbyid(supplierId);
 		if ((owner != null) || (staff != null) && (supplierDto != null)) {
-			stock.setOwner1(owner);
 			stock.setStaff(staff);
-			stock.setTotal_Cost(stock.getQuantity()*stock.getUnit_Price());
+			stock.setOwner1(owner);
+			stock.setTotal_Cost(stock.getQuantity() * stock.getUnit_Price());
 			stock.setSupplier(supplierDto);
 			ResponseStructure<Stock> structure = new ResponseStructure<Stock>();
 			structure.setStatus(HttpStatus.OK.value());
@@ -76,33 +79,48 @@ public class StockServiceImpl implements Stockservice {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Stock>> updateStock(int id, Stock stock,String userId) {
-		// TODO Auto-generated method stub
-//		Stock stock2=dao.getStockById(id);
-		Staff staff=null;
-		Owner owner=ownerDao.getOwnerById(userId);
-	    stock.setOwner1(owner);
-		if(owner==null) {
-			staff=staffDao.getStaffById(userId);
+	public ResponseEntity<ResponseStructure<Stock>> updateStock(int id, Stock stock, String userId) {
+		ResponseEntity<ResponseStructure<Stock>> entity = null;
+		Staff staff = null;
+		Stock stock2 = dao.getStockById(id);
+		Owner owner = ownerDao.getOwnerById(userId);
+		if (stock2 != null && owner != null && owner.getId().equals(stock2.getOwner1().getId())) {
+			stock.setOwner1(owner);
 			stock.setStaff(staff);
-		}
-		if(owner!=null || staff!=null ) {
 			ResponseStructure<Stock> responseStructure = new ResponseStructure<Stock>();
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("success");
 			responseStructure.setData(dao.updateStock(id, stock));
-			ResponseEntity<ResponseStructure<Stock>> entity = new ResponseEntity<ResponseStructure<Stock>>(
-					responseStructure, HttpStatus.OK);
-			return entity;
+			entity = new ResponseEntity<ResponseStructure<Stock>>(responseStructure, HttpStatus.OK);
+		} else if (owner == null) {
+			staff = staffDao.getStaffById(userId);
+			System.out.println(stock2);
+			if (stock2 != null && staff.getOwner().getId().equals(stock2.getOwner1().getId())) {
+				stock.setStaff(staff);
+				owner = staff.getOwner();
+				stock.setOwner1(owner);
+				ResponseStructure<Stock> responseStructure = new ResponseStructure<Stock>();
+				responseStructure.setStatus(HttpStatus.OK.value());
+				responseStructure.setMessage("success");
+				responseStructure.setData(dao.updateStock(id, stock));
+				entity = new ResponseEntity<ResponseStructure<Stock>>(responseStructure, HttpStatus.OK);
+			} else {
+				ResponseStructure<Stock> responseStructure = new ResponseStructure<Stock>();
+				responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+				responseStructure.setMessage("not found");
+				responseStructure.setData(null);
+				entity = new ResponseEntity<ResponseStructure<Stock>>(responseStructure, HttpStatus.NOT_FOUND);
+
+			}
 		} else {
 			ResponseStructure<Stock> responseStructure = new ResponseStructure<Stock>();
 			responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
 			responseStructure.setMessage("not found");
 			responseStructure.setData(null);
-			ResponseEntity<ResponseStructure<Stock>> entity = new ResponseEntity<ResponseStructure<Stock>>(
-					responseStructure, HttpStatus.NOT_FOUND);
-			return entity;
+			entity = new ResponseEntity<ResponseStructure<Stock>>(responseStructure, HttpStatus.NOT_FOUND);
+
 		}
+		return entity;
 
 	}
 
@@ -131,11 +149,12 @@ public class StockServiceImpl implements Stockservice {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<String>> deleteStock(int id) {
+	public ResponseEntity<ResponseStructure<String>> deleteStock(int id, String oid) {
 		// TODO Auto-generated method stub
 		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
 		ResponseEntity<ResponseStructure<String>> entity = null;
-		if (dao.deleteStock(id)) {
+		Stock stock = dao.getStockById(id);
+		if (oid.equals(stock.getOwner1().getId()) && dao.deleteStock(id)) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("success");
 			responseStructure.setData("deleted");
