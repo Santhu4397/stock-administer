@@ -60,13 +60,13 @@ public class Owner {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "owner2")
-	private List<OrdersRecievied> orders;
+	private List<Orders> orders;
 
-	public List<OrdersRecievied> getOrders() {
+	public List<Orders> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(List<OrdersRecievied> orders) {
+	public void setOrders(List<Orders> orders) {
 		this.orders = orders;
 	}
 
@@ -173,7 +173,7 @@ public class Owner {
 			@NotNull(message = "Password should not be null") String password, Long phone,
 			@NotNull(message = "Company name should not be null") String comapnyName, String department,
 			@NotNull(message = "Address should not be null") String address, List<Staff> staffs, List<Stock> stocks,
-			List<OrdersRecievied> orders) {
+			List<Orders> orders) {
 		super();
 		this.id = id;
 		this.name = name;

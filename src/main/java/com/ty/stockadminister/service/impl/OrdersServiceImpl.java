@@ -11,14 +11,12 @@ import com.ty.stockadminister.dao.OrdersDao;
 import com.ty.stockadminister.dao.OwnerDao;
 import com.ty.stockadminister.dao.StaffDao;
 import com.ty.stockadminister.dao.SupplierDao;
-import com.ty.stockadminister.dto.OrdersRecievied;
+import com.ty.stockadminister.dto.Orders;
 import com.ty.stockadminister.dto.Owner;
 import com.ty.stockadminister.dto.Staff;
 import com.ty.stockadminister.dto.SupplierDto;
 import com.ty.stockadminister.service.OrdersService;
 import com.ty.stockadminister.util.ResponseStructure;
-
-import ch.qos.logback.core.joran.spi.NoAutoStart;
 
 @Service
 public class OrdersServiceImpl implements OrdersService {
@@ -32,13 +30,13 @@ public class OrdersServiceImpl implements OrdersService {
 	SupplierDao supplierDao;
 
 	@Override
-	public ResponseEntity<ResponseStructure<OrdersRecievied>> save(OrdersRecievied orders, String uid, int sid) {
+	public ResponseEntity<ResponseStructure<Orders>> save(Orders orders, String uid, int sid) {
 		Owner owner = ownerDao.getOwnerById(uid);
 
 		Staff staff = null;
 		SupplierDto supplier = supplierDao.getbyid(sid);
-		ResponseStructure<OrdersRecievied> structuer = new ResponseStructure<OrdersRecievied>();
-		ResponseEntity<ResponseStructure<OrdersRecievied>> responseEntity;
+		ResponseStructure<Orders> structuer = new ResponseStructure<Orders>();
+		ResponseEntity<ResponseStructure<Orders>> responseEntity;
 		if (owner == null) {
 			staff = staffDao.getStaffById(uid);
 			owner = staff.getOwner();
@@ -51,62 +49,103 @@ public class OrdersServiceImpl implements OrdersService {
 			structuer.setStatus(HttpStatus.OK.value());
 			structuer.setMessage("successfull");
 			structuer.setData(dao.save(orders));
-			responseEntity = new ResponseEntity<ResponseStructure<OrdersRecievied>>(structuer, HttpStatus.OK);
+			responseEntity = new ResponseEntity<ResponseStructure<Orders>>(structuer, HttpStatus.OK);
 			return responseEntity;
 		} else {
 			structuer.setStatus(HttpStatus.NOT_FOUND.value());
 			structuer.setMessage("successfull");
 			structuer.setData(null);
-			responseEntity = new ResponseEntity<ResponseStructure<OrdersRecievied>>(structuer, HttpStatus.NOT_FOUND);
+			responseEntity = new ResponseEntity<ResponseStructure<Orders>>(structuer, HttpStatus.NOT_FOUND);
 			return responseEntity;
 		}
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<List<OrdersRecievied>>> getAll() {
-		ResponseStructure<List<OrdersRecievied>> structuer = new ResponseStructure<List<OrdersRecievied>>();
+	public ResponseEntity<ResponseStructure<List<Orders>>> getAll() {
+		ResponseStructure<List<Orders>> structuer = new ResponseStructure<List<Orders>>();
 		structuer.setStatus(HttpStatus.OK.value());
 		structuer.setMessage("successfull");
 		structuer.setData(dao.getAll());
-		ResponseEntity<ResponseStructure<List<OrdersRecievied>>> responseEntity = new ResponseEntity<ResponseStructure<List<OrdersRecievied>>>(
+		ResponseEntity<ResponseStructure<List<Orders>>> responseEntity = new ResponseEntity<ResponseStructure<List<Orders>>>(
 				structuer, HttpStatus.OK);
 		return responseEntity;
 
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<OrdersRecievied>> update(String uid, int orderId, OrdersRecievied orders) {
-
-		ResponseEntity<ResponseStructure<OrdersRecievied>> entity = null;
-		ResponseStructure<OrdersRecievied> structuer = new ResponseStructure<OrdersRecievied>();
-		OrdersRecievied order = dao.getByOrderId(orderId);
-		Owner owner = order.getOwner2();
-		Staff staff = order.getStaff1();
-
-		if (staff.getOwner().getId().equals(order.getOwner2().getId())) {
-			if (uid.equals(staff.getId()) || uid.equals(owner.getId()) && order != null) {
-				orders.setOwner2(owner);
+	public ResponseEntity<ResponseStructure<Orders>> update(String uid, int orderId, Orders orders) {
+		ResponseEntity<ResponseStructure<Orders>> entity = null;
+		Staff staff = null;
+		Orders orders2 = dao.getByOrderId(orderId);
+		Owner owner = ownerDao.getOwnerById(uid);
+		if (orders2 != null && owner != null && owner.getId().equals(orders2.getOwner2().getId())) {
+			orders.setOwner2(owner);
+			orders.setStaff1(staff);
+			ResponseStructure<Orders> responseStructure = new ResponseStructure<Orders>();
+			responseStructure.setStatus(HttpStatus.OK.value());
+			responseStructure.setMessage("success");
+			responseStructure.setData(dao.update(orderId, orders));
+			entity = new ResponseEntity<ResponseStructure<Orders>>(responseStructure, HttpStatus.OK);
+		} else if (owner == null) {
+			staff = staffDao.getStaffById(uid);
+			System.out.println(orders2);
+			if (orders2 != null && staff.getOwner().getId().equals(orders2.getOwner2().getId())) {
 				orders.setStaff1(staff);
-				structuer.setStatus(HttpStatus.OK.value());
-				structuer.setMessage("successfull");
-				structuer.setData(dao.update(orderId, orders));
-				entity = new ResponseEntity<ResponseStructure<OrdersRecievied>>(structuer, HttpStatus.OK);
-				return entity;
+				owner = staff.getOwner();
+				orders.setOwner2(owner);
+				ResponseStructure<Orders> responseStructure = new ResponseStructure<Orders>();
+				responseStructure.setStatus(HttpStatus.OK.value());
+				responseStructure.setMessage("success");
+				responseStructure.setData(dao.update(orderId, orders));
+				entity = new ResponseEntity<ResponseStructure<Orders>>(responseStructure, HttpStatus.OK);
 			} else {
-				structuer.setStatus(HttpStatus.NOT_FOUND.value());
-				structuer.setMessage("Order id :" + uid + " NOTFOUND");
-				structuer.setData(null);
-				entity = new ResponseEntity<ResponseStructure<OrdersRecievied>>(structuer, HttpStatus.NOT_FOUND);
-				return entity;
+				ResponseStructure<Orders> responseStructure = new ResponseStructure<Orders>();
+				responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+				responseStructure.setMessage("not found");
+				responseStructure.setData(null);
+				entity = new ResponseEntity<ResponseStructure<Orders>>(responseStructure, HttpStatus.NOT_FOUND);
+
 			}
 		} else {
-			structuer.setStatus(HttpStatus.NOT_FOUND.value());
-			structuer.setMessage("Order id :" + uid + " NOTFOUND");
-			structuer.setData(null);
-			entity = new ResponseEntity<ResponseStructure<OrdersRecievied>>(structuer, HttpStatus.NOT_FOUND);
-			return entity;
+			ResponseStructure<Orders> responseStructure = new ResponseStructure<Orders>();
+			responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMessage("not found");
+			responseStructure.setData(null);
+			entity = new ResponseEntity<ResponseStructure<Orders>>(responseStructure, HttpStatus.NOT_FOUND);
 
 		}
+		return entity;
+
+//		ResponseEntity<ResponseStructure<Orders>> entity = null;
+//		ResponseStructure<Orders> structuer = new ResponseStructure<Orders>();
+//		Orders order = dao.getByOrderId(orderId);
+//		Owner owner = order.getOwner2();
+//		Staff staff = order.getStaff1();
+//		List<Staff> staffs = owner.getList();
+//		for (Staff staff2 : staffs) {
+//			if (staff2.getId().equals(uid)) {
+//				System.out.println("-----------------");
+//				System.out.println(staff2);
+//				// if (uid.equals(staff.getId()) || uid.equals(owner.getId()) && order != null)
+//				// {
+//				orders.setOwner2(owner);
+//				orders.setStaff1(staff);
+//				structuer.setStatus(HttpStatus.OK.value());
+//				structuer.setMessage("successfull");
+//				structuer.setData(dao.update(orderId, orders));
+//				entity = new ResponseEntity<ResponseStructure<Orders>>(structuer, HttpStatus.OK);
+//				return entity;
+//
+//			} else {
+//				structuer.setStatus(HttpStatus.NOT_FOUND.value());
+//				structuer.setMessage("Order id :" + uid + " NOTFOUND");
+//				structuer.setData(null);
+//				entity = new ResponseEntity<ResponseStructure<Orders>>(structuer, HttpStatus.NOT_FOUND);
+//				return entity;
+//			}
+//		}
+//		return entity;
+
 	}
 
 	@Override
@@ -128,21 +167,21 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<OrdersRecievied>> getByOrderId(int orderId) {
-		ResponseStructure<OrdersRecievied> structuer = new ResponseStructure<OrdersRecievied>();
-		ResponseEntity<ResponseStructure<OrdersRecievied>> responseEntity;
-		OrdersRecievied orders = dao.getByOrderId(orderId);
+	public ResponseEntity<ResponseStructure<Orders>> getByOrderId(int orderId) {
+		ResponseStructure<Orders> structuer = new ResponseStructure<Orders>();
+		ResponseEntity<ResponseStructure<Orders>> responseEntity;
+		Orders orders = dao.getByOrderId(orderId);
 		if (orders != null) {
 			structuer.setStatus(HttpStatus.OK.value());
 			structuer.setMessage("successfull");
 			structuer.setData(dao.getByOrderId(orderId));
-			responseEntity = new ResponseEntity<ResponseStructure<OrdersRecievied>>(structuer, HttpStatus.OK);
+			responseEntity = new ResponseEntity<ResponseStructure<Orders>>(structuer, HttpStatus.OK);
 
 		} else {
 			structuer.setStatus(HttpStatus.NOT_FOUND.value());
 			structuer.setMessage("Order id :" + orderId + " NOTFOUND");
 			structuer.setData(null);
-			responseEntity = new ResponseEntity<ResponseStructure<OrdersRecievied>>(structuer, HttpStatus.NOT_FOUND);
+			responseEntity = new ResponseEntity<ResponseStructure<Orders>>(structuer, HttpStatus.NOT_FOUND);
 		}
 		return responseEntity;
 	}

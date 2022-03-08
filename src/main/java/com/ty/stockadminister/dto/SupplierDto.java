@@ -33,7 +33,7 @@ public class SupplierDto {
 	@OneToMany(mappedBy = "supplier")
 	private List<Stock> stocks;
 	@OneToMany(mappedBy = "dto")
-	private List<OrdersRecievied> list;
+	private List<Orders> list;
 	@ManyToOne
 	private Staff staff;
 	@ManyToOne
@@ -55,11 +55,11 @@ public class SupplierDto {
 		this.owner = owner;
 	}
 
-	public List<OrdersRecievied> getList() {
+	public List<Orders> getList() {
 		return list;
 	}
 
-	public void setList(List<OrdersRecievied> list) {
+	public void setList(List<Orders> list) {
 		this.list = list;
 	}
 
@@ -113,7 +113,7 @@ public class SupplierDto {
 	 public SupplierDto(int id, @NotNull(message = "name should not be null") String name,
 				@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id") String mailId,
 				long phone, @NotNull(message = "address name should not be null") String address, List<Stock> stocks,
-				List<OrdersRecievied> list) {
+				List<Orders> list) {
 			super();
 			this.id = id;
 			this.name = name;

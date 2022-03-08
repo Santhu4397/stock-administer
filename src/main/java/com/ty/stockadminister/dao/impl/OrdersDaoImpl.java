@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ty.stockadminister.dao.OrdersDao;
-import com.ty.stockadminister.dto.OrdersRecievied;
+import com.ty.stockadminister.dto.Orders;
 import com.ty.stockadminister.repositroy.OrdersRepository;
 
 @Repository
@@ -16,13 +16,13 @@ public class OrdersDaoImpl implements OrdersDao {
 	OrdersRepository repository;
 
 	@Override
-	public OrdersRecievied save(OrdersRecievied orders) {
+	public Orders save(Orders orders) {
 		return repository.save(orders);
 	}
 
 	@Override
-	public OrdersRecievied getByOrderId(int orderId) {
-		Optional<OrdersRecievied> optional = repository.findById(orderId);
+	public Orders getByOrderId(int orderId) {
+		Optional<Orders> optional = repository.findById(orderId);
 		if (optional.isPresent()) {
 			return optional.get();
 		}
@@ -30,13 +30,13 @@ public class OrdersDaoImpl implements OrdersDao {
 	}
 
 	@Override
-	public List<OrdersRecievied> getAll() {
+	public List<Orders> getAll() {
 		return repository.findAll();
 	}
 
 	@Override
-	public OrdersRecievied update(int orderId, OrdersRecievied orders) {
-		OrdersRecievied exsitingproduct = getByOrderId(orderId);
+	public Orders update(int orderId, Orders orders) {
+		Orders exsitingproduct = getByOrderId(orderId);
 		if (exsitingproduct != null) {
 			exsitingproduct.setOwner2(orders.getOwner2());
 			exsitingproduct.setStaff1(orders.getStaff1());
@@ -52,7 +52,7 @@ public class OrdersDaoImpl implements OrdersDao {
 
 	@Override
 	public boolean delete(int orderId) {
-		OrdersRecievied orders = getByOrderId(orderId);
+		Orders orders = getByOrderId(orderId);
 		if (orders != null) {
 			repository.delete(orders);
 			return true;

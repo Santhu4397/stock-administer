@@ -47,13 +47,13 @@ public class Staff {
 	private List<Stock> stock;
 	
 	@OneToMany(mappedBy = "staff1")
-	private List<OrdersRecievied> orders;
+	private List<Orders> orders;
 	
-	public List<OrdersRecievied> getOrders() {
+	public List<Orders> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(List<OrdersRecievied> orders) {
+	public void setOrders(List<Orders> orders) {
 		this.orders = orders;
 	}
 

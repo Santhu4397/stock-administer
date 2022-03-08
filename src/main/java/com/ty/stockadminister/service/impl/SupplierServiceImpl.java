@@ -12,7 +12,7 @@ import com.ty.stockadminister.dao.OwnerDao;
 import com.ty.stockadminister.dao.StaffDao;
 import com.ty.stockadminister.dao.SupplierDao;
 import com.ty.stockadminister.dao.impl.SupplierDaoImpl;
-import com.ty.stockadminister.dto.OrdersRecievied;
+import com.ty.stockadminister.dto.Orders;
 import com.ty.stockadminister.dto.Owner;
 import com.ty.stockadminister.dto.Staff;
 import com.ty.stockadminister.dto.Stock;
