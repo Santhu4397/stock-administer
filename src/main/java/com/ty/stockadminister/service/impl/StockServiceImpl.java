@@ -80,41 +80,39 @@ public class StockServiceImpl implements Stockservice {
 
 	@Override
 	public ResponseEntity<ResponseStructure<Stock>> updateStock(int id, Stock stock, String userId) {
-		// TODO Auto-generated method stub
 		ResponseEntity<ResponseStructure<Stock>> entity = null;
 		Staff staff = null;
 		Stock stock2 = dao.getStockById(id);
 		Owner owner = ownerDao.getOwnerById(userId);
-		 if(stock2!=null && owner!=null && owner.getId().equals(stock2.getOwner1().getId())){
-			 stock.setOwner1(owner);
-			 stock.setStaff(staff);
-			 ResponseStructure<Stock> responseStructure = new ResponseStructure<Stock>();
-			 responseStructure.setStatus(HttpStatus.OK.value());
-			 responseStructure.setMessage("success");
-			 responseStructure.setData(dao.updateStock(id, stock));
-			 entity = new ResponseEntity<ResponseStructure<Stock>>(responseStructure, HttpStatus.OK);
-		 }else if(owner==null) {
-			 staff = staffDao.getStaffById(userId);
-			 System.out.println(stock2);
-			 if(stock2!=null && staff.getOwner().getId().equals(stock2.getOwner1().getId()) ) {
+		if (stock2 != null && owner != null && owner.getId().equals(stock2.getOwner1().getId())) {
+			stock.setOwner1(owner);
+			stock.setStaff(staff);
+			ResponseStructure<Stock> responseStructure = new ResponseStructure<Stock>();
+			responseStructure.setStatus(HttpStatus.OK.value());
+			responseStructure.setMessage("success");
+			responseStructure.setData(dao.updateStock(id, stock));
+			entity = new ResponseEntity<ResponseStructure<Stock>>(responseStructure, HttpStatus.OK);
+		} else if (owner == null) {
+			staff = staffDao.getStaffById(userId);
+			System.out.println(stock2);
+			if (stock2 != null && staff.getOwner().getId().equals(stock2.getOwner1().getId())) {
 				stock.setStaff(staff);
 				owner = staff.getOwner();
 				stock.setOwner1(owner);
-				 ResponseStructure<Stock> responseStructure = new ResponseStructure<Stock>();
-				 responseStructure.setStatus(HttpStatus.OK.value());
-				 responseStructure.setMessage("success");
-				 responseStructure.setData(dao.updateStock(id, stock));
-				 entity = new ResponseEntity<ResponseStructure<Stock>>(responseStructure, HttpStatus.OK);
-			 }else {
-					ResponseStructure<Stock> responseStructure = new ResponseStructure<Stock>();
-					responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
-					responseStructure.setMessage("not found");
-					responseStructure.setData(null);
-					entity = new ResponseEntity<ResponseStructure<Stock>>(responseStructure, HttpStatus.NOT_FOUND);
+				ResponseStructure<Stock> responseStructure = new ResponseStructure<Stock>();
+				responseStructure.setStatus(HttpStatus.OK.value());
+				responseStructure.setMessage("success");
+				responseStructure.setData(dao.updateStock(id, stock));
+				entity = new ResponseEntity<ResponseStructure<Stock>>(responseStructure, HttpStatus.OK);
+			} else {
+				ResponseStructure<Stock> responseStructure = new ResponseStructure<Stock>();
+				responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+				responseStructure.setMessage("not found");
+				responseStructure.setData(null);
+				entity = new ResponseEntity<ResponseStructure<Stock>>(responseStructure, HttpStatus.NOT_FOUND);
 
-				}
-		 }
-		    else {
+			}
+		} else {
 			ResponseStructure<Stock> responseStructure = new ResponseStructure<Stock>();
 			responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
 			responseStructure.setMessage("not found");
