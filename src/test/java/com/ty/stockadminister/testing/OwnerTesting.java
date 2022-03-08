@@ -84,10 +84,10 @@ public class OwnerTesting {
 
 	}
 	
-	@Test 
+	@org.junit.Test
 	public void updateStaffTest() {
 		when(dao2.updateStaff("Adm_00001", staff)).thenReturn(staff);
-		assertEquals(staff, controller.updateStaff("Adm_00001", staff).getBody().getData());
+		assertEquals(staff, controller.updateStaff("Adm_00001", "1", staff).getBody().getData());
 	}
 
 }

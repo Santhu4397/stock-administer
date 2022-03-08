@@ -56,18 +56,6 @@ public class StaffTesting {
 
 	}
 
-	
-
-	@org.junit.jupiter.api.Test
-	public void deleteownerTest() {
-
-		boolean bt = true;
-		String respon = "Staff deleted";
-		when(dao.deleteStaff("1")).thenReturn(bt);
-		assertEquals(respon, controller.deleteStaff("1").getBody().getData());
-
-	}
-
 	@Test
 	public void getByStaffName() {
 		when(dao.getStaffByName("deepak")).thenReturn(staff);
