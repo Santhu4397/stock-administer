@@ -16,7 +16,7 @@ public interface Stockservice {
 
 	public ResponseEntity<ResponseStructure<Stock>> getStockById(int id);
 
-	public ResponseEntity<ResponseStructure<String>> deleteStock(int id);
+	public ResponseEntity<ResponseStructure<String>> deleteStock(int id,String oid);
 
 	public ResponseEntity<ResponseStructure<List<Stock>>> getByProduct_Name(String name);
 
