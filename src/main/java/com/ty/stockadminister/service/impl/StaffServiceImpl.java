@@ -109,14 +109,14 @@ public class StaffServiceImpl implements StaffService {
 		ResponseStructure<String> structure = new ResponseStructure<String>();
 		ResponseEntity<ResponseStructure<String>> responseEntity = null;
 		Staff staff = dao.getStaffById(id);
-		if (uid.equals(staff.getOwner().getId() )) {
-			if(dao.deleteStaff(id)) {
+		if (uid.equals(staff.getOwner().getId() ) &&dao.deleteStaff(id)) {
+//			if() {
 			structure.setStatus(HttpStatus.OK.value());
 			structure.setMessage("Sucess");
 			structure.setData("Staff deleted");
 			responseEntity = new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.OK);
 			}
-		} else {
+		 else {
 			structure.setStatus(HttpStatus.NOT_FOUND.value());
 			structure.setMessage("data not fond");
 			structure.setData("Staff not  deleted");
