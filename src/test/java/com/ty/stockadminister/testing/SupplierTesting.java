@@ -31,17 +31,17 @@ public class SupplierTesting {
 		when(dao.save(dto)).thenReturn(dto);
 		assertEquals(dto, controller.save(dto, "1").getBody().getData());
 	}
-	@Test
+	@org.junit.Test
 	public void updateSupplier() {
 		when(dao.update(1, dto)).thenReturn(dto);
 		assertEquals(dto, controller.update(1, "Adm_00001", dto).getBody().getData());
 	}
-	@Test
+	@org.junit.Test
 	public void deleteSupplier() {
 		Boolean t=true;
 		String resp="deleted";
 		when(dao.delete(1)).thenReturn(t);
-		assertEquals(resp, controller.delete(1).getBody().getData());
+		assertEquals(resp, controller.delete(1, "Adm_00001").getBody().getData());
 	}
 	@Test
 	public void getById() {
