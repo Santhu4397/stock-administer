@@ -119,7 +119,7 @@ public class StaffServiceImpl implements StaffService {
 		} else {
 			structure.setStatus(HttpStatus.NOT_FOUND.value());
 			structure.setMessage("data not fond");
-			structure.setData("Staff not  deleted");
+			structure.setData(uid+" not an authorized person to delete");
 			responseEntity = new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
 		}
 		return responseEntity;

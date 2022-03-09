@@ -162,7 +162,7 @@ public class StockServiceImpl implements Stockservice {
 		} else {
 			responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
 			responseStructure.setMessage("id " + id + " not found");
-			responseStructure.setData("not deleted");
+			responseStructure.setData(oid+" not an authorized person to delete");
 			entity = new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 		}
 		return entity;
