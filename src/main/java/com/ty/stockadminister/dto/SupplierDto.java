@@ -1,7 +1,8 @@
-  package com.ty.stockadminister.dto;
+package com.ty.stockadminister.dto;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class SupplierDto {
 	private int id;
 	@NotNull(message = "name should not be null")
 	private String name;
-	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}",message = "Enter proper email id")
+	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id")
 	private String mailId;
 	@PhoneNumber
 	private long phone;
@@ -37,8 +38,8 @@ public class SupplierDto {
 	@ManyToOne
 	private Staff staff;
 	@ManyToOne
-	private Owner  owner;
-	
+	private Owner owner;
+
 	public Staff getStaff() {
 		return staff;
 	}
@@ -110,23 +111,19 @@ public class SupplierDto {
 	public void setStocks(List<Stock> stocks) {
 		this.stocks = stocks;
 	}
-	 public SupplierDto(int id, @NotNull(message = "name should not be null") String name,
-				@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id") String mailId,
-				long phone, @NotNull(message = "address name should not be null") String address, List<Stock> stocks,
-				List<Orders> list) {
-			super();
-			this.id = id;
-			this.name = name;
-			this.mailId = mailId;
-			this.phone = phone;
-			this.address = address;
-			this.stocks = stocks;
-			this.list = list;
-		}
 
-	
-
-	
-	 
+	public SupplierDto(int id, @NotNull(message = "name should not be null") String name,
+			@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{2,3}", message = "Enter proper email id") String mailId,
+			long phone, @NotNull(message = "address name should not be null") String address, List<Stock> stocks,
+			List<Orders> list) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.mailId = mailId;
+		this.phone = phone;
+		this.address = address;
+		this.stocks = stocks;
+		this.list = list;
+	}
 
 }

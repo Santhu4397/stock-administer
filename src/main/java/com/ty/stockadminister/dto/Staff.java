@@ -46,7 +46,7 @@ public class Staff {
 	@OneToMany(mappedBy = "staff")
 	private List<Stock> stock;
 	
-	@OneToMany(mappedBy = "staff1")
+	@OneToMany(mappedBy = "staff1" )
 	private List<Orders> orders;
 	
 	public List<Orders> getOrders() {

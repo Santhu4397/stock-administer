@@ -61,13 +61,13 @@ public class OrdersController {
 		return service.getByOrderId(orderId);
 	}
 
-	@DeleteMapping("orders")
+	@DeleteMapping("orders/{id}/oid/{oid}")
 	@ApiOperation("To Get order by order Id ")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Order deleted"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<String>> delete(@RequestParam int id) {
-		return service.delete(id);
+	public ResponseEntity<ResponseStructure<String>> delete(@PathVariable int id,@PathVariable String oid) {
+		return service.delete(id,oid);
 	}
 
 	@PutMapping("orders/userid/{uid}/orderid/{id}")
