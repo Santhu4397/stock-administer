@@ -66,7 +66,7 @@ public class OrdersController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Order deleted"),
 			@ApiResponse(code = 404, message = "Class not found"),
 			@ApiResponse(code = 500, message = "Internal Server error") })
-	public ResponseEntity<ResponseStructure<String>> delete(@RequestParam int id,@PathVariable String oid) {
+	public ResponseEntity<ResponseStructure<String>> delete(@PathVariable int id,@PathVariable String oid) {
 		return service.delete(id,oid);
 	}
 
