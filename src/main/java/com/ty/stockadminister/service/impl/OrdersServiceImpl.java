@@ -149,10 +149,11 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<String>> delete(int orderId) {
+	public ResponseEntity<ResponseStructure<String>> delete(int orderId,String oid) {
 		ResponseStructure<String> structuer = new ResponseStructure<String>();
 		ResponseEntity<ResponseStructure<String>> entity;
-		if (dao.delete(orderId)) {
+		Orders orders=dao.getByOrderId(orderId);
+		if (dao.delete(orderId)&&orders.getOwner2().getId().equals(oid)) {
 			structuer.setStatus(HttpStatus.OK.value());
 			structuer.setMessage("successfull");
 			structuer.setData("Order deleted");
@@ -160,7 +161,7 @@ public class OrdersServiceImpl implements OrdersService {
 		} else {
 			structuer.setStatus(HttpStatus.OK.value());
 			structuer.setMessage("ID :" + orderId + " NOTFOUND");
-			structuer.setData("User not deleted");
+			structuer.setData(oid+" not an authorized person to delete");
 			entity = new ResponseEntity<ResponseStructure<String>>(structuer, HttpStatus.NOT_FOUND);
 		}
 		return entity;
