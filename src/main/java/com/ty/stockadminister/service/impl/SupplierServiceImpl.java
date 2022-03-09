@@ -144,9 +144,9 @@ public class SupplierServiceImpl implements SupplierService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<String>> delete(int id) {
+	public ResponseEntity<ResponseStructure<String>> delete(int id,String oid) {
 		SupplierDto dto = dao.getbyid(id);
-		if (dao.delete(id)) {
+		if (dao.delete(id)&&dto.getOwner().getId().equals(oid)) {
 			ResponseStructure<String> responseStructure = new ResponseStructure<String>();
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("successfull");
@@ -158,7 +158,7 @@ public class SupplierServiceImpl implements SupplierService {
 			ResponseStructure<String> responseStructure = new ResponseStructure<String>();
 			responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
 			responseStructure.setMessage("not found");
-			responseStructure.setData("not deleted");
+			responseStructure.setData(oid+" not an authorized person to delete");
 			ResponseEntity<ResponseStructure<String>> entity = new ResponseEntity<ResponseStructure<String>>(
 					responseStructure, HttpStatus.NOT_FOUND);
 			return entity;

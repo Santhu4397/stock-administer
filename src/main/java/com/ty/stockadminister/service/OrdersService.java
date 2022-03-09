@@ -16,6 +16,6 @@ public interface OrdersService {
 
 	public ResponseEntity<ResponseStructure<Orders>> update(String uid, int orderId, Orders orders);
 
-	public ResponseEntity<ResponseStructure<String>> delete(int orderId);
+	public ResponseEntity<ResponseStructure<String>> delete(int orderId,String oid);
 
 }
