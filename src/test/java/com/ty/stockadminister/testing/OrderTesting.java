@@ -55,20 +55,20 @@ public class OrderTesting {
 
 	}
 
-	@Test
+	@org.junit.Test
 	public void updateOrders() {
 
 		when(dao.update(1, orders)).thenReturn(orders);
 		assertEquals(orders, controller.update("Adm_00001", 1, orders).getBody().getData());
 	}
 
-	@Test
+	@org.junit.Test
 	public void deleteOrdersTest() {
 
 		boolean bt = true;
 		String respon = "Order deleted";
 		when(dao.delete(1)).thenReturn(bt);
-		assertEquals(respon, controller.delete(1).getBody().getData());
+		assertEquals(respon, controller.delete(1, "Adm_00001").getBody().getData());
 
 	}
 
